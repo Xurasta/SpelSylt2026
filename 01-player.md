@@ -2,6 +2,9 @@
 
 Vi skapar en spelarklass med tangentbordskontroll och rörelse - grunden för alla interaktiva spel.
 
+# steg - Hej
+hej
+
 ## Vad lär vi oss?
 
 I detta steg fokuserar vi på:
