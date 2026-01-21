@@ -296,8 +296,8 @@ export default class PlatformerGame extends GameBase {
         // Kontrollera kollision med fiender
         this.enemies.forEach(enemy => {
             if (this.player.intersects(enemy) && !enemy.markedForDeletion) {
-                // Spelaren tar skada
-                this.player.takeDamage(enemy.damage)
+            enemy.markedForDeletion = true
+            this.score += enemy.points || 50
             }
         })
         
