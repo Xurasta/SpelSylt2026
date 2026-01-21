@@ -295,33 +295,11 @@ export default class PlatformerGame extends GameBase {
         
         // Kontrollera kollision med fiender
         this.enemies.forEach(enemy => {
-            if (this.player.intersects(enemy) && !enemy.markedForDeletion) {
+            if (this.player.intersects(enemy) && !enemy.markedForDeletion && this.inputHandler.keys.has('r')) {
             enemy.markedForDeletion = true
             this.score += enemy.points || 50
             }
         })
-        
-        // Uppdatera projektiler
-        this.projectiles.forEach(projectile => {
-            projectile.update(deltaTime)
-            
-            // Kolla kollision med fiender
-            this.enemies.forEach(enemy => {
-                if (projectile.intersects(enemy) && !enemy.markedForDeletion) {
-                    enemy.markedForDeletion = true
-                    projectile.markedForDeletion = true
-                    this.score += enemy.points || 50 // Använd enemy.points om det finns, annars 50
-                }
-            })
-            
-            // Kolla projektil-kollision med plattformar (plattformsspel-specifikt)
-            this.platforms.forEach(platform => {
-                if (projectile.intersects(platform)) {
-                    projectile.markedForDeletion = true
-                }
-            })
-        })
-        
         // Ta bort objekt markerade för borttagning
         this.coins = this.coins.filter(coin => !coin.markedForDeletion)
         this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion)
