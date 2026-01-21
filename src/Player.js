@@ -18,6 +18,11 @@ export default class Player extends GameObject {
         this.directionX = 0
         this.directionY = 0
 
+        // Dash egeneskaper
+        this.dashSpeed = 0.8
+        this.dashTimer = 0
+        this.isDashing = false
+
         // Fysik egenskaper
         this.jumpPower = -0.6 // negativ hastighet för att hoppa uppåt
         this.isGrounded = false // om spelaren står på marken
@@ -45,19 +50,41 @@ export default class Player extends GameObject {
     }
 
     update(deltaTime) {
-        // Horisontell rörelse
-        if (this.game.inputHandler.keys.has('ArrowLeft')) {
-            this.velocityX = -this.moveSpeed
-            this.directionX = -1
-            this.lastDirectionX = -1 // Spara riktning
-        } else if (this.game.inputHandler.keys.has('ArrowRight')) {
-            this.velocityX = this.moveSpeed
-            this.directionX = 1
-            this.lastDirectionX = 1 // Spara riktning
-        } else {
-            this.velocityX = 0
-            this.directionX = 0
+        // Startar dash timer
+        if (!this.isDashing && this.game.inputHandler.keys.has('Shift')) {
+            this.startTimer('dashTimer', 50)
+            this.isDashing = true
         }
+        // Dash - updaterar tiden och sätter velocity i x-led till dashSpeed
+        if (this.isDashing) { 
+            this.updateTimer('dashTimer', deltaTime)
+            // Fixar enkelriktat problemet
+            if (this.lastDirectionX != 0) {
+                this.velocityX = this.dashSpeed * this.lastDirectionX
+            } else {
+                this.velocityX = this.dashSpeed
+            }
+            // Kollar när dash bör sluta
+            if (this.dashTimer == 0) {
+                this.isDashing = false
+            }
+
+        } else {
+            // Horisontell rörelse
+            if (this.game.inputHandler.keys.has('ArrowLeft')) {
+                this.velocityX = -this.moveSpeed
+                this.directionX = -1
+                this.lastDirectionX = -1 // Spara riktning
+            } else if (this.game.inputHandler.keys.has('ArrowRight')) {
+                this.velocityX = this.moveSpeed
+                this.directionX = 1
+                this.lastDirectionX = 1 // Spara riktning
+            } else {
+                this.velocityX = 0
+                this.directionX = 0
+            }
+        }
+
 
         // Hopp - endast om spelaren är på marken
         if (this.game.inputHandler.keys.has(' ') && this.isGrounded) {
