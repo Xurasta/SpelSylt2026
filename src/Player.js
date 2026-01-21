@@ -18,7 +18,14 @@ export default class Player extends GameObject {
         this.directionX = 0
         this.directionY = 0
 
+        // Dash egeneskaper
+        this.dashSpeed = 0.8
+        this.dashTimer = 0
+        this.isDashing = false
+
         // Fysik egenskaper
+        this.jumpCount = 0
+        this.maxJumps = 2
         this.jumpPower = -0.6 // negativ hastighet för att hoppa uppåt
         this.isGrounded = false // om spelaren står på marken
         
@@ -29,12 +36,6 @@ export default class Player extends GameObject {
         this.invulnerableTimer = 0
         this.invulnerableDuration = 1000 // 1 sekund i millisekunder
         
-        // Shooting system
-        this.canShoot = true
-        this.shootCooldown = 300 // millisekunder mellan skott
-        this.shootCooldownTimer = 0
-        this.lastDirectionX = 1 // Kom ihåg senaste riktningen för skjutning
-        
         // Sprite animation system - ladda sprites med olika hastigheter
         this.loadSprite('idle', idleSprite, 11, 150)  // Långsammare idle
         this.loadSprite('run', runSprite, 12, 80)     // Snabbare spring
@@ -42,27 +43,69 @@ export default class Player extends GameObject {
         this.loadSprite('fall', fallSprite, 1)
         
         this.currentAnimation = 'idle'
+        this.currentSizeState="middle"
     }
 
     update(deltaTime) {
-        // Horisontell rörelse
-        if (this.game.inputHandler.keys.has('ArrowLeft')) {
-            this.velocityX = -this.moveSpeed
-            this.directionX = -1
-            this.lastDirectionX = -1 // Spara riktning
-        } else if (this.game.inputHandler.keys.has('ArrowRight')) {
-            this.velocityX = this.moveSpeed
-            this.directionX = 1
-            this.lastDirectionX = 1 // Spara riktning
-        } else {
-            this.velocityX = 0
-            this.directionX = 0
+        // Startar dash timer
+        if (!this.isDashing && this.game.inputHandler.keys.has('Shift')) {
+            this.startTimer('dashTimer', 50)
+            this.isDashing = true
         }
+        // Dash - updaterar tiden och sätter velocity i x-led till dashSpeed
+        if (this.isDashing) { 
+            this.updateTimer('dashTimer', deltaTime)
+            // Fixar enkelriktat problemet
+            if (this.lastDirectionX != 0) {
+                this.velocityX = this.dashSpeed * this.lastDirectionX
+            } else {
+                this.velocityX = this.dashSpeed
+            }
+            // Kollar när dash bör sluta
+            if (this.dashTimer == 0) {
+                this.isDashing = false
+            }
 
-        // Hopp - endast om spelaren är på marken
-        if (this.game.inputHandler.keys.has(' ') && this.isGrounded) {
+        } else {
+            // Horisontell rörelse
+            if (this.game.inputHandler.keys.has('a')) {
+                this.velocityX = -this.moveSpeed
+                this.directionX = -1
+                this.lastDirectionX = -1 // Spara riktning
+            } else if (this.game.inputHandler.keys.has('d')) {
+                this.velocityX = this.moveSpeed
+                this.directionX = 1
+                this.lastDirectionX = 1 // Spara riktning
+            } else {
+                this.velocityX = 0
+                this.directionX = 0
+            }
+        }
+        // Hoppa
+        if (this.game.inputHandler.keys.has('w') && (this.jumpCount < this.maxJumps)) {
             this.velocityY = this.jumpPower
             this.isGrounded = false
+            this.game.inputHandler.keys.delete('w')
+            this.jumpCount +++ 1
+        }
+        if (this.isGrounded == true) this.jumpCount = 0
+
+
+        if (this.game.inputHandler.keys.has('q')  ) {
+            this.game.inputHandler.keys.delete('q')
+            this.SizeChange('Increace')          
+        }
+
+
+
+        if (this.game.inputHandler.keys.has('e') ) {
+            this.game.inputHandler.keys.delete('e')
+            this.SizeChange('Decreace')
+
+            
+
+
+            
         }
 
         // Applicera gravitation
@@ -96,18 +139,9 @@ export default class Player extends GameObject {
         }
         
         // Uppdatera shoot cooldown
-        if (!this.canShoot) {
-            this.shootCooldownTimer -= deltaTime
-            if (this.shootCooldownTimer <= 0) {
-                this.canShoot = true
-            }
-        }
+
         
         // Skjut med X-tangenten
-        if ((this.game.inputHandler.keys.has('x') || this.game.inputHandler.keys.has('X')) && this.canShoot) {
-            this.shoot()
-        }
-        
         // Uppdatera animation state baserat på movement
         if (!this.isGrounded && this.velocityY < 0) {
             this.setAnimation('jump')
@@ -118,33 +152,86 @@ export default class Player extends GameObject {
         } else {
             this.setAnimation('idle')
         }
+
+    
+
+        // Size Changer 
+
+        if (this.currentSizeState=='middle'){
+            this.width=50
+            this.height=50
+            this.jumpPower= -0.5
+            this.moveSpeed=0.3
+            //Dash
+            //Double jump
+        }  
+        else if (this.currentSizeState=='mini'){
+            this.width=20
+            this.height=20
+            this.jumpPower= -0.3
+            this.moveSpeed=0.15
+            //Dash
+            //Double jump
+        }
+        else if (this.currentSizeState=='max'){
+            this.width=80
+            this.height=80
+            this.jumpPower= -0.7
+            this.moveSpeed= 0.45
+            //Dash
+            //Double jump
+
+        }
+
+        
+            
+
         
         // Uppdatera animation frame
         this.updateAnimation(deltaTime)
     }
+
+
+
+    SizeChange(Size){
+        
+        if (Size =='Increace'){
+            console.log(this.currentSizeState)
+            if (this.currentSizeState== 'middle'){
+                this.currentSizeState='max'
+                this.x-=10}
+
+            else if (this.currentSizeState== 'mini'){
+                this.currentSizeState='middle'
+                this.x-=10}
+            }
+
+
+        else if (Size =='Decreace'){
+            console.log(this.currentSizeState)
+            if(this.currentSizeState=='middle'){
+                this.currentSizeState='mini'
+                this.x+=10
+            }
+
+            else if (this.currentSizeState=='max'){
+                this.currentSizeState='middle'
+                this.x+=10
+            }
+
+            
+        }
+
+
+      
+
+
+            
+
+                
+                
     
-    shoot() {
-        // Skjut i senaste riktningen spelaren rörde sig
-        const projectileX = this.x + this.width / 2
-        const projectileY = this.y + this.height / 2
-        
-        this.game.addProjectile(projectileX, projectileY, this.lastDirectionX)
-        
-        // Sätt cooldown
-        this.canShoot = false
-        this.shootCooldownTimer = this.shootCooldown
-    }
-    
-    takeDamage(amount) {
-        if (this.invulnerable) return
-        
-        this.health -= amount
-        if (this.health < 0) this.health = 0
-        
-        // Sätt invulnerability efter att ha tagit skada
-        this.invulnerable = true
-        this.invulnerableTimer = this.invulnerableDuration
-    }
+    } 
     
     handlePlatformCollision(platform) {
         const collision = this.getCollisionData(platform)
