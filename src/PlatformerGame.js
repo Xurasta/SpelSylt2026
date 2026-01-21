@@ -127,10 +127,7 @@ export default class PlatformerGame extends GameBase {
         this.gameState = 'PLAYING'
     }
     
-    addProjectile(x, y, directionX) {
-        const projectile = new Projectile(this, x, y, directionX)
-        this.projectiles.push(projectile)
-    }
+
     
     restart() {
         this.currentLevelIndex = 0
