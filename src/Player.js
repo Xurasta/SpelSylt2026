@@ -66,10 +66,14 @@ export default class Player extends GameObject {
 
 
         if (this.game.inputHandler.keys.has('q')  ) {
+
+
+
+
             this.game.inputHandler.keys.delete('q')
-            
+                this.SizeChange('In')
             if(this.currentSizeState== 'middle'){
-                this.currentSizeState="max"
+                this.currentSizeState='max'
                 this.x-=10}
             else if (this.currentSizeState== 'mini'){
                 this.currentSizeState='middle'
@@ -78,11 +82,16 @@ export default class Player extends GameObject {
                 console.log('nope')            
         }
 
+
+
         if (this.game.inputHandler.keys.has('e') ) {
+                this.SizeChange('De')
+
+
             this.game.inputHandler.keys.delete('e')
-    
+            
             if(this.currentSizeState== 'middle'){
-                this.currentSizeState="mini"
+                this.currentSizeState='mini'
                 this.x+=10}
             else if (this.currentSizeState== 'max'){
                 this.currentSizeState='middle'
@@ -175,6 +184,22 @@ export default class Player extends GameObject {
         // Uppdatera animation frame
         this.updateAnimation(deltaTime)
     }
+
+
+
+    SizeChange(Size){
+
+        if(Size =='In'){
+            console.log('yes')}
+
+
+        if(Size =='De'){
+            console.log('no')}
+
+        else{
+            
+        }
+    } 
     
     takeDamage(amount) {
         if (this.invulnerable) return
