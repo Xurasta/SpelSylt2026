@@ -93,28 +93,17 @@ export default class Player extends GameObject {
 
         if (this.game.inputHandler.keys.has('q')  ) {
             this.game.inputHandler.keys.delete('q')
-            
-            if(this.currentSizeState== 'middle'){
-                this.currentSizeState="max"
-                this.x-=10}
-            else if (this.currentSizeState== 'mini'){
-                this.currentSizeState='middle'
-                this.x-=10}
-            else
-                console.log('nope')            
+            this.SizeChange('Increace')          
         }
+
+
 
         if (this.game.inputHandler.keys.has('e') ) {
             this.game.inputHandler.keys.delete('e')
-    
-            if(this.currentSizeState== 'middle'){
-                this.currentSizeState="mini"
-                this.x+=10}
-            else if (this.currentSizeState== 'max'){
-                this.currentSizeState='middle'
-                this.x+=10}
-            else{
-                console.log('nope')}  
+            this.SizeChange('Decreace')
+
+            
+
 
             
         }
@@ -201,17 +190,48 @@ export default class Player extends GameObject {
         // Uppdatera animation frame
         this.updateAnimation(deltaTime)
     }
+
+
+
+    SizeChange(Size){
+        
+        if (Size =='Increace'){
+            console.log(this.currentSizeState)
+            if (this.currentSizeState== 'middle'){
+                this.currentSizeState='max'
+                this.x-=10}
+
+            else if (this.currentSizeState== 'mini'){
+                this.currentSizeState='middle'
+                this.x-=10}
+            }
+
+
+        else if (Size =='Decreace'){
+            console.log(this.currentSizeState)
+            if(this.currentSizeState=='middle'){
+                this.currentSizeState='mini'
+                this.x+=10
+            }
+
+            else if (this.currentSizeState=='max'){
+                this.currentSizeState='middle'
+                this.x+=10
+            }
+
+            
+        }
+
+
+      
+
+
+            
+
+                
+                
     
-    takeDamage(amount) {
-        if (this.invulnerable) return
-        
-        this.health -= amount
-        if (this.health < 0) this.health = 0
-        
-        // Sätt invulnerability efter att ha tagit skada
-        this.invulnerable = true
-        this.invulnerableTimer = this.invulnerableDuration
-    }
+    } 
     
     handlePlatformCollision(platform) {
         const collision = this.getCollisionData(platform)

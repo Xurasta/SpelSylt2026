@@ -8,7 +8,7 @@ export default class Enemy extends GameObject {
         // Fysik
         this.velocityX = 0
         this.velocityY = 0
-        this.isGrounded = false
+        this.isGrounded = false 
         
         // Patrol AI
         this.startX = x
@@ -16,8 +16,6 @@ export default class Enemy extends GameObject {
         this.endX = patrolDistance !== null ? x + patrolDistance : null
         this.speed = 0.1
         this.direction = 1 // 1 = höger, -1 = vänster
-        
-        this.damage = 1 // Hur mycket skada fienden gör
 
     }
 
@@ -31,7 +29,7 @@ export default class Enemy extends GameObject {
             if (this.velocityY < 0) this.velocityY = 0
         }
         
-        // Patruller när på marken
+        // Patruller när på marken  
         if (this.isGrounded) {
             this.velocityX = this.speed * this.direction
             
