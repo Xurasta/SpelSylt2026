@@ -19,6 +19,8 @@ export default class Player extends GameObject {
         this.directionY = 0
 
         // Fysik egenskaper
+        this.jumpCount = 0
+        this.maxJumps = 2
         this.jumpPower = -0.6 // negativ hastighet för att hoppa uppåt
         this.isGrounded = false // om spelaren står på marken
         
@@ -28,12 +30,6 @@ export default class Player extends GameObject {
         this.invulnerable = false // Immun mot skada efter att ha blivit träffad
         this.invulnerableTimer = 0
         this.invulnerableDuration = 1000 // 1 sekund i millisekunder
-        
-        // Shooting system
-        this.canShoot = true
-        this.shootCooldown = 300 // millisekunder mellan skott
-        this.shootCooldownTimer = 0
-        this.lastDirectionX = 1 // Kom ihåg senaste riktningen för skjutning
         
         // Sprite animation system - ladda sprites med olika hastigheter
         this.loadSprite('idle', idleSprite, 11, 150)  // Långsammare idle
@@ -59,12 +55,14 @@ export default class Player extends GameObject {
             this.velocityX = 0
             this.directionX = 0
         }
-
-        // Hopp - endast om spelaren är på marken
-        if (this.game.inputHandler.keys.has(' ') && this.isGrounded) {
+        // Hoppa
+        if (this.game.inputHandler.keys.has(' ') && (this.jumpCount < this.maxJumps)) {
             this.velocityY = this.jumpPower
             this.isGrounded = false
+            this.game.inputHandler.keys.delete(' ')
+            this.jumpCount +++ 1
         }
+        if (this.isGrounded == true) this.jumpCount = 0
 
 
         if (this.game.inputHandler.keys.has('q')  ) {
@@ -176,18 +174,6 @@ export default class Player extends GameObject {
         
         // Uppdatera animation frame
         this.updateAnimation(deltaTime)
-    }
-    
-    shoot() {
-        // Skjut i senaste riktningen spelaren rörde sig
-        const projectileX = this.x + this.width / 2
-        const projectileY = this.y + this.height / 2
-        
-        this.game.addProjectile(projectileX, projectileY, this.lastDirectionX)
-        
-        // Sätt cooldown
-        this.canShoot = false
-        this.shootCooldownTimer = this.shootCooldown
     }
     
     takeDamage(amount) {
