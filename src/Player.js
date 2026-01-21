@@ -140,7 +140,9 @@ export default class Player extends GameObject {
             this.setAnimation('idle')
         }
 
+    
 
+        // Size Changer 
 
         if (this.currentSizeState=='middle'){
             this.width=50
