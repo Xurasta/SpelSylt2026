@@ -10,7 +10,7 @@ import cloud1 from '../assets/clouds/Small Cloud 1.png'
 import cloud2 from '../assets/clouds/Small Cloud 2.png'
 import cloud3 from '../assets/clouds/Small Cloud 3.png'
 import grass from '../assets/sprites/Grass.png'
-import tree from '../assets/sprites/Tree.png'
+import bush from '../assets/sprites/bush.png'
 
 /**
  * Level 1 - Den första nivån i spelet
@@ -38,13 +38,13 @@ export default class Level1 extends Level {
                 scrollSpeed: 0.3 // Långsam parallax (långt bort)
             }),
             // Mid background - stora moln
-            new Background(this.game, bigClouds, {
+            new Background(this.game, bush, {
                 tiled: true,
                 tileWidth: 448,
-                tileHeight: 101,
+                tileHeight: 115,
                 tileY: false, // Tila bara horisontellt
                 scrollSpeed: 0.6, // Mellan-parallax
-                yPosition: this.game.height - 141, // Precis ovanför marken
+                yPosition: this.game.height - 155, // Precis ovanför marken
                 height: 101
             })
         ]
@@ -75,10 +75,8 @@ export default class Level1 extends Level {
                 speed: 0.016,
                 scrollSpeed: 0.4
             }),
-            new BackgroundObject(this.game, 300, height - 80, tree, {
-                speed: 0,
-                scrollSpeed: 1
-            })
+           
+            
         ]
     }
 
