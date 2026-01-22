@@ -9,6 +9,7 @@ import bigClouds from '../assets/clouds/Big Clouds.png'
 import cloud1 from '../assets/clouds/Small Cloud 1.png'
 import cloud2 from '../assets/clouds/Small Cloud 2.png'
 import grass from '../assets/sprites/Grass.png'
+import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
 
 
 /**
