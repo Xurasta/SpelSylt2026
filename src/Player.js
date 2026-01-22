@@ -3,6 +3,7 @@ import idleSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Id
 import runSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Run (32x32).png'
 import jumpSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Jump (32x32).png'
 import fallSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Fall (32x32).png'
+import jumpSound from './assets/sounds/jump.mp3'
 
 export default class Player extends GameObject {
     constructor(game, x, y, width, height, color) {
@@ -33,12 +34,21 @@ export default class Player extends GameObject {
         this.DecreaceOnesChecker=0
         
         
+        
         // Health system
         this.maxHealth = 3
         this.health = this.maxHealth
         this.invulnerable = false // Immun mot skada efter att ha blivit träffad
         this.invulnerableTimer = 0
         this.invulnerableDuration = 1000 // 1 sekund i millisekunder
+
+         // ljud effekter
+        this.jumpSound = new Audio(jumpSound);
+        this.jumpSound.volume = 0.3; // Sänk volymen lite
+
+        
+
+
         
         // Sprite animation system - ladda sprites med olika hastigheter
         this.loadSprite('idle', idleSprite, 11, 150)  // Långsammare idle
@@ -58,6 +68,7 @@ export default class Player extends GameObject {
             this.startTimer('dashTimer', 100)
             this.isDashing = true
         }
+
         // Dash - updaterar tiden och sätter velocity i x-led till dashSpeed
         if (this.isDashing) { 
             this.updateTimer('dashTimer', deltaTime)
@@ -92,6 +103,10 @@ export default class Player extends GameObject {
             this.game.inputHandler.keys.delete(' ')            
             this.velocityY = this.jumpPower
             this.isGrounded = false
+            if (this.jumpCount == 1){
+                this.jumpSound.play();
+            }
+            this.game.inputHandler.keys.delete(' ')
             this.jumpCount +++ 1
 
         }else if (this.jumpCount==this.maxJumps && this.DecreaceOnesChecker<1  ){
