@@ -17,17 +17,21 @@ export default class Player extends GameObject {
         this.moveSpeed = 0.3
         this.directionX = 0
         this.directionY = 0
+        this.lastDirectionX=0
 
         // Dash egeneskaper
-        this.dashSpeed = 0.8
+        this.dashSpeed = 2
         this.dashTimer = 0
         this.isDashing = false
+        
 
         // Fysik egenskaper
         this.jumpCount = 0
         this.maxJumps = 2
         this.jumpPower = -0.6 // negativ hastighet för att hoppa uppåt
         this.isGrounded = false // om spelaren står på marken
+        this.DecreaceOnesChecker=0
+        
         
         // Health system
         this.maxHealth = 3
@@ -48,8 +52,10 @@ export default class Player extends GameObject {
 
     update(deltaTime) {
         // Startar dash timer
-        if (!this.isDashing && this.game.inputHandler.keys.has('Shift')) {
-            this.startTimer('dashTimer', 50)
+        if (!this.isDashing && this.game.inputHandler.keys.has('Shift') && this.currentSizeState!='mini') {
+            this.SizeChange('Decreace')
+            this.game.inputHandler.keys.delete('Shift')
+            this.startTimer('dashTimer', 100)
             this.isDashing = true
         }
         // Dash - updaterar tiden och sätter velocity i x-led till dashSpeed
@@ -82,13 +88,26 @@ export default class Player extends GameObject {
             }
         }
         // Hoppa
-        if (this.game.inputHandler.keys.has(' ') && (this.jumpCount < this.maxJumps)) {
+        if ( this.game.inputHandler.keys.has(' ') && (this.jumpCount <1 || this.jumpCount < this.maxJumps) ){
+            this.game.inputHandler.keys.delete(' ')            
             this.velocityY = this.jumpPower
             this.isGrounded = false
-            this.game.inputHandler.keys.delete(' ')
             this.jumpCount +++ 1
+
+        }else if (this.jumpCount==this.maxJumps && this.DecreaceOnesChecker<1  ){
+            this.SizeChange('Decreace')
+            this.DecreaceOnesChecker=1
         }
-        if (this.isGrounded == true) this.jumpCount = 0
+
+        if (this.isGrounded == true) {
+            this.jumpCount = 0
+            this.DecreaceOnesChecker=0
+
+        }else{
+
+        }
+
+
 
 
         if (this.game.inputHandler.keys.has('q')  ) {
@@ -162,24 +181,21 @@ export default class Player extends GameObject {
             this.height=50
             this.jumpPower= -0.5
             this.moveSpeed=0.3
-            //Dash
-            //Double jump
+            this.maxJumps=2
         }  
         else if (this.currentSizeState=='mini'){
             this.width=20
             this.height=20
             this.jumpPower= -0.3
             this.moveSpeed=0.15
-            //Dash
-            //Double jump
+            this.maxJumps=1
         }
         else if (this.currentSizeState=='max'){
             this.width=80
             this.height=80
             this.jumpPower= -0.7
             this.moveSpeed= 0.45
-            //Dash
-            //Double jump
+            this.maxJumps=2
 
         }
 
