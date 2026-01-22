@@ -218,22 +218,22 @@ export default class Player extends GameObject {
         // Size Changer 
 
         if (this.currentSizeState=='middle'){
-            this.width=60
-            this.height=60
-            this.jumpPower= -0.5
+            this.width=40
+            this.height=40
+            this.jumpPower= -0.6
             this.moveSpeed=0.3
             this.maxJumps=2
         }  
         else if (this.currentSizeState=='mini'){
-            this.width=40
-            this.height=40
-            this.jumpPower= -0.3
-            this.moveSpeed=0.15
+            this.width=20
+            this.height=20
+            this.jumpPower= -0.5
+            this.moveSpeed=0.3
             this.maxJumps=1
         }
         else if (this.currentSizeState=='max'){
-            this.width=80
-            this.height=80
+            this.width=60
+            this.height=60
             this.jumpPower= -0.7
             this.moveSpeed= 0.45
             this.maxJumps=2

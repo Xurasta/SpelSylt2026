@@ -60,8 +60,6 @@ export default class GameObject {
             this.currentAnimation = animationName
             this.frameIndex = 0
             this.frameTimer = 0
-            this.frameWidth=100
-            this.fe
         }
     }
 
@@ -73,6 +71,7 @@ export default class GameObject {
 
         const img = new Image()
         img.src = imagePath
+        
 
         img.onload = () => {
             this.spriteLoaded = true
@@ -134,10 +133,10 @@ export default class GameObject {
             ctx.scale(-1, 1)
             ctx.drawImage(
                 anim.image,
-                this.frameIndex * frameWidth,
-                0,
-                frameWidth ,
-                frameHeight,
+                this.frameIndex * frameWidth + (frameWidth / 4),
+                frameHeight / 2,
+                frameWidth / 2 ,
+                frameHeight / 2 ,
                 0,
                 0,
                 this.width,
@@ -146,10 +145,10 @@ export default class GameObject {
         } else {
             ctx.drawImage(
                 anim.image,
-                this.frameIndex * frameWidth,
-                0,
-                frameWidth ,
-                frameHeight,
+                this.frameIndex * frameWidth + (frameWidth / 4),
+                frameHeight / 2,
+                frameWidth / 2 ,
+                frameHeight / 2 ,
                 screenX,
                 screenY,
                 this.width,
