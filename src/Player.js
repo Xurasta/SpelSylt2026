@@ -311,6 +311,7 @@ export default class Player extends GameObject {
         if (collision) {
             if (collision.direction === 'top' && this.velocityY > 0) {
                 // Kollision från ovan - spelaren landar på plattformen
+                console.log('top')
                 this.y = platform.y - this.height
                 this.velocityY = 0
                 this.isGrounded = true

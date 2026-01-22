@@ -16,6 +16,7 @@ import grass from '../assets/sprites/Grass.png'
  * Fler fiender, högre plattformar, mer precision krävs
  * Rosa himmel för att signalera svårare level (skymning/kväll)
  */
+
 export default class Level2 extends Level {
     constructor(game) {
         super(game)
