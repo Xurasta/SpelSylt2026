@@ -1,5 +1,5 @@
 import GameObject from './GameObject.js'
-
+import NpcSpricte from './assets/player/Squirrel.png'
 export default class Enemy extends GameObject {
     constructor(game, x, y, width, height, patrolDistance = null) {
         super(game, x, y, width, height)
@@ -17,10 +17,18 @@ export default class Enemy extends GameObject {
         this.speed = 0.1
         this.direction = 1 // 1 = höger, -1 = vänster
 
+
+          this.loadSprite('idle', NpcSpricte, 1)
+
     }
+
+
+
 
     update(deltaTime) {
         // Applicera gravitation
+
+        this.setAnimation('idle')
         this.velocityY += this.game.gravity * deltaTime
         
         // Applicera luftmotstånd
@@ -106,4 +114,7 @@ export default class Enemy extends GameObject {
         ctx.fillStyle = this.color
         ctx.fillRect(screenX, screenY, this.width, this.height)
     }
+
+
+    
 }
