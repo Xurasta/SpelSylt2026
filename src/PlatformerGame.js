@@ -294,7 +294,7 @@ export default class PlatformerGame extends GameBase {
         this.enemies.forEach(enemy => {
             if (this.player.intersects(enemy) && !enemy.markedForDeletion && this.inputHandler.keys.has('r')) {
             enemy.markedForDeletion = true
-            this.score += enemy.points || 50
+            this.player.SizeChange("Increace")
             }
         })
         // Ta bort objekt markerade för borttagning
