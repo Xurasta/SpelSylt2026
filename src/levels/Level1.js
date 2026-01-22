@@ -1,6 +1,5 @@
 import Level from './Level.js'
 import Platform from '../Platform.js'
-import tilePlatfrom from '../tilePlatform.js'
 import Coin from '../Coin.js'
 import Enemy from '../Enemy.js'
 import Background from '../Background.js'
@@ -82,21 +81,21 @@ export default class Level1 extends Level {
         const height = this.game.height
         const worldWidth = this.game.worldWidth
 
+        const ground = {
+            image: grass,
+            sourceWidth: 32,
+            sourceHeight: 32,
+            startclipX: 12,
+            clippedWidthX: 12,
+            startClipY: 32,
+            clippedWidthY: 32,
+            tile: 'both'
+        }
+
         this.platforms = [
             // Marken (hela nivån)
+            new Platform (this.game, 0, height - 32, worldWidth, 32, { sprite: ground })
             // new Platform(this.game, 0, height - 32, worldWidth, 32, grass),
-            new tilePlatfrom(this.game, grass, {
-                tiled: true,
-                tileWidth: 32,
-                tileHeight: 32,
-                tileY: true,
-                tileX: true,
-                scrollSpeed: 1,
-                yPosition: this.game.height - 32,
-                xPosition: 0,
-                height: 32,
-                width: 32
-            })
         ]
     }
 

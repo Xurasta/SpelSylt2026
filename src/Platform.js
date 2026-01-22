@@ -1,37 +1,40 @@
 import GameObject from './GameObject.js'
+import Sprite from './Sprite.js'
 
 export default class Platform extends GameObject {
-    constructor(game, x, y, width, height, imagePath) {
+    constructor(game, x, y, width, height, options = {}) {
         super(game, x, y, width, height)
-        this.image = new Image()
-        this.image.src = imagePath
-        this.imageLoaded = false
-        // this.sx = 0 //crop (x) from top left
-        // this.sy = 0 //crop (y) from top left
-        // this.sWidth = 0 // crop width
-        // this.sHeight = 0 //crop height
-
-        this.image.onload = () => {
-            this.imageLoaded = true
+        
+        // Options
+        this.color = options.color || '#cfa588' // Fallback color
+        
+        // Create sprite if sprite config is provided
+        if (options.sprite) {
+            this.sprite = new Sprite(options.sprite)
         }
     }
-
+    
     update(deltaTime) {
         // Plattformar är statiska, gör inget
     }
     
-
-    draw(ctx, camera) {
-        
-        if (!this.imageLoaded) return
-
+    draw(ctx, camera = null) {
+        // Beräkna screen position (om camera finns)
         const screenX = camera ? this.x - camera.x : this.x
         const screenY = camera ? this.y - camera.y : this.y
-         
-        // Repeterande bilder
-        const pattern = ctx.createPattern(this.image, 'repeat')
-        ctx.rect(screenX, screenY, this.width, this.height)
-        ctx.fillStyle = pattern
-        ctx.fill()
+        // Try to draw sprite first if available
+        if (this.sprite && this.sprite.draw(ctx, screenX, screenY, this.width, this.height)) {
+            // Sprite drawn successfully
+            return
+        }
+
+        // Fallback: Rita färgad rektangel (om sprite laddas eller saknas)
+        ctx.fillStyle = this.color
+        ctx.fillRect(screenX, screenY, this.width, this.height)
+        
+        // Rita en enkel kant/skugga för att ge djup
+        ctx.strokeStyle = '#654321'
+        ctx.lineWidth = 2
+        ctx.strokeRect(screenX, screenY, this.width, this.height)
     }
 }
