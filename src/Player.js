@@ -42,9 +42,7 @@ export default class Player extends GameObject {
         this.jumpSound = new Audio(jumpSound);
         this.jumpSound.volume = 0.3; // Sänk volymen lite
 
-        if (this.maxCount > 3) {
-            this.jumpSound.play();
-        }
+        
 
 
         
@@ -64,6 +62,7 @@ export default class Player extends GameObject {
             this.startTimer('dashTimer', 50)
             this.isDashing = true
         }
+
         // Dash - updaterar tiden och sätter velocity i x-led till dashSpeed
         if (this.isDashing) { 
             this.updateTimer('dashTimer', deltaTime)
@@ -97,6 +96,9 @@ export default class Player extends GameObject {
         if (this.game.inputHandler.keys.has(' ') && (this.jumpCount < this.maxJumps)) {
             this.velocityY = this.jumpPower
             this.isGrounded = false
+            if (this.jumpCount == 1){
+                this.jumpSound.play();
+            }
             this.game.inputHandler.keys.delete(' ')
             this.jumpCount +++ 1
         }
