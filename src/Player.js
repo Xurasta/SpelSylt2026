@@ -4,6 +4,8 @@ import runSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Run
 import jumpSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Jump (32x32).png'
 import fallSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Fall (32x32).png'
 import jumpSound from './assets/sounds/jump.mp3'
+import crunchSound from './assets/sounds/crunch.mp3'
+
 
 export default class Player extends GameObject {
     constructor(game, x, y, width, height, color) {
@@ -45,6 +47,8 @@ export default class Player extends GameObject {
          // ljud effekter
         this.jumpSound = new Audio(jumpSound);
         this.jumpSound.volume = 0.3; // Sänk volymen lite
+        this.crunchSound = new Audio(crunchSound);
+        this.crunchSound.volume = 0.3; // Sänk volymen lite
 
         
 
@@ -211,7 +215,6 @@ export default class Player extends GameObject {
             this.jumpPower= -0.7
             this.moveSpeed= 0.45
             this.maxJumps=2
-
         }
 
         
@@ -228,6 +231,7 @@ export default class Player extends GameObject {
         
         if (Size =='Increace'){
             console.log(this.currentSizeState)
+            this.crunchSound.play()
             if (this.currentSizeState== 'middle'){
                 this.currentSizeState='max'
                 this.x-=10}
