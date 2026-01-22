@@ -2,14 +2,17 @@ import Level from './Level.js'
 import Platform from '../Platform.js'
 import Coin from '../Coin.js'
 import Enemy from '../Enemy.js'
-import Background from '../Background.js'
 import BackgroundObject from '../BackgroundObject.js'
+import Background from '../Background.js'
 import blueBg from '../assets/Pixel Adventure 1/Background/Blue.png'
 import bigClouds from '../assets/clouds/Big Clouds.png'
 import cloud1 from '../assets/clouds/Small Cloud 1.png'
 import cloud2 from '../assets/clouds/Small Cloud 2.png'
 import cloud3 from '../assets/clouds/Small Cloud 3.png'
-import grass from '../assets02/Grass.png'
+import grass from '../assets/sprites/Grass.png'
+import bush from '../assets/sprites/bush.png'
+import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
+
 
 /**
  * Level 1 - Den första nivån i spelet
@@ -30,22 +33,18 @@ export default class Level1 extends Level {
     createBackgrounds() {
         this.backgrounds = [
             // Far background - blå himmel
-            new Background(this.game, blueBg, {
+            new Background(this.game, bakgrundlvl, {
                 tiled: true,
                 tileWidth: 64,
                 tileHeight: 64,
-                scrollSpeed: 0.3 // Långsam parallax (långt bort)
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                tileHeight: this.game.height, // Fyll hela höjden
+                tileWidth: this.game.width // Fyll hela bredden
             }),
+
             // Mid background - stora moln
-            new Background(this.game, bigClouds, {
-                tiled: true,
-                tileWidth: 448,
-                tileHeight: 101,
-                tileY: false, // Tila bara horisontellt
-                scrollSpeed: 0.6, // Mellan-parallax
-                yPosition: this.game.height - 100, // Precis ovanför marken
-                height: 120
-            })
+           
         ]
     }
 
@@ -73,7 +72,9 @@ export default class Level1 extends Level {
             new BackgroundObject(this.game, 2200, height - 260, cloud2, {
                 speed: 0.016,
                 scrollSpeed: 0.4
-            })
+            }),
+           
+            
         ]
     }
 
@@ -94,8 +95,8 @@ export default class Level1 extends Level {
 
         this.platforms = [
             // Marken (hela nivån)
-            new Platform (this.game, 0, height - 32, worldWidth, 32, { sprite: ground })
-            // new Platform(this.game, 0, height - 32, worldWidth, 32, grass),
+            new Platform (this.game, 0, height - 32, worldWidth, 32, { sprite: ground }),
+
         ]
     }
 

@@ -1,8 +1,22 @@
 import GameObject from './GameObject.js'
-import idleSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Idle (32x32).png'
-import runSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Run (32x32).png'
-import jumpSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Jump (32x32).png'
+
+import MiniIdleSprite from './assets/player/Slime S Idle V1.png'
+import MiniRunSprite from './assets/player/Slime S Running V2.png'
+import MiniJumpSprite from './assets/player/Slime S Jumping V1.png'
+
+import MiddleIdleSprite from './assets/player/Slime S Idle V1.png'
+import MiddleRunSprite from './assets/player/Slime S Running V2.png'
+import MiddleJumpSprite from './assets/player/Slime S Jumping V1.png'
+
+import MaxIdleSprite from './assets/player/Slime S Idle V1.png'
+import MaxRunSprite from './assets/player/Slime S Running V2.png'
+import MaxJumpSprite from './assets/player/Slime S Jumping V1.png'
+
+
+
+
 import fallSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Fall (32x32).png'
+import jumpSound from './assets/sounds/jump.mp3'
 
 export default class Player extends GameObject {
     constructor(game, x, y, width, height, color) {
@@ -17,17 +31,22 @@ export default class Player extends GameObject {
         this.moveSpeed = 0.3
         this.directionX = 0
         this.directionY = 0
+        this.lastDirectionX=0
 
         // Dash egeneskaper
-        this.dashSpeed = 0.8
+        this.dashSpeed = 2
         this.dashTimer = 0
         this.isDashing = false
+        
 
         // Fysik egenskaper
         this.jumpCount = 0
         this.maxJumps = 2
         this.jumpPower = -0.6 // negativ hastighet för att hoppa uppåt
         this.isGrounded = false // om spelaren står på marken
+        this.DecreaceOnesChecker=0
+        
+        
         
         // Health system
         this.maxHealth = 3
@@ -35,12 +54,32 @@ export default class Player extends GameObject {
         this.invulnerable = false // Immun mot skada efter att ha blivit träffad
         this.invulnerableTimer = 0
         this.invulnerableDuration = 1000 // 1 sekund i millisekunder
+
+         // ljud effekter
+        this.jumpSound = new Audio(jumpSound);
+        this.jumpSound.volume = 0.3; // Sänk volymen lite
+
+        
+
+
         
         // Sprite animation system - ladda sprites med olika hastigheter
-        this.loadSprite('idle', idleSprite, 11, 150)  // Långsammare idle
-        this.loadSprite('run', runSprite, 12, 80)     // Snabbare spring
-        this.loadSprite('jump', jumpSprite, 1)
-        this.loadSprite('fall', fallSprite, 1)
+        this.loadSprite('idle', MiniIdleSprite, 10, 150)  // Långsammare idle
+        this.loadSprite('run', MiniRunSprite, 8, 80)     // Snabbare spring
+        this.loadSprite('jump', MiniJumpSprite, 8,100)
+        this.loadSprite('fall', MiniIdleSprite, 10,100)
+
+
+        //this.loadSprite('idle', MiddleIdleSprite, 10, 150)  // Långsammare idle
+        //this.loadSprite('run', MiddleRunSprite, 8, 80)     // Snabbare spring
+        //this.loadSprite('jump', MiddleJumpSprite, 8,100)
+        //this.loadSprite('fall', MiddleIdleSprite, 10,100)
+
+
+       // this.loadSprite('idle', MaxIdleSprite, 10, 150)  // Långsammare idle
+       // this.loadSprite('run', MaxRunSprite, 8, 80)     // Snabbare spring
+        //this.loadSprite('jump', MaxJumpSprite, 8,100)
+        //this.loadSprite('fall', MaxIdleSprite, 10,100)
         
         this.currentAnimation = 'idle'
         this.currentSizeState="middle"
@@ -48,10 +87,13 @@ export default class Player extends GameObject {
 
     update(deltaTime) {
         // Startar dash timer
-        if (!this.isDashing && this.game.inputHandler.keys.has('Shift')) {
-            this.startTimer('dashTimer', 50)
+        if (!this.isDashing && this.game.inputHandler.keys.has('Shift') && this.currentSizeState!='mini') {
+            this.SizeChange('Decreace')
+            this.game.inputHandler.keys.delete('Shift')
+            this.startTimer('dashTimer', 100)
             this.isDashing = true
         }
+
         // Dash - updaterar tiden och sätter velocity i x-led till dashSpeed
         if (this.isDashing) { 
             this.updateTimer('dashTimer', deltaTime)
@@ -82,41 +124,42 @@ export default class Player extends GameObject {
             }
         }
         // Hoppa
-        if (this.game.inputHandler.keys.has(' ') && (this.jumpCount < this.maxJumps)) {
+        if ( this.game.inputHandler.keys.has(' ') && (this.jumpCount <1 || this.jumpCount < this.maxJumps) ){
+            this.game.inputHandler.keys.delete(' ')            
             this.velocityY = this.jumpPower
             this.isGrounded = false
+            if (this.jumpCount == 1){
+                this.jumpSound.play();
+            }
             this.game.inputHandler.keys.delete(' ')
             this.jumpCount +++ 1
+
+        }else if (this.jumpCount==this.maxJumps && this.DecreaceOnesChecker<1  ){
+            this.SizeChange('Decreace')
+            this.DecreaceOnesChecker=1
         }
-        if (this.isGrounded == true) this.jumpCount = 0
+
+        if (this.isGrounded == true) {
+            this.jumpCount = 0
+            this.DecreaceOnesChecker=0
+
+        }else{
+
+        }
+
+
 
 
         if (this.game.inputHandler.keys.has('q')  ) {
             this.game.inputHandler.keys.delete('q')
-            
-            if(this.currentSizeState== 'middle'){
-                this.currentSizeState="max"
-                this.x-=10}
-            else if (this.currentSizeState== 'mini'){
-                this.currentSizeState='middle'
-                this.x-=10}
-            else
-                console.log('nope')            
+            this.SizeChange('Increace')          
         }
+
+
 
         if (this.game.inputHandler.keys.has('e') ) {
             this.game.inputHandler.keys.delete('e')
-    
-            if(this.currentSizeState== 'middle'){
-                this.currentSizeState="mini"
-                this.x+=10}
-            else if (this.currentSizeState== 'max'){
-                this.currentSizeState='middle'
-                this.x+=10}
-            else{
-                console.log('nope')}  
-
-            
+            this.SizeChange('Decreace') 
         }
 
         // Applicera gravitation
@@ -154,13 +197,34 @@ export default class Player extends GameObject {
         
         // Skjut med X-tangenten
         // Uppdatera animation state baserat på movement
-        if (!this.isGrounded && this.velocityY < 0) {
+        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='mini') {
             this.setAnimation('jump')
-        } else if (!this.isGrounded && this.velocityY > 0) {
+        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='mini' ) {
             this.setAnimation('fall')
-        } else if (this.velocityX !== 0) {
+        } else if (this.velocityX !== 0 && this.currentSizeState=='mini') {
             this.setAnimation('run')
-        } else {
+        } else if( this.currentSizeState=='mini' ) {
+            this.setAnimation('idle')
+        }
+
+
+        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='middle') {
+            this.setAnimation('jump')
+        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='middle' ) {
+            this.setAnimation('fall')
+        } else if (this.velocityX !== 0 && this.currentSizeState=='middle') {
+            this.setAnimation('run')
+        } else if( this.currentSizeState=='middle' ) {
+            this.setAnimation('idle')
+        }
+
+        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='max') {
+            this.setAnimation('jump')
+        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='max' ) {
+            this.setAnimation('fall')
+        } else if (this.velocityX !== 0 && this.currentSizeState=='max') {
+            this.setAnimation('run')
+        } else if( this.currentSizeState=='max' ) {
             this.setAnimation('idle')
         }
 
@@ -169,28 +233,25 @@ export default class Player extends GameObject {
         // Size Changer 
 
         if (this.currentSizeState=='middle'){
-            this.width=50
-            this.height=50
-            this.jumpPower= -0.5
+            this.width=40
+            this.height=40
+            this.jumpPower= -0.6
             this.moveSpeed=0.3
-            //Dash
-            //Double jump
+            this.maxJumps=2
         }  
         else if (this.currentSizeState=='mini'){
             this.width=20
             this.height=20
-            this.jumpPower= -0.3
-            this.moveSpeed=0.15
-            //Dash
-            //Double jump
+            this.jumpPower= -0.5
+            this.moveSpeed=0.3
+            this.maxJumps=1
         }
         else if (this.currentSizeState=='max'){
-            this.width=80
-            this.height=80
+            this.width=60
+            this.height=60
             this.jumpPower= -0.7
             this.moveSpeed= 0.45
-            //Dash
-            //Double jump
+            this.maxJumps=2
 
         }
 
@@ -201,17 +262,48 @@ export default class Player extends GameObject {
         // Uppdatera animation frame
         this.updateAnimation(deltaTime)
     }
+
+
+
+    SizeChange(Size){
+        
+        if (Size =='Increace'){
+            console.log(this.currentSizeState)
+            if (this.currentSizeState== 'middle'){
+                this.currentSizeState='max'
+                this.x-=10}
+
+            else if (this.currentSizeState== 'mini'){
+                this.currentSizeState='middle'
+                this.x-=10}
+            }
+
+
+        else if (Size =='Decreace'){
+            console.log(this.currentSizeState)
+            if(this.currentSizeState=='middle'){
+                this.currentSizeState='mini'
+                this.x+=10
+            }
+
+            else if (this.currentSizeState=='max'){
+                this.currentSizeState='middle'
+                this.x+=10
+            }
+
+            
+        }
+
+
+      
+
+
+            
+
+                
+                
     
-    takeDamage(amount) {
-        if (this.invulnerable) return
-        
-        this.health -= amount
-        if (this.health < 0) this.health = 0
-        
-        // Sätt invulnerability efter att ha tagit skada
-        this.invulnerable = true
-        this.invulnerableTimer = this.invulnerableDuration
-    }
+    } 
     
     handlePlatformCollision(platform) {
         const collision = this.getCollisionData(platform)

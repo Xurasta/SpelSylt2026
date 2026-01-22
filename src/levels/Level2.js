@@ -8,7 +8,9 @@ import pinkBg from '../assets/Pixel Adventure 1/Background/Pink.png'
 import bigClouds from '../assets/clouds/Big Clouds.png'
 import cloud1 from '../assets/clouds/Small Cloud 1.png'
 import cloud2 from '../assets/clouds/Small Cloud 2.png'
-import grass01 from '../assets02/Grass.png'
+import grass from '../assets/sprites/Grass.png'
+import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
+
 
 /**
  * Level 2 - Andra nivån med svårare utmaningar
@@ -88,11 +90,18 @@ export default class Level2 extends Level {
 
         this.platforms = [
             // Marken (hela nivån)
-            new Platform(this.game, 0, height - 40, worldWidth, 40, '#654321'),
+            new Platform(this.game, 0, height - 40, worldWidth, 40, grass),
             
             // Svårare plattformar - högre hopp, längre gap
-            new Platform(this.game, 200, height - 180, 100, 20, '#8B4513'),
-
+            new Platform(this.game, 200, height - 180, 100, 20, grass),
+            new Platform(this.game, 450, height - 280, 80, 20, grass),
+            new Platform(this.game, 700, height - 200, 120, 20, grass),
+            new Platform(this.game, 950, height - 320, 100, 20, grass),
+            new Platform(this.game, 1200, height - 240, 90, 20, grass),
+            new Platform(this.game, 1450, height - 360, 110, 20, grass),
+            new Platform(this.game, 1700, height - 280, 100, 20, grass),
+            new Platform(this.game, 1950, height - 200, 120, 20, grass),
+            new Platform(this.game, 2200, height - 320, 100, 20, grass),
         ]
     }
 
