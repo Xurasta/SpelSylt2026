@@ -19,7 +19,6 @@ export default class Platform extends GameObject {
     }
     
     draw(ctx, camera = null) {
-        if (!this.imageLoaded) return
         // Beräkna screen position (om camera finns)
         const screenX = camera ? this.x - camera.x : this.x
         const screenY = camera ? this.y - camera.y : this.y
