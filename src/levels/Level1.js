@@ -9,6 +9,7 @@ import bigClouds from '../assets/clouds/Big Clouds.png'
 import cloud1 from '../assets/clouds/Small Cloud 1.png'
 import cloud2 from '../assets/clouds/Small Cloud 2.png'
 import cloud3 from '../assets/clouds/Small Cloud 3.png'
+import grass from '../assets02/Grass.png'
 
 /**
  * Level 1 - Den första nivån i spelet
@@ -42,8 +43,8 @@ export default class Level1 extends Level {
                 tileHeight: 101,
                 tileY: false, // Tila bara horisontellt
                 scrollSpeed: 0.6, // Mellan-parallax
-                yPosition: this.game.height - 141, // Precis ovanför marken
-                height: 101
+                yPosition: this.game.height - 100, // Precis ovanför marken
+                height: 120
             })
         ]
     }
@@ -80,24 +81,21 @@ export default class Level1 extends Level {
         const height = this.game.height
         const worldWidth = this.game.worldWidth
 
+        const ground = {
+            image: grass,
+            sourceWidth: 32,
+            sourceHeight: 32,
+            startclipX: 12,
+            clippedWidthX: 12,
+            startClipY: 32,
+            clippedWidthY: 32,
+            tile: 'both'
+        }
+
         this.platforms = [
             // Marken (hela nivån)
-            new Platform(this.game, 0, height - 40, worldWidth, 40, '#654321'),
-            
-            // Plattformar (utspridda över nivån)
-            new Platform(this.game, 150, height - 140, 150, 20, '#8B4513'),
-            new Platform(this.game, 400, height - 200, 120, 20, '#8B4513'),
-            new Platform(this.game, 100, height - 280, 100, 20, '#8B4513'),
-            new Platform(this.game, 550, height - 160, 100, 20, '#8B4513'),
-            new Platform(this.game, 350, height - 320, 140, 20, '#8B4513'),
-            // Nya plattformar längre bort
-            new Platform(this.game, 900, height - 180, 140, 20, '#8B4513'),
-            new Platform(this.game, 1100, height - 240, 120, 20, '#8B4513'),
-            new Platform(this.game, 1300, height - 160, 100, 20, '#8B4513'),
-            new Platform(this.game, 1500, height - 280, 150, 20, '#8B4513'),
-            new Platform(this.game, 1750, height - 200, 120, 20, '#8B4513'),
-            new Platform(this.game, 1950, height - 320, 140, 20, '#8B4513'),
-            new Platform(this.game, 2150, height - 180, 100, 20, '#8B4513'),
+            new Platform (this.game, 0, height - 32, worldWidth, 32, { sprite: ground })
+            // new Platform(this.game, 0, height - 32, worldWidth, 32, grass),
         ]
     }
 
