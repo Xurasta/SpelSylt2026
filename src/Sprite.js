@@ -177,6 +177,28 @@ export default class Sprite {
                 const remainingHeight = Math.min(tileHeight, height - row * tileHeight)
                 const remainingWidth = Math.min(tileWidth, width - col * tileWidth)
 
+                ctx.drawImage(
+                this.image,
+                this.sourceX, 
+                this.sourceY,
+                remainingHeight,
+                remainingWidth,
+                tileX - 1,
+                tileY,
+                remainingWidth + 2,
+                remainingHeight
+                )
+            }
+        }
+
+        for (let row = 0; row < numTilesY; row++) {
+            for (let col = 0; col < numTilesX; col++) {
+                const tileX = x + col * tileWidth
+                const tileY = y + row * tileHeight
+
+                const remainingHeight = Math.min(tileHeight, height - row * tileHeight)
+                const remainingWidth = Math.min(tileWidth, width - col * tileWidth)
+
                 if (this.startclipX == null) {
                     this.startclipX = this.sourceX
                 }
@@ -189,6 +211,8 @@ export default class Sprite {
                 if (this.clippedWidthY == null) {
                     this.clippedWidthY = remainingHeight
                 }
+
+                // Ritar ut bild under så den får kanter
 
                 ctx.drawImage(
                     this.image,
