@@ -1,6 +1,5 @@
 import GameBase from './GameBase.js'
 import Player from './Player.js'
-import Projectile from './Projectile.js'
 import Level1 from './levels/Level1.js'
 import Level2 from './levels/Level2.js'
 import MainMenu from './menus/MainMenu.js'
@@ -315,8 +314,12 @@ export default class PlatformerGame extends GameBase {
         this.camera.update(deltaTime)
         
         // Kolla win condition - alla mynt samlade
-        if (this.coinsCollected === this.totalCoins && this.gameState === 'PLAYING') {
-            // Gå till nästa level
+        // if (this.coinsCollected === this.totalCoins && this.gameState === 'PLAYING') {
+        //     // Gå till nästa level
+        //     this.nextLevel()
+        // }
+        
+        if (this.player.x + this.player.width == this.worldWidth) {
             this.nextLevel()
         }
         
