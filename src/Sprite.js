@@ -29,9 +29,9 @@ export default class Sprite {
         this.sourceHeight = config.sourceHeight
 
         // Clipping
-        this.startclipX = config.startclipX
+        this.startClipX = config.startClipX
         this.clippedWidthX = config.clippedWidthX
-        this.startclipY = config.startclipY
+        this.startClipY = config.startClipY
         this.clippedWidthY = config.clippedWidthY
 
         // Source position in sprite sheet
@@ -199,25 +199,24 @@ export default class Sprite {
                 const remainingHeight = Math.min(tileHeight, height - row * tileHeight)
                 const remainingWidth = Math.min(tileWidth, width - col * tileWidth)
 
-                if (this.startclipX == null) {
-                    this.startclipX = this.sourceX
+                if (this.startClipX == null) {
+                    this.startClipX = this.sourceX
                 }
                 if (this.clippedWidthX == null) {
                     this.clippedWidthX = remainingWidth
                 }
-                if (this.startclipY == null) {
-                    this.startclipY = this.sourceY
+                if (this.startClipY == null) {
+                    this.startClipY = this.sourceY
                 }
                 if (this.clippedWidthY == null) {
                     this.clippedWidthY = remainingHeight
                 }
 
                 // Ritar ut bild under så den får kanter
-
                 ctx.drawImage(
                     this.image,
-                    this.startclipX, 
-                    this.startclipY,
+                    this.startClipX, 
+                    this.startClipY,
                     this.clippedWidthX,
                     this.clippedWidthY,
                     tileX,

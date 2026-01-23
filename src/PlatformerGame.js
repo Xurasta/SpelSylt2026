@@ -320,6 +320,7 @@ export default class PlatformerGame extends GameBase {
         // }
         
         if (this.player.x + this.player.width == this.worldWidth) {
+            
             this.nextLevel()
         }
         
