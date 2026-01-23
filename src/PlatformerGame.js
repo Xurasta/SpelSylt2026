@@ -278,16 +278,9 @@ export default class PlatformerGame extends GameBase {
                 otherEnemy.handleEnemyCollision(enemy)
             })
         })
+        // poeng för att klara bana snabbare
+        this.score += deltaTime;
 
-        // Kontrollera kollision med mynt
-        this.coins.forEach(coin => {
-            if (this.player.intersects(coin) && !coin.markedForDeletion) {
-                // Plocka upp myntet
-                this.score += coin.value
-                this.coinsCollected++
-                coin.collect() // Myntet hanterar sin egen ljud och markering
-            }
-        })
         
         // Kontrollera kollision med fiender
         this.enemies.forEach(enemy => {
@@ -328,6 +321,7 @@ export default class PlatformerGame extends GameBase {
         if (this.player.health <= 0 && this.gameState === 'PLAYING') {
             this.gameState = 'GAME_OVER'
         }
+        this.currentLevel.updateTimer('timer', deltaTime);
     }
 
     draw(ctx) {
