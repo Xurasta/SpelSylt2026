@@ -120,6 +120,34 @@ export default class GameObject {
     startCooldown(timerName, duration) { this.startTimer(timerName, duration) }
     
 
+      /**
+     * Hjälpmetod för att hantera timers (cooldowns, durations, etc)
+     * Används för: shootCooldown, dashTimer, reloadTimer, invulnerableTimer, etc
+     * @param {string} timerName - Namnet på timer-variabeln (t.ex. 'shootCooldown')
+     * @param {number} deltaTime - Tid sedan senaste frame
+     * @returns {boolean} - true om timer är klar (timer <= 0)
+     */
+    updateTimer(timerName, deltaTime) {
+        if (this[timerName] > 0) {
+            this[timerName] -= deltaTime
+            if (this[timerName] < 0) this[timerName] = 0
+            return false
+        }
+        return true
+    }
+    
+    /**
+     * Starta en timer/cooldown
+     */
+    startTimer(timerName, duration) {
+        this[timerName] = duration
+    }
+    
+    // Alias för bakåtkompatibilitet
+    updateCooldown(timerName, deltaTime) { return this.updateTimer(timerName, deltaTime) }
+    startCooldown(timerName, duration) { this.startTimer(timerName, duration) }
+    
+
     // Uppdatera animation frame (anropa i subklassens update)
     updateAnimation(deltaTime) {
         if (!this.animations || !this.currentAnimation) return

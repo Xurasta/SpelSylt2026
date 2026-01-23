@@ -97,6 +97,7 @@ export default class Level1 extends Level {
             // Marken (hela nivån)
             new Platform (this.game, 0, height - 32, worldWidth, 32, { sprite: ground }),
 
+            new Platform (this.game, 120, 320, 64, 64, { sprite: ground})
         ]
     }
 
