@@ -12,12 +12,18 @@ import cloud3 from '../assets/clouds/Small Cloud 3.png'
 import grass from '../assets/sprites/Grass.png'
 import bush from '../assets/sprites/bush.png'
 import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
-
+import tree from '../assets/sprites/tree.png'
+import rock from '../assets/sprites/Boulder.png'
+import Grass from '../assets/sprites/grass.png'
+import Grass2 from '../assets/sprites/grass2.png'
+import Grass3 from '../assets/sprites/grass3.png'
+import wood from '../assets/sprites/woodplatform.png'
 
 /**
  * Level 1 - Den första nivån i spelet
  * Enklare layout för att introducera spelmekaniker
  */
+
 export default class Level1 extends Level {
     constructor(game) {
         super(game)
@@ -50,10 +56,10 @@ export default class Level1 extends Level {
 
     createBackgroundObjects() {
         const height = this.game.height
-
+        
         this.backgroundObjects = [
             // Små moln som rör sig oberoende
-            new BackgroundObject(this.game, 200, height - 300, cloud1, {
+            new BackgroundObject(this.game, 200, height - 500, tree, {
                 speed: 0.02,
                 scrollSpeed: 0.4
             }),
