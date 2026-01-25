@@ -15,8 +15,8 @@ export default class PlatformerGame extends GameBase {
         super(width, height)
         
         // Plattformsspel behöver en större värld för sidoscrolling
-        this.worldWidth = width * 3
-        this.worldHeight = height
+        this.worldWidth = width * 4
+        this.worldHeight = height * 2
         this.camera.setWorldBounds(this.worldWidth, this.worldHeight)
         
         // Plattformsspel-specifik fysik

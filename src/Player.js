@@ -28,23 +28,25 @@ export default class Player extends GameObject {
         this.velocityY = 0
 
         // Rörelsehastighet (hur snabbt spelaren accelererar/rör sig)
-        this.moveSpeed = 0.3
+        this.moveSpeed = 0
         this.directionX = 0
         this.directionY = 0
         this.lastDirectionX=0
-
+        this.constantMoveSpeed = 0.4
+        
         // Dash egeneskaper
-        this.dashSpeed = 2
+        this.dashSpeed = 2.4
         this.dashTimer = 0
         this.isDashing = false
         
-
+        
         // Fysik egenskaper
         this.jumpCount = 0
         this.maxJumps = 2
-        this.jumpPower = -0.6 // negativ hastighet för att hoppa uppåt
+        this.jumpPower = 0 // negativ hastighet för att hoppa uppåt
         this.isGrounded = false // om spelaren står på marken
         this.DecreaceOnesChecker=0
+        this.constantJumpPower = -1
         
         
         
@@ -231,27 +233,26 @@ export default class Player extends GameObject {
     
 
         // Size Changer 
-
         if (this.currentSizeState=='middle'){
-            this.width=40
-            this.height=40
-            this.jumpPower= -0.6
-            this.moveSpeed=0.3
-            this.maxJumps=2
+            this.width= 40
+            this.height= 40
+            this.jumpPower= this.constantJumpPower * 0.45
+            this.moveSpeed= this.constantMoveSpeed * 0.45
+            this.maxJumps= 2
         }  
         else if (this.currentSizeState=='mini'){
-            this.width=20
-            this.height=20
-            this.jumpPower= -0.5
-            this.moveSpeed=0.3
-            this.maxJumps=1
+            this.width= 20
+            this.height= 20
+            this.jumpPower= this.constantJumpPower * 0.40
+            this.moveSpeed= this.constantMoveSpeed * 0.40
+            this.maxJumps= 1
         }
         else if (this.currentSizeState=='max'){
-            this.width=60
-            this.height=60
-            this.jumpPower= -0.7
-            this.moveSpeed= 0.45
-            this.maxJumps=2
+            this.width= 60
+            this.height= 60
+            this.jumpPower= this.constantJumpPower * 0.50
+            this.moveSpeed= this.constantMoveSpeed * 0.50
+            this.maxJumps= 2
 
         }
 
