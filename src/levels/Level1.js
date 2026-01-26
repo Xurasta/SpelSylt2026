@@ -87,21 +87,10 @@ export default class Level1 extends Level {
             image: grass,
             sourceWidth: 32,
             sourceHeight: 32,
-            startClipX: 12,
-            clippedWidthX: 16,
-            startClipY: 0,
+            startclipX: 12,
+            clippedWidthX: 12,
+            startClipY: 32,
             clippedWidthY: 32,
-            tile: 'both'
-        }
-
-        const dirt = {
-            image: grass,
-            sourceWidth: 32,
-            sourceHeight: 32,
-            startClipX: 12,
-            clippedWidthX: 16,
-            startClipY: 10,
-            clippedWidthY: 20,
             tile: 'both'
         }
 
@@ -109,8 +98,6 @@ export default class Level1 extends Level {
             // Marken (hela nivån)
             new Platform (this.game, 0, height - 32, worldWidth, 32, { sprite: ground }),
 
-            // Berg
-            new Platform (this.game, 120, 320, 128, 180, { sprite: dirt})
         ]
     }
 
