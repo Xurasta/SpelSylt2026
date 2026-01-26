@@ -49,6 +49,8 @@ export default class Level1 extends Level {
         ]
     }
 
+    // Backgroundobjects
+
     createBackgroundObjects() {
         const height = this.game.height
 
