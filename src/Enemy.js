@@ -1,5 +1,5 @@
 import GameObject from './GameObject.js'
-import NpcSpricte from './assets/player/Squirrel.png'
+
 export default class Enemy extends GameObject {
     constructor(game, x, y, width, height, patrolDistance = null) {
         super(game, x, y, width, height)
@@ -18,8 +18,7 @@ export default class Enemy extends GameObject {
         this.direction = 1 // 1 = höger, -1 = vänster
 
 
-          this.loadSprite('idle', NpcSpricte, 1)
-
+          
     }
 
 

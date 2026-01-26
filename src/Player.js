@@ -1,16 +1,6 @@
 import GameObject from './GameObject.js'
 
-import MiniIdleSprite from './assets/player/Slime S Idle V1.png'
-import MiniRunSprite from './assets/player/Slime S Running V2.png'
-import MiniJumpSprite from './assets/player/Slime S Jumping V1.png'
-
-import MiddleIdleSprite from './assets/player/Slime S Idle V1.png'
-import MiddleRunSprite from './assets/player/Slime S Running V2.png'
-import MiddleJumpSprite from './assets/player/Slime S Jumping V1.png'
-
-import MaxIdleSprite from './assets/player/Slime S Idle V1.png'
-import MaxRunSprite from './assets/player/Slime S Running V2.png'
-import MaxJumpSprite from './assets/player/Slime S Jumping V1.png'
+import MiniIdle from './assets/player/Slime_S_Idle'
 
 
 
@@ -64,7 +54,7 @@ export default class Player extends GameObject {
 
         
         // Sprite animation system - ladda sprites med olika hastigheter
-        this.loadSprite('idle', MiniIdleSprite, 10, 150)  // Långsammare idle
+        this.loadSprite('idle', MiniIdle, 10, 150)  // Långsammare idle
         this.loadSprite('run', MiniRunSprite, 8, 80)     // Snabbare spring
         this.loadSprite('jump', MiniJumpSprite, 8,100)
         this.loadSprite('fall', MiniIdleSprite, 10,100)
@@ -207,27 +197,9 @@ export default class Player extends GameObject {
             this.setAnimation('idle')
         }
 
+        
 
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='middle') {
-            this.setAnimation('jump')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='middle' ) {
-            this.setAnimation('fall')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='middle') {
-            this.setAnimation('run')
-        } else if( this.currentSizeState=='middle' ) {
-            this.setAnimation('idle')
-        }
-
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='max') {
-            this.setAnimation('jump')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='max' ) {
-            this.setAnimation('fall')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='max') {
-            this.setAnimation('run')
-        } else if( this.currentSizeState=='max' ) {
-            this.setAnimation('idle')
-        }
-
+        
     
 
         // Size Changer 
