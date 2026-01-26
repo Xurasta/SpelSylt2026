@@ -91,8 +91,8 @@ export default class GameObject {
 
         console.log(frameWidth, (img.width / frames), frameHeight, img.height)
     }
-
-      /**
+    
+     /**
      * Hjälpmetod för att hantera timers (cooldowns, durations, etc)
      * Används för: shootCooldown, dashTimer, reloadTimer, invulnerableTimer, etc
      * @param {string} timerName - Namnet på timer-variabeln (t.ex. 'shootCooldown')
