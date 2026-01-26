@@ -16,7 +16,7 @@ import woodPlatform from '../assets/sprites/wood platform.png'
 import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
 import Camera from '../Camera.js'
 
-// ok
+// third test
 /**
  * Level 1 - Den första nivån i spelet
  * Enklare layout för att introducera spelmekaniker
