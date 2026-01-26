@@ -336,9 +336,7 @@ export default class PlatformerGame extends GameBase {
         
         // Rita background objects
         this.backgroundObjects.forEach(obj => {
-            if (this.camera.isVisible(obj)) {
                 obj.draw(ctx, this.camera)
-            }
         })
         
         // Rita alla plattformar med camera offset

@@ -4,16 +4,15 @@ import Enemy from '../Enemy.js'
 import BackgroundObject from '../BackgroundObject.js'
 import Background from '../Background.js'
 import blueBg from '../assets/Pixel Adventure 1/Background/Blue.png'
-import bigClouds from '../assets/clouds/Big Clouds.png'
-import cloud1 from '../assets/clouds/Small Cloud 1.png'
-import cloud2 from '../assets/clouds/Small Cloud 2.png'
-import cloud3 from '../assets/clouds/Small Cloud 3.png'
+import tree from '../assets/sprites/träd.png'
 import grass from '../assets/sprites/Grass.png'
 import bush from '../assets/sprites/bush.png'
 import thorns from '../assets/sprites/Thorns.png'
 import woodPlatform from '../assets/sprites/wood platform.png'
+import hills from '../assets/bakgrund/Gläs.png'
+import clouds from '../assets/bakgrund/Moln skog.png'
 
-import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
+import bakgrundlvl from '../assets/bakgrund/Skog himmel.png'
 import Camera from '../Camera.js'
 
 // Second test
@@ -93,27 +92,24 @@ export default class Level1 extends Level {
         }
         
         this.backgroundObjects = [
-            // Små moln som rör sig oberoende
-            new BackgroundObject(this.game, 200, height - 300, cloud1, {
-                speed: 0.02,
-                scrollSpeed: 0.4
+            new BackgroundObject(this.game, -500, worldHeight - 700, clouds, {
+                speed: 0.001,
+                scrollSpeed: 0.4,
+                height: 200,
+                width: screen.width
             }),
-            new BackgroundObject(this.game, 600, height - 250, cloud2, {
-                speed: 0.015,
-                scrollSpeed: 0.4
+            new BackgroundObject(this.game, -500, worldHeight - 450, hills, {
+                speed: 1000,
+                scrollSpeed: 0.4,
+                height: 200,
+                width: screen.width
             }),
-            new BackgroundObject(this.game, 1200, height - 280, cloud3, {
-                speed: 0.018,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 1800, height - 320, cloud1, {
-                speed: 0.022,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 2200, height - 260, cloud2, {
-                speed: 0.016,
-                scrollSpeed: 0.4
-            }),
+    
+        
+
+
+
+
 
             new Platform(this.game, 2900, height + 400, 48, 72, { sprite: woodenPlatformSupport }),
             new Platform(this.game, 2900, height + 390, 48, 12, { sprite: woodenPlatformRail }),
