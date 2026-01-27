@@ -3,10 +3,11 @@ import Platform from '../Platform.js'
 import Enemy from '../Enemy.js'
 import BackgroundObject from '../BackgroundObject.js'
 import Background from '../Background.js'
-import cloud1 from '../assets/clouds/Small Cloud 1.png'
+import tree from '../assets/bakgrund/Träd.png'
+import clouds from '../assets/bakgrund/Moln skog.png'
+import trees from '../assets/bakgrund/Träd.png'
 
 import bush from '../assets/sprites/bush.png'
-
 import grass from '../assets/sprites/Grass.png'
 import thorns from '../assets/sprites/Thorns.png'
 import woodPlatform from '../assets/sprites/wood platform.png'
@@ -29,7 +30,7 @@ export default class Level1 extends Level {
         super(game)
         
         // Player spawn position för denna level
-        this.playerSpawnX = 200
+        this.playerSpawnX = 3100
         this.playerSpawnY = 300
         
         // Initiera level
@@ -53,10 +54,58 @@ export default class Level1 extends Level {
                 tileWidth: 64,
                 tileHeight: 64,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
-                tiledY: true, // Tila bara horisontellt
-                tileHeight: 200, // Fyll hela höjden
-                tileWidth: this.game.worldWidth // Fyll hela bredden
+                tiledY: false, // Tila bara horisontellt
+                height: 500, // Fyll hela höjden
+                width: 2000,
+                yPosition: -300,
+                xPosition: 200
             }),
+            new Background(this.game, clouds, {
+                tiled: false,
+                tileWidth: 64,
+                tileHeight: 64,
+                scrollSpeed: 0.6, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 200, // Fyll hela höjden
+                width: 3000,
+                yPosition: -200 ,
+                xPosition: 0
+            }),
+            new Background(this.game, trees, {
+                tiled: false,
+                tileWidth: 64,
+                tileHeight: 64,
+                scrollSpeed: 0.35, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 500,
+                yPosition: -400,
+                xPosition: 0
+            }),
+            new Background(this.gam, trees, {
+                tiled: false,
+                tileWidth: 64,
+                tileHeight: 64,
+                scrollSpeed: 0.35, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 500,
+                yPosition: -420,
+                xPosition: -500
+            }),
+            new Background(this.game, trees, {
+                tiled: false,
+                tileWidth: 64,
+                tileHeight: 64,
+                scrollSpeed: 0.2, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 500,
+                yPosition: -435,
+                xPosition: -100
+            }),
+
+
 
             // Mid background - stora moln
            
