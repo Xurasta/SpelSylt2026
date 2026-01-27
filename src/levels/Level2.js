@@ -25,6 +25,7 @@ export default class Level2 extends Level {
         // Player spawn position för denna level
         this.playerSpawnX = 50
         this.playerSpawnY = 50
+        this.timer = 0
         
         // Initiera level
         this.init()
@@ -119,5 +120,9 @@ export default class Level2 extends Level {
             new Enemy(this.game, 1850, height - 240, 40, 40, 100),
             new Enemy(this.game, 2100, height - 360, 40, 40, 130),
         ]
+    }
+    update(deltaTime) {
+        this.updateTimer('timer', deltaTime);
+        console.log(this.timer);
     }
 }
