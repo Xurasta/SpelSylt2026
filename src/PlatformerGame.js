@@ -15,8 +15,8 @@ export default class PlatformerGame extends GameBase {
         super(width, height)
         
         // Plattformsspel behöver en större värld för sidoscrolling
-        this.worldWidth = width * 3
-        this.worldHeight = height
+        this.worldWidth = width * 4
+        this.worldHeight = height * 2
         this.camera.setWorldBounds(this.worldWidth, this.worldHeight)
         
         // Plattformsspel-specifik fysik
@@ -292,7 +292,6 @@ export default class PlatformerGame extends GameBase {
         // Ta bort objekt markerade för borttagning
         this.coins = this.coins.filter(coin => !coin.markedForDeletion)
         this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion)
-        this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion)
 
         // Förhindra att spelaren går utöver world bounds
         if (this.player.x < 0) {
@@ -313,6 +312,7 @@ export default class PlatformerGame extends GameBase {
         // }
         
         if (this.player.x + this.player.width == this.worldWidth) {
+            
             this.nextLevel()
         }
         
@@ -329,9 +329,7 @@ export default class PlatformerGame extends GameBase {
         
         // Rita background objects
         this.backgroundObjects.forEach(obj => {
-            if (this.camera.isVisible(obj)) {
-                obj.draw(ctx, this.camera)
-            }
+            obj.draw(ctx, this.camera)
         })
         
         // Rita alla plattformar med camera offset

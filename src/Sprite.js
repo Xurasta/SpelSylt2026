@@ -29,10 +29,11 @@ export default class Sprite {
         this.sourceHeight = config.sourceHeight
 
         // Clipping
-        this.startclipX = config.startclipX
+        this.startClipX = config.startClipX
         this.clippedWidthX = config.clippedWidthX
-        this.startclipY = config.startclipY
+        this.startClipY = config.startClipY
         this.clippedWidthY = config.clippedWidthY
+        this.backdrop = config.backdrop || true
 
         // Source position in sprite sheet
         this.sourceX = config.sourceX || 0
@@ -169,25 +170,27 @@ export default class Sprite {
         const numTilesX = Math.ceil(width / tileWidth)
         const numTilesY = Math.ceil(height / tileHeight)
         
-        for (let row = 0; row < numTilesY; row++) {
-            for (let col = 0; col < numTilesX; col++) {
-                const tileX = x + col * tileWidth
-                const tileY = y + row * tileHeight
-
-                const remainingHeight = Math.min(tileHeight, height - row * tileHeight)
-                const remainingWidth = Math.min(tileWidth, width - col * tileWidth)
-
-                ctx.drawImage(
-                this.image,
-                this.sourceX, 
-                this.sourceY,
-                remainingHeight,
-                remainingWidth,
-                tileX - 1,
-                tileY,
-                remainingWidth + 2,
-                remainingHeight
-                )
+        if (this.backdrop == true) {
+            for (let row = 0; row < numTilesY; row++) {
+                for (let col = 0; col < numTilesX; col++) {
+                    const tileX = x + col * tileWidth
+                    const tileY = y + row * tileHeight
+    
+                    const remainingHeight = Math.min(tileHeight, height - row * tileHeight)
+                    const remainingWidth = Math.min(tileWidth, width - col * tileWidth)
+    
+                    ctx.drawImage(
+                    this.image,
+                    this.sourceX, 
+                    this.sourceY,
+                    remainingHeight,
+                    remainingWidth,
+                    tileX - 1,
+                    tileY,
+                    remainingWidth + 2,
+                    remainingHeight
+                    )
+                }
             }
         }
 
@@ -199,25 +202,24 @@ export default class Sprite {
                 const remainingHeight = Math.min(tileHeight, height - row * tileHeight)
                 const remainingWidth = Math.min(tileWidth, width - col * tileWidth)
 
-                if (this.startclipX == null) {
-                    this.startclipX = this.sourceX
+                if (this.startClipX == null) {
+                    this.startClipX = this.sourceX
                 }
                 if (this.clippedWidthX == null) {
                     this.clippedWidthX = remainingWidth
                 }
-                if (this.startclipY == null) {
-                    this.startclipY = this.sourceY
+                if (this.startClipY == null) {
+                    this.startClipY = this.sourceY
                 }
                 if (this.clippedWidthY == null) {
                     this.clippedWidthY = remainingHeight
                 }
 
                 // Ritar ut bild under så den får kanter
-
                 ctx.drawImage(
                     this.image,
-                    this.startclipX, 
-                    this.startclipY,
+                    this.startClipX, 
+                    this.startClipY,
                     this.clippedWidthX,
                     this.clippedWidthY,
                     tileX,
