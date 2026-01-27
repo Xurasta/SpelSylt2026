@@ -30,8 +30,8 @@ export default class Level1 extends Level {
         super(game)
         
         // Player spawn position för denna level
-        this.playerSpawnX = 3100
-        this.playerSpawnY = 300
+        this.playerSpawnX = 50
+        this.playerSpawnY = 50
         
         // Initiera level
         this.init()
