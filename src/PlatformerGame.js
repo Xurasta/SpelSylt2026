@@ -18,7 +18,7 @@ export default class PlatformerGame extends GameBase {
         this.worldWidth = width * 4
         this.worldHeight = height * 2
         this.camera.setWorldBounds(this.worldWidth, this.worldHeight)
-        
+
         // Plattformsspel-specifik fysik
         this.gravity = 0.001 // pixels per millisekund^2
         this.friction = 0.00015 // luftmotstånd för att bromsa fallhastighet
@@ -278,7 +278,7 @@ export default class PlatformerGame extends GameBase {
             })
         })
 
-        // Kontrollera kollision med mynt
+        // Kontrollera kollision med blobs
         this.slimeBlobs.forEach(slimeBlob => {
             if (this.player.intersects(slimeBlob) && !slimeBlob.markedForDeletion && this.inputHandler.keys.has('r')) {
                 // Plocka upp myntet
@@ -289,7 +289,7 @@ export default class PlatformerGame extends GameBase {
             }
         })
 
-        // Hanterar collision med marken
+        // Kontrollera collision med marken för slimeBlob
         this.slimeBlobs.forEach(slimeBlob => {
             slimeBlob.isGrounded = false
             
@@ -301,10 +301,20 @@ export default class PlatformerGame extends GameBase {
         // Kontrollera kollision med fiender
         this.enemies.forEach(enemy => {
             if (this.player.intersects(enemy) && !enemy.markedForDeletion && this.inputHandler.keys.has('r')) {
-            enemy.markedForDeletion = true
-            this.player.SizeChange("Increace")
+                enemy.velocityX = 0
+                enemy.speed = 0
+                
+                enemy.setAnimation('eaten')
+                enemy.startTimer('timeout', 200)
             }
+            if (enemy.timeout == 0) {
+                enemy.markedForDeletion = true
+                this.player.SizeChange("Increace")
+            }
+            enemy.updateTimer('timeout', deltaTime)
         })
+
+
 
         // Ta bort objekt markerade för borttagning
         this.slimeBlobs = this.slimeBlobs.filter(slimeBlob => !slimeBlob.markedForDeletion)

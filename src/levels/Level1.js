@@ -9,8 +9,6 @@ import cloud1 from '../assets/clouds/Small Cloud 1.png'
 import cloud2 from '../assets/clouds/Small Cloud 2.png'
 import cloud3 from '../assets/clouds/Small Cloud 3.png'
 
-import bush from '../assets/sprites/bush.png'
-
 import grass from '../assets/sprites/Grass.png'
 import thorns from '../assets/sprites/Thorns.png'
 import woodPlatform from '../assets/sprites/wood platform.png'
@@ -18,6 +16,14 @@ import arrowLeft from '../assets/sprites/Arrow Left.png'
 import arrowRight from '../assets/sprites/Arrow Right.png'
 import arrowUp from '../assets/sprites/Arrow Up.png'
 import boulder from '../assets/sprites/Boulder.png'
+
+import bush from '../assets/sprites/lvl1/Bush.png'
+import gackGrass from '../assets/sprites/lvl1/BG Grass.png'
+import flowers from '../assets/sprites/lvl1/Flowers.png'
+import dashSign from '../assets/sprites/lvl1/Sign (dashing).png'
+import growSign from '../assets/sprites/lvl1/Sign (Growing).png'
+import jumpingSign from '../assets/sprites/lvl1/Sign (jumping).png'
+import thornSign from '../assets/sprites/lvl1/Sign (Thorns).png'
 
 import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
 import Camera from '../Camera.js'
@@ -72,7 +78,6 @@ export default class Level1 extends Level {
             tile: 'both',
             backdrop: 'false'
         }
-
         
         const woodenPlatformSupport = {
             image: woodPlatform,
