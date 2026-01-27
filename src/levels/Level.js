@@ -82,4 +82,8 @@ export default class Level {
             playerSpawnY: this.playerSpawnY
         }
     }
+    updateTimer(timerName, deltaTime) {
+        this[timerName] += deltaTime;
+    }
+        
 }
