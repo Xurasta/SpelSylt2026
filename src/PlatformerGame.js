@@ -1,6 +1,5 @@
 import GameBase from './GameBase.js'
 import Player from './Player.js'
-import Projectile from './Projectile.js'
 import Level1 from './levels/Level1.js'
 import Level2 from './levels/Level2.js'
 import MainMenu from './menus/MainMenu.js'
@@ -16,8 +15,8 @@ export default class PlatformerGame extends GameBase {
         super(width, height)
         
         // Plattformsspel behöver en större värld för sidoscrolling
-        this.worldWidth = width * 3
-        this.worldHeight = height
+        this.worldWidth = width * 4
+        this.worldHeight = height * 2
         this.camera.setWorldBounds(this.worldWidth, this.worldHeight)
         
         // Plattformsspel-specifik fysik
@@ -127,10 +126,7 @@ export default class PlatformerGame extends GameBase {
         this.gameState = 'PLAYING'
     }
     
-    addProjectile(x, y, directionX) {
-        const projectile = new Projectile(this, x, y, directionX)
-        this.projectiles.push(projectile)
-    }
+
     
     restart() {
         this.currentLevelIndex = 0
@@ -297,13 +293,12 @@ export default class PlatformerGame extends GameBase {
         this.enemies.forEach(enemy => {
             if (this.player.intersects(enemy) && !enemy.markedForDeletion && this.inputHandler.keys.has('r')) {
             enemy.markedForDeletion = true
-            this.score += enemy.points || 50
+            this.player.SizeChange("Increace")
             }
         })
         // Ta bort objekt markerade för borttagning
         this.coins = this.coins.filter(coin => !coin.markedForDeletion)
         this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion)
-        this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDeletion)
 
         // Förhindra att spelaren går utöver world bounds
         if (this.player.x < 0) {
@@ -318,8 +313,13 @@ export default class PlatformerGame extends GameBase {
         this.camera.update(deltaTime)
         
         // Kolla win condition - alla mynt samlade
-        if (this.coinsCollected === this.totalCoins && this.gameState === 'PLAYING') {
-            // Gå till nästa level
+        // if (this.coinsCollected === this.totalCoins && this.gameState === 'PLAYING') {
+        //     // Gå till nästa level
+        //     this.nextLevel()
+        // }
+        
+        if (this.player.x + this.player.width == this.worldWidth) {
+            
             this.nextLevel()
         }
         
@@ -335,9 +335,7 @@ export default class PlatformerGame extends GameBase {
         
         // Rita background objects
         this.backgroundObjects.forEach(obj => {
-            if (this.camera.isVisible(obj)) {
-                obj.draw(ctx, this.camera)
-            }
+            obj.draw(ctx, this.camera)
         })
         
         // Rita alla plattformar med camera offset
