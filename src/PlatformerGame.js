@@ -7,7 +7,7 @@ import SaveGameManager from './SaveGameManager.js'
 
 /**
  * PlatformerGame - En konkret implementation av GameBase för plattformsspel
- * Innehåller plattformsspel-specifik logik som gravity, platforms, coins
+ * Innehåller plattformsspel-specifik logik som gravity, platforms, slimeBlobs
  * Använder Level-system för att hantera olika nivåer
  */
 export default class PlatformerGame extends GameBase {
@@ -24,8 +24,8 @@ export default class PlatformerGame extends GameBase {
         this.friction = 0.00015 // luftmotstånd för att bromsa fallhastighet
 
         // Plattformsspel-specifik state
-        this.coinsCollected = 0
-        this.totalCoins = 0 // Sätts när vi skapar coins
+        this.slimeBlobsCollected = 0
+        this.totalSlimeBlobs = 0 // Sätts när vi skapar slimeBlobs
         
         // Level management
         this.currentLevelIndex = 0
@@ -34,7 +34,7 @@ export default class PlatformerGame extends GameBase {
         
         // Plattformsspel-specifika arrays
         this.platforms = []
-        this.coins = []
+        this.slimeBlobs = []
         this.projectiles = []
         
         // Background arrays (sätts av levels)
@@ -54,7 +54,7 @@ export default class PlatformerGame extends GameBase {
     init() {
         // Återställ score (men inte game state - det hanteras av constructor/restart)
         this.score = 0
-        this.coinsCollected = 0
+        this.slimeBlobsCollected = 0
         
         // Återställ camera
         this.camera.x = 0
@@ -82,17 +82,16 @@ export default class PlatformerGame extends GameBase {
         
         // Sätt level data
         this.platforms = levelData.platforms
-        this.coins = levelData.coins
+        // this.slimeBlobs = levelData.slimeBlobs
         this.enemies = levelData.enemies
-        this.totalCoins = this.coins.length
+        this.totalslimeBlobs = this.slimeBlobs.length
         
         // Sätt background data
         this.backgrounds = levelData.backgrounds
         this.backgroundObjects = levelData.backgroundObjects
         
         // Återställ mynt-räknare för denna level
-        this.coinsCollected = 0
-        
+        this.slimeBlobsCollected = 0
         // Skapa player på level spawn position
         this.player = new Player(
             this, 
@@ -148,7 +147,7 @@ export default class PlatformerGame extends GameBase {
         return this.saveManager.save({
             currentLevelIndex: this.currentLevelIndex,
             score: this.score,
-            coinsCollected: this.coinsCollected,
+            slimeBlobsCollected: this.slimeBlobsCollected,
             health: this.player.health,
             playerX: this.player.x,
             playerY: this.player.y
@@ -177,7 +176,7 @@ export default class PlatformerGame extends GameBase {
         
         // Återställ progress
         this.score = saveData.score
-        this.coinsCollected = saveData.coinsCollected
+        this.slimeBlobsCollected = saveData.slimeBlobsCollected
         
         // Starta spelet
         this.gameState = 'PLAYING'
@@ -242,8 +241,8 @@ export default class PlatformerGame extends GameBase {
         // Uppdatera plattformar (även om de är statiska)
         this.platforms.forEach(platform => platform.update(deltaTime))
         
-        // Uppdatera mynt (plattformsspel-specifikt)
-        this.coins.forEach(coin => coin.update(deltaTime))
+        // Uppdatera goo
+        this.slimeBlobs.forEach(slimeBlob => slimeBlob.update(deltaTime))
         
         // Uppdatera fiender (med plattformsfysik)
         this.enemies.forEach(enemy => enemy.update(deltaTime))
@@ -280,13 +279,23 @@ export default class PlatformerGame extends GameBase {
         })
 
         // Kontrollera kollision med mynt
-        this.coins.forEach(coin => {
-            if (this.player.intersects(coin) && !coin.markedForDeletion) {
+        this.slimeBlobs.forEach(slimeBlob => {
+            if (this.player.intersects(slimeBlob) && !slimeBlob.markedForDeletion && this.inputHandler.keys.has('r')) {
                 // Plocka upp myntet
-                this.score += coin.value
-                this.coinsCollected++
-                coin.collect() // Myntet hanterar sin egen ljud och markering
+                this.score += slimeBlob.value
+                this.slimeBlobsCollected++
+                slimeBlob.collect() 
+                this.player.SizeChange('Increace')
             }
+        })
+
+        // Hanterar collision med marken
+        this.slimeBlobs.forEach(slimeBlob => {
+            slimeBlob.isGrounded = false
+            
+            this.platforms.forEach(platform => {
+                slimeBlob.handlePlatformCollision(platform)
+            })
         })
         
         // Kontrollera kollision med fiender
@@ -296,8 +305,9 @@ export default class PlatformerGame extends GameBase {
             this.player.SizeChange("Increace")
             }
         })
+
         // Ta bort objekt markerade för borttagning
-        this.coins = this.coins.filter(coin => !coin.markedForDeletion)
+        this.slimeBlobs = this.slimeBlobs.filter(slimeBlob => !slimeBlob.markedForDeletion)
         this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion)
 
         // Förhindra att spelaren går utöver world bounds
@@ -345,10 +355,10 @@ export default class PlatformerGame extends GameBase {
             }
         })
         
-        // Rita mynt med camera offset
-        this.coins.forEach(coin => {
-            if (this.camera.isVisible(coin)) {
-                coin.draw(ctx, this.camera)
+        // Rita slimeBlob med camera offset
+        this.slimeBlobs.forEach(slimeBlob => {
+            if (this.camera.isVisible(slimeBlob)) {
+                slimeBlob.draw(ctx, this.camera)
             }
         })
         

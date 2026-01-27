@@ -1,5 +1,7 @@
 import GameObject from './GameObject.js'
 
+import SlimeBlob from './slimeBlob.js'
+
 import MiniIdleSprite from './assets/player/Slime S Idle V1.png'
 import MiniRunSprite from './assets/player/Slime S Running V2.png'
 import MiniJumpSprite from './assets/player/Slime S Jumping V1.png'
@@ -11,9 +13,6 @@ import MiddleJumpSprite from './assets/player/Slime S Jumping V1.png'
 import MaxIdleSprite from './assets/player/Slime S Idle V1.png'
 import MaxRunSprite from './assets/player/Slime S Running V2.png'
 import MaxJumpSprite from './assets/player/Slime S Jumping V1.png'
-
-
-
 
 import fallSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Fall (32x32).png'
 import jumpSound from './assets/sounds/jump.mp3'
@@ -48,8 +47,8 @@ export default class Player extends GameObject {
         this.DecreaceOnesChecker=0
         this.constantJumpPower = -1
         
-        
-        
+        this.slimeDrop = []
+
         // Health system
         this.maxHealth = 3
         this.health = this.maxHealth
@@ -60,10 +59,6 @@ export default class Player extends GameObject {
          // ljud effekter
         this.jumpSound = new Audio(jumpSound);
         this.jumpSound.volume = 0.3; // Sänk volymen lite
-
-        
-
-
         
         // Sprite animation system - ladda sprites med olika hastigheter
         this.loadSprite('idle', MiniIdleSprite, 10, 150)  // Långsammare idle
@@ -91,11 +86,16 @@ export default class Player extends GameObject {
         // Startar dash timer
         if (!this.isDashing && this.game.inputHandler.keys.has('Shift') && this.currentSizeState!='mini') {
             this.SizeChange('Decreace')
+            this.slimeDrop.push(true)
             this.game.inputHandler.keys.delete('Shift')
             this.startTimer('dashTimer', 100)
             this.isDashing = true
+            this.game.slimeBlobs.push(
+                new SlimeBlob (this.game, this.x, this.y, 20)
+            )
         }
 
+        
         // Dash - updaterar tiden och sätter velocity i x-led till dashSpeed
         if (this.isDashing) { 
             this.updateTimer('dashTimer', deltaTime)
@@ -125,6 +125,7 @@ export default class Player extends GameObject {
                 this.directionX = 0
             }
         }
+
         // Hoppa
         if ( this.game.inputHandler.keys.has(' ') && (this.jumpCount <1 || this.jumpCount < this.maxJumps) ){
             this.game.inputHandler.keys.delete(' ')            
@@ -136,29 +137,28 @@ export default class Player extends GameObject {
             this.game.inputHandler.keys.delete(' ')
             this.jumpCount +++ 1
 
-        }else if (this.jumpCount==this.maxJumps && this.DecreaceOnesChecker<1  ){
+        } else if (this.jumpCount == this.maxJumps && this.DecreaceOnesChecker < 1 && this.currentSizeState !== 'mini'){
             this.SizeChange('Decreace')
-            this.DecreaceOnesChecker=1
+            this.DecreaceOnesChecker = 1
+            this.game.slimeBlobs.push(
+                new SlimeBlob (this.game, this.x, this.y, 20)
+            )
         }
-
         if (this.isGrounded == true) {
             this.jumpCount = 0
-            this.DecreaceOnesChecker=0
+            this.DecreaceOnesChecker = 0
 
-        }else{
-
+        } else{
+            // Nothing?
         }
 
-
-
-
+        // Öka storlek button
         if (this.game.inputHandler.keys.has('q')  ) {
             this.game.inputHandler.keys.delete('q')
             this.SizeChange('Increace')          
         }
 
-
-
+        // Minska storlek button
         if (this.game.inputHandler.keys.has('e') ) {
             this.game.inputHandler.keys.delete('e')
             this.SizeChange('Decreace') 
@@ -231,7 +231,6 @@ export default class Player extends GameObject {
         }
 
     
-
         // Size Changer 
         if (this.currentSizeState=='middle'){
             this.width= 40
@@ -254,11 +253,7 @@ export default class Player extends GameObject {
             this.moveSpeed= this.constantMoveSpeed * 0.50
             this.maxJumps= 2
 
-        }
-
-        
-            
-
+        }  
         
         // Uppdatera animation frame
         this.updateAnimation(deltaTime)
@@ -293,16 +288,7 @@ export default class Player extends GameObject {
             }
 
             
-        }
-
-
-      
-
-
-            
-
-                
-                
+        }          
     
     } 
     

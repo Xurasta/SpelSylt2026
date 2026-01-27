@@ -23,8 +23,6 @@ export default class Enemy extends GameObject {
     }
 
 
-
-
     update(deltaTime) {
         // Applicera gravitation
 

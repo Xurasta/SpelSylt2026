@@ -32,8 +32,8 @@ export default class Level1 extends Level {
         super(game)
         
         // Player spawn position för denna level
-        this.playerSpawnX = 200
-        this.playerSpawnY = 300
+        this.playerSpawnX = 50
+        this.playerSpawnY = 800
         
         // Initiera level
         this.init()
@@ -43,11 +43,11 @@ export default class Level1 extends Level {
         this.backgrounds = [
             // Far background - blå himmel
             new Background(this.game, bakgrundlvl, {
-                tiled: true,
+                tiled: false,
                 tileWidth: 64,
                 tileHeight: 64,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
-                tiledY: false, // Tila bara horisontellt
+                tiledY: true, // Tila bara horisontellt
                 tileHeight: this.game.worldHeight, // Fyll hela höjden
                 tileWidth: this.game.worldWidth // Fyll hela bredden
             }),
