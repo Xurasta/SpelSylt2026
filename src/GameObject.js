@@ -147,7 +147,9 @@ export default class GameObject {
     drawSprite(ctx, camera = null, flipHorizontal = false) {
         if (!this.spriteLoaded || !this.animations || !this.currentAnimation) return false
 
-        const anim = this.animations[this.currentAnimation]
+        const anim = this.animations[this.currentAnimation] // 
+        console.log(this.currentAnimation, anim, this.animations)
+
         const frameWidth = anim.frameWidth
         const frameHeight = anim.frameHeight
 
