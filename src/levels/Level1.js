@@ -3,7 +3,7 @@ import Platform from '../Platform.js'
 import Enemy from '../Enemy.js'
 import BackgroundObject from '../BackgroundObject.js'
 import Background from '../Background.js'
-import tree from '../assets/bakgrund/Träd.png'
+import tree from '../assets/bakgrund/1 träd andra sidan bäcken.png'
 import clouds from '../assets/bakgrund/Moln skog.png'
 import trees from '../assets/bakgrund/Träd.png'
 
@@ -97,12 +97,67 @@ export default class Level1 extends Level {
                 tiled: false,
                 tileWidth: 64,
                 tileHeight: 64,
-                scrollSpeed: 0.2, // Långsam parallax (långt bort)
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 100, // Fyll hela höjden
                 width: 500,
-                yPosition: -435,
+                yPosition: -490,
                 xPosition: -100
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                tileWidth: 64,
+                tileHeight: 64,
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -650
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                tileWidth: 64,
+                tileHeight: 64,
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -860
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                tileWidth: 64,
+                tileHeight: 64,
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -750
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                tileWidth: 64,
+                tileHeight: 64,
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -1000
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                tileWidth: 64,
+                tileHeight: 64,
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -400 ,
+                xPosition: -950
             }),
 
 
