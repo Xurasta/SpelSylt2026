@@ -31,7 +31,7 @@ export default class UserInterface {
         ctx.shadowBlur = 3
         
         // Rita score
-        ctx.fillText(`Score: ${this.game.score}`, 20, 40)
+        ctx.fillText(`Score: ${Math.round(100 - this.game.score/1000)}`, 20, 40)
         
         // Rita slimeBlobs collected
         ctx.fillText(`SlimeBlobs: ${this.game.slimeBlobsCollected}`, 20, 70)
