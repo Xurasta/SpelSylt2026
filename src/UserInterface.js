@@ -33,8 +33,8 @@ export default class UserInterface {
         // Rita score
         ctx.fillText(`Score: ${Math.round(100 - this.game.score/1000)}`, 20, 40)
         
-        // Rita coins collected
-        ctx.fillText(`Coins: ${this.game.coinsCollected}`, 20, 70)
+        // Rita slimeBlobs collected
+        ctx.fillText(`SlimeBlobs: ${this.game.slimeBlobsCollected}`, 20, 70)
         
         ctx.restore()
         
@@ -91,8 +91,8 @@ export default class UserInterface {
         // Score
         ctx.fillStyle = '#FFFFFF'
         ctx.font = '30px Arial'
-        ctx.fillText(`Final Score: ${Math.round(100 - this.game.score/1000)}`, this.game.width / 2, this.game.height / 2 + 20)
-        ctx.fillText(`Coins: ${this.game.coinsCollected}/${this.game.totalCoins}`, this.game.width / 2, this.game.height / 2 + 60)
+        ctx.fillText(`Final Score: ${this.game.score}`, this.game.width / 2, this.game.height / 2 + 20)
+        ctx.fillText(`SlimeBlobs: ${this.game.slimeBlobsCollected}/${this.game.totalSlimeBlobs}`, this.game.width / 2, this.game.height / 2 + 60)
         
         // Restart instruktion
         ctx.font = '24px Arial'
@@ -116,8 +116,7 @@ export default class UserInterface {
         // Score
         ctx.fillStyle = '#FFFFFF'
         ctx.font = '30px Arial'
-        ctx.fillText(`All Coins Collected!`, this.game.width / 2, this.game.height / 2 + 20)
-        ctx.fillText(`Final Score: ${Math.round(100 - this.game.score/1000) }`, this.game.width / 2, this.game.height / 2 + 60)
+        ctx.fillText(`Final Score: ${this.game.score}`, this.game.width / 2, this.game.height / 2 + 60)
         
         // Restart instruktion
         ctx.font = '24px Arial'

@@ -7,7 +7,6 @@ import tree from '../assets/bakgrund/Träd.png'
 import clouds from '../assets/bakgrund/Moln skog.png'
 import trees from '../assets/bakgrund/Träd.png'
 
-import bush from '../assets/sprites/bush.png'
 import grass from '../assets/sprites/Grass.png'
 import thorns from '../assets/sprites/Thorns.png'
 import woodPlatform from '../assets/sprites/wood platform.png'
@@ -17,7 +16,15 @@ import arrowUp from '../assets/sprites/Arrow Up.png'
 import boulder from '../assets/sprites/Boulder.png'
 import mountain from '../assets/bakgrund/Gläs.png'
 
-import bakgrundlvl from '../assets/bakgrund/Skog-himmel.png'
+import bush from '../assets/sprites/lvl1/Bush.png'
+import gackGrass from '../assets/sprites/lvl1/BG Grass.png'
+import flowers from '../assets/sprites/lvl1/Flowers.png'
+import dashSign from '../assets/sprites/lvl1/Sign (dashing).png'
+import growSign from '../assets/sprites/lvl1/Sign (Growing).png'
+import jumpingSign from '../assets/sprites/lvl1/Sign (jumping).png'
+import thornSign from '../assets/sprites/lvl1/Sign (Thorns).png'
+
+import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
 import Camera from '../Camera.js'
 
 // Second test
@@ -31,7 +38,7 @@ export default class Level1 extends Level {
         
         // Player spawn position för denna level
         this.playerSpawnX = 50
-        this.playerSpawnY = 50
+        this.playerSpawnY = 800
         
         // Initiera level
         this.init()
@@ -41,11 +48,11 @@ export default class Level1 extends Level {
         this.backgrounds = [
             // Far background - blå himmel
             new Background(this.game, bakgrundlvl, {
-                tiled: true,
+                tiled: false,
                 tileWidth: 64,
                 tileHeight: 64,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
-                tiledY: false, // Tila bara horisontellt
+                tiledY: true, // Tila bara horisontellt
                 tileHeight: this.game.worldHeight, // Fyll hela höjden
                 tileWidth: this.game.worldWidth // Fyll hela bredden
             }),
@@ -128,7 +135,6 @@ export default class Level1 extends Level {
             tile: 'both',
             backdrop: 'false'
         }
-
         
         const woodenPlatformSupport = {
             image: woodPlatform,

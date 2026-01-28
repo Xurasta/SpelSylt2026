@@ -1,6 +1,6 @@
 import Level from './Level.js'
 import Platform from '../Platform.js'
-import Coin from '../Coin.js'
+import SlimeBlob from '../slimeBlob.js'
 import Enemy from '../Enemy.js'
 import Background from '../Background.js'
 import BackgroundObject from '../BackgroundObject.js'
