@@ -4,16 +4,16 @@ import Coin from '../Coin.js'
 import Enemy from '../Enemy.js'
 import Background from '../Background.js'
 import BackgroundObject from '../BackgroundObject.js'
-import blueBg from '../assets/Pixel Adventure 1/Background/Blue.png'
-import bigClouds from '../assets/clouds/Big Clouds.png'
-import cloud1 from '../assets/clouds/Small Cloud 1.png'
-import cloud2 from '../assets/clouds/Small Cloud 2.png'
-import cloud3 from '../assets/clouds/Small Cloud 3.png'
-import ground from '../assets/sprites/Grass.png'
-import tree from '../assets/sprites/Tree.png'
-
-
-
+import Background from '../Background.js'
+import grass from '../assets/sprites/Grass.png'
+import bush from '../assets/sprites/bush.png'
+import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
+import tree from '../assets/sprites/tree.png'
+import rock from '../assets/sprites/Boulder.png'
+import Grass from '../assets/sprites/grass.png'
+import Grass2 from '../assets/sprites/grass2.png'
+import Grass3 from '../assets/sprites/grass3.png'
+import wood from '../assets/sprites/woodplatform.png'
 
 /**
  * Level 1 - Den första nivån i spelet
@@ -41,15 +41,16 @@ export default class Level1 extends Level {
                 scrollSpeed: 0.3 // Långsam parallax (långt bort)
             }),
             // Mid background - stora moln
-            new Background(this.game, bigClouds, {
-                tiled: true,
-                tileWidth: 448,
-                tileHeight: 101,
-                tileY: false, // Tila bara horisontellt
-                scrollSpeed: 0.6, // Mellan-parallax
-                yPosition: this.game.height - 141, // Precis ovanför marken
-                height: 101
+            new BackgroundObject(this.game, 300, height - 200, tree, {
+                speed: 0.02,
+                scrollSpeed: 0.4,
+                scale: 0.5
+                
             })
+
+
+
+           
         ]
     }
 
@@ -58,7 +59,7 @@ export default class Level1 extends Level {
 
         this.backgroundObjects = [
             // Små moln som rör sig oberoende
-            new BackgroundObject(this.game, 200, height - 300, cloud1, {
+            new BackgroundObject(this.game, 300, height - 100, tree, {
                 speed: 0.02,
                 scrollSpeed: 0.4
             }),
