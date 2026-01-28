@@ -23,8 +23,8 @@ import MiddleToMax from './assets/player/Slime_M_Grow.png'
 import MiddleIdle from './assets/player/Slime_M_Idle.png'
 
 // Run Middle
-import MiddleRunActive from './assets/player/Slime_M_Running_Active.png'
-import MiddleRunStop from './assets/player/Slime_M_Running_Stop.png'
+//import MiddleRunActive from './assets/player/Slime_M_Running_Active.png'
+//import MiddleRunStop from './assets/player/Slime_M_Running_Stop.png'
 
 // Jump Middle
 import MiddleJumpAscend from './assets/player/Slime_M_Jumping_Ascend.png'
@@ -32,7 +32,8 @@ import MiddleJumpApex from './assets/player/Slime_M_Jumping_Apex.png'
 import MiddleJumpDescend from './assets/player/Slime_M_Jumping_Descend.png'
 import MiddleJumpLanding from './assets/player/Slime_M_Jumping_Landing.png'
 
-
+// Dash Middle
+import MiddleDash from  './assets/player/Slime_M_Dash.png'
 
 // Idle Max
 import MaxIdle from './assets/player/Slime_L_Idle.png'
@@ -103,31 +104,34 @@ export default class Player extends GameObject {
         this.loadSprite('idle_S',MiniIdle, 10, 150)  
         this.loadSprite('Run_S_Active',MiniRunActive,3,150)
         this.loadSprite('Run_S_Stop',MiniRunStop,4,150)
-        this.loadSprite('Jump_S_Ascend',MiniJumpAscend,5)
-        this.loadSprite('Jump_S_Landing',MiniJumpLanding,5)
-        this.loadSprite('Junmp_S_Apex',MiniJumpApex,5)
-        this.loadSprite('Jump_S_Descend',MiniJumpDescend,)
+        this.loadSprite('Jump_S_Ascend',MiniJumpAscend,1,150)
+        this.loadSprite('Jump_S_Landing',MiniJumpLanding,3,150)
+        this.loadSprite('Junmp_S_Apex',MiniJumpApex,1,150)
+        this.loadSprite('Jump_S_Descend',MiniJumpDescend,1,150)
+        this.loadSprite('Growth_S',MiniToMiddle,5,150)
 
 
 
         //Middle
-        this.loadSprite('idle_M',MiddleIdle, 10, 150)
-        this.loadSprite('Run_M_Active',MiddleRunActive,3,150)
-        this.loadSprite('Run_M_Stop',MiddleRunStop,4,150)
-        this.loadSprite('Jump_M_Ascend',MiddleJumpAscend,5)
-        this.loadSprite('Jump_M_Landing',MiddleJumpLanding,5)
-        this.loadSprite('Junmp_M_Apex',MiddleJumpApex,5)
-        this.loadSprite('Jump_M_Descend',MiddleJumpDescend,)
+        this.loadSprite('idle_M',MiddleIdle, 8, 150)
+       // this.loadSprite('Run_M_Active',MiddleRunActive,3,150)
+       // this.loadSprite('Run_M_Stop',MiddleRunStop,4,150)
+        this.loadSprite('Jump_M_Ascend',MiddleJumpAscend,1,150)
+        this.loadSprite('Jump_M_Landing',MiddleJumpLanding,5,150)
+        this.loadSprite('Junmp_M_Apex',MiddleJumpApex,1,150)
+        this.loadSprite('Jump_M_Descend',MiddleJumpDescend,1,150)
+        this.loadSprite('Dash_M',MiddleDash,5,150 )
+        this.loadSprite('Growh_M',MiddleToMax,10,150 )
 
 
         //Max
         this.loadSprite('idle_L',MaxIdle, 10, 150)
-        this.loadSprite('Run_L_Active',MaxRunActive,3,150)
-        this.loadSprite('Run_L_Stop',MaxRunStop,4,150)
-        this.loadSprite('Jump_L_Ascend',MaxJumpAscend,5)
-        this.loadSprite('Jump_L_Landing',MaxJumpLanding,5)
-        this.loadSprite('Junmp_L_Apex',MaxJumpApex,5)
-        this.loadSprite('Jump_L_Descend',MaxJumpDescend,)  
+        this.loadSprite('Run_L_Active',MaxRunActive,9,150)
+        this.loadSprite('Run_L_Stop',MaxRunStop,6,150)
+        this.loadSprite('Jump_L_Ascend',MaxJumpAscend,1,150)
+        this.loadSprite('Jump_L_Landing',MaxJumpLanding,7,150)
+        this.loadSprite('Junmp_L_Apex',MaxJumpApex,1,150)
+        this.loadSprite('Jump_L_Descend',MaxJumpDescend,1,150)  
     
 
 
@@ -248,6 +252,7 @@ export default class Player extends GameObject {
         
         // Skjut med X-tangenten
         // Uppdatera animation state baserat på movement
+        
         if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='mini') {
             this.setAnimation('idle_S')
         } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='mini' ) {
