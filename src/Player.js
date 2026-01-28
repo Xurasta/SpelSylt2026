@@ -1,6 +1,6 @@
 import GameObject from './GameObject.js'
 
-import SlimeBlob from './slimeBlob.js'
+import SlimeBlob from './SlimeBlob.js'
 
 import MiniIdleSprite from './assets/player/Slime S Idle V1.png'
 import MiniRunSprite from './assets/player/Slime S Running V2.png'
@@ -16,6 +16,8 @@ import MaxJumpSprite from './assets/player/Slime S Jumping V1.png'
 
 import fallSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Fall (32x32).png'
 import jumpSound from './assets/sounds/jump.mp3'
+
+import chunk from './assets/player/Slime chunk.png'
 
 export default class Player extends GameObject {
     constructor(game, x, y, width, height, color) {
@@ -82,6 +84,17 @@ export default class Player extends GameObject {
     }
 
     update(deltaTime) {
+        const blob = {
+            image: chunk,
+            sourceWidth: 16,
+            sourceHeight: 16,
+            startClipX: 0,
+            clippedWidthX: 16,
+            startClipY: 0,
+            clippedWidthY: 16,
+            tile: 'both',
+            backdrop: 'false'
+        }
         // Startar dash timer
         if (!this.isDashing && this.game.inputHandler.keys.has('Shift') && this.currentSizeState!='mini') {
             this.SizeChange('Decreace')
@@ -89,7 +102,7 @@ export default class Player extends GameObject {
             this.startTimer('dashTimer', 100)
             this.isDashing = true
             this.game.slimeBlobs.push(
-                new SlimeBlob (this.game, this.x, this.y, 20)
+                new SlimeBlob (this.game, this.x, this.y, 16, 16, { sprite: blob })
             )
         }
 
@@ -138,7 +151,7 @@ export default class Player extends GameObject {
             this.SizeChange('Decreace')
             this.DecreaceOnesChecker = 1
             this.game.slimeBlobs.push(
-                new SlimeBlob (this.game, this.x, this.y, 20)
+                new SlimeBlob (this.game, this.x, this.y, 16, 16, { sprite: blob })
             )
         }
         if (this.isGrounded == true) {

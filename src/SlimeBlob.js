@@ -1,10 +1,12 @@
 import GameObject from './GameObject.js'
+import Sprite from './Sprite.js'
 import dingSound from './assets/sounds/ding-402325.mp3'
 
 export default class SlimeBlob extends GameObject {
-    constructor(game, x, y, size = 20) {
-        super(game, x, y, size, size)
-        this.size = size
+    constructor(game, x, y, width, height, options = {}) {
+        super(game, x, y)
+        this.width = width
+        this.height = height
         this.color = 'brown'
         this.touchSurface = false
          // Poäng för detta mynt
@@ -12,9 +14,9 @@ export default class SlimeBlob extends GameObject {
         // Bob animation
         this.velocitY = 0
         
-        // Sound
-        // this.sound = new Audio(dingSound)
-        // this.sound.volume = 0.3
+        if (options.sprite) {
+            this.sprite = new Sprite(options.sprite)
+        }
     }
 
     update(deltaTime) {
@@ -29,7 +31,7 @@ export default class SlimeBlob extends GameObject {
         const collision = this.getCollisionData(platform)
         if (collision) {
             if (collision.direction === 'top') {
-                this.y = platform.y - this.height/2
+                this.y = platform.y - this.height
                 this.touchSurface = true
                 this.velocityY = 0
             } else if (collision.direction === 'left') {
@@ -49,10 +51,13 @@ export default class SlimeBlob extends GameObject {
         // Beräkna screen position (om camera finns)
         const screenX = camera ? this.x - camera.x : this.x
         const screenY = camera ? this.y - camera.y : this.y
-        // Rita myntet som en cirkel
-        ctx.fillStyle = this.color
-        ctx.beginPath()
-        ctx.rect(screenX, screenY, 15, 10)
-        ctx.fill()
+        
+        if (this.sprite && this.sprite.draw(ctx, screenX, screenY, this.width, this.height)) {
+            // Sprite drawn successfully
+            // ctx.strokeRect(screenX, screenY, this.width, this.height)
+            return
+        }
+
+        ctx.strokeRect(this.screenX, this.screenY, this.width, this.height)
     }
 }

@@ -367,11 +367,13 @@ export default class PlatformerGame extends GameBase {
         })
         
         // Rita slimeBlob med camera offset
+        ctx.globalAlpha = 0.6
         this.slimeBlobs.forEach(slimeBlob => {
             if (this.camera.isVisible(slimeBlob)) {
                 slimeBlob.draw(ctx, this.camera)
             }
         })
+        ctx.globalAlpha = 1
         
         // Rita fiender med camera offset
         this.enemies.forEach(enemy => {
