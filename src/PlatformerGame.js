@@ -303,7 +303,8 @@ export default class PlatformerGame extends GameBase {
             if (this.player.intersects(enemy) && !enemy.markedForDeletion && this.inputHandler.keys.has('r')) {
                 enemy.velocityX = 0
                 enemy.speed = 0
-                
+                enemy.y += 10
+
                 enemy.setAnimation('eaten')
                 enemy.startTimer('timeout', 200)
             }

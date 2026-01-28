@@ -1,6 +1,6 @@
 import GameObject from './GameObject.js'
-import NPCRunning from './assets/animals/Squirrel Running (animation).png'
-import NPCEaten from './assets/animals/Squirrel Getting Eaten (animation).png'
+import NPCRunning from './assets/animals/Squirrel running.png'
+import NPCEaten from './assets/animals/Squirrel getting eaten.png'
 
 export default class Enemy extends GameObject {
     constructor(game, x, y, width, height, patrolDistance = null) {
