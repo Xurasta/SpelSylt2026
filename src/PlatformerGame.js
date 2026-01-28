@@ -300,7 +300,7 @@ export default class PlatformerGame extends GameBase {
         
         // Kontrollera kollision med fiender
         this.enemies.forEach(enemy => {
-            if (this.player.intersects(enemy) && !enemy.markedForDeletion && this.inputHandler.keys.has('r')) {
+            if (this.player.intersects(enemy) && !enemy.markedForDeletion && this.inputHandler.keys.has('r') && enemy.currentAnimation !== 'eaten') {
                 enemy.velocityX = 0
                 enemy.speed = 0
                 enemy.y += 10
