@@ -29,7 +29,7 @@ import MiddleIdle from './assets/player/Slime_M_Idle.png'
 // Jump Middle
 import MiddleJumpAscend from './assets/player/Slime_M_Jumping_Ascend.png'
 import MiddleJumpApex from './assets/player/Slime_M_Jumping_Apex.png'
-import MiddleJumpDescend from './assets/player/Slime_M_Jumping_Descend.png'
+import MiddleJumpDescend from './assets/player/Slime_M_Jumping_Descent.png'
 import MiddleJumpLanding from './assets/player/Slime_M_Jumping_Landing.png'
 
 // Dash Middle
@@ -45,7 +45,7 @@ import MaxRunStop from './assets/player/Slime_L_Running_Stop.png'
 // Jump Max
 import MaxJumpAscend from './assets/player/Slime_L_Jumping_Ascend.png'
 import MaxJumpApex from './assets/player/Slime_L_Jumping_Apex.png'
-import MaxJumpDescend from './assets/player/Slime_L_Jumping_Descend.png'
+import MaxJumpDescend from './assets/player/Slime_L_Jumping_Ascend.png'
 import MaxJumpLanding from './assets/player/Slime_L_Jumping_Landing.png'
 
 
