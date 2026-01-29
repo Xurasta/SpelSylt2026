@@ -1,6 +1,6 @@
 import Level from './Level.js'
 import Platform from '../Platform.js'
-import Enemy from '../Enemy.js'
+import Enemy from '../Mouse.js'
 import Background from '../Background.js'
 import BackgroundObject from '../BackgroundObject.js'
 import pinkBg from '../assets/Pixel Adventure 1/Background/Pink.png'

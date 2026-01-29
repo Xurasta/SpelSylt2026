@@ -1,8 +1,8 @@
 import GameObject from './GameObject.js'
-import NPCRunning from './assets/animals/Squirrel running.png'
-import NPCEaten from './assets/animals/Squirrel getting eaten.png'
+import NPCRunning from './assets/animals/Mouse Running.png'
+import NPCEaten from './assets/animals/Mouse Getting Eaten.png'
 
-export default class Enemy extends GameObject {
+export default class Mouse extends GameObject {
     constructor(game, x, y, width, height, patrolDistance = null) {
         super(game, x, y, width, height)
         this.color = 'red' // Röd
@@ -24,7 +24,7 @@ export default class Enemy extends GameObject {
         this.lastDirectionX = 1
         
 
-        this.loadSprite('running', NPCRunning, 8, 50)
+        this.loadSprite('running', NPCRunning, 4, 50)
         this.loadSprite('eaten', NPCEaten, 6, 60)
     }
 
