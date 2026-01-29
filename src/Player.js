@@ -16,16 +16,16 @@ import MiniJumpLanding from './assets/player/Slime_S_Jumping_Landing.png'
 
 
 // "Growth" 
-import MiniToMiddle from './assets/player/Slime_S_Grow.png'
-import MiddleToMax from './assets/player/Slime_M_Grow.png'
+import MiniToMiddle from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Grow.png'
+import MiddleToMax from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Grow.png'
 
 
 // Idle Middle
 import MiddleIdle from './assets/player/Slime_M_Idle.png'
 
 // Run Middle
-//import MiddleRunActive from './assets/player/Slime_M_Running_Active.png'
-//import MiddleRunStop from './assets/player/Slime_M_Running_Stop.png'
+import MiddleRunActive from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Run_Active.png'
+import MiddleRunStop from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Run_Stop.png'
 
 // Jump Middle
 import MiddleJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Jumping_Ascend.png'
@@ -109,8 +109,8 @@ export default class Player extends GameObject {
 
         //Middle
         this.loadSprite('idle_M',MiddleIdle, 8, 150)
-       // this.loadSprite('Run_M_Active',MiddleRunActive,3,150)
-       // this.loadSprite('Run_M_Stop',MiddleRunStop,4,150)
+        this.loadSprite('Run_M_Active',MiddleRunActive,4,150)
+        this.loadSprite('Run_M_Stop',MiddleRunStop,4,150)
         this.loadSprite('Jump_M_Ascend',MiddleJumpAscend,1,150)
         this.loadSprite('Jump_M_Landing',MiddleJumpLanding,5,150)
         this.loadSprite('Jump_M_Apex',MiddleJumpApex,1,150)
@@ -268,46 +268,129 @@ export default class Player extends GameObject {
         // Uppdatera animation state baserat på movement
                 
         if (this.currentSizeState=='mini'){
-            console.log(this.Active_Timer)
-            console.log(this.velocityY)
-            if(!this.isGrounded && this.velocityY < 0 ){
+            // console.log(this.Active_Timer)
+            // console.log(this.velocityY)
+            if (!this.isGrounded && this.velocityY < 0 ){
             this.setAnimation('Jump_S_Ascend')
             
 
-        }else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='false'){
-            this.setAnimation('Jump_S_Apex')
-            this.Active_Timer=0
-            this.Active_Animation='true'
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='false'){
+                this.setAnimation('Jump_S_Apex')
+                this.Active_Timer=0
+                this.Active_Animation='true'
 
-        }else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='true' && this.Active_Timer>1) {
-            this.setAnimation('Jump_S_Descend')
-            
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='true' && this.Active_Timer > 1) {
+                this.setAnimation('Jump_S_Descend')
 
-        }else if (this.isGrounded && this.velocityY >0){
-            this.setAnimation('Jump_S_Landing')
-            this.Active_Animation='false'
+            } else if (this.isGrounded && this.velocityY >0 && this.currentAnimation == 'Jump_S_Descend'){
+                this.startTimer('timeout', 400)
+                this.setAnimation('Jump_S_Landing')
+
+            } else if (this.isGrounded && this.velocityX==this.moveSpeed || this.velocityX==  -this.moveSpeed)  {
+                this.setAnimation('Run_S_Active')
+                this.Active_Timer=0
+
+            } else if (this.isGrounded && this.Active_Timer < 1 ){
+                this.setAnimation('Run_S_Stop')
+            } else {
+                console.log('idle')
+                if (this.timeout <= 0 && this.isGrounded) {
+                    this.setAnimation('idle_S')
+                }
+            }
+
+        this.updateTimer('timeout', deltaTime)
+        
+        
+        
+
 
 
         }
-        }
-
 
 
         if (this.currentSizeState=='middle'){
-
-            if(!this.isGrounded && this.velocityY < 0 ){
+            // console.log(this.Active_Timer)
+            // console.log(this.velocityY)
+            if (!this.isGrounded && this.velocityY < 0 ){
             this.setAnimation('Jump_M_Ascend')
-            this.Active_Timer=0.5}
+            
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='false'){
+                this.setAnimation('Jump_M_Apex')
+                this.Active_Timer=0
+                this.Active_Animation='true'
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='true' && this.Active_Timer > 1) {
+                this.setAnimation('Jump_M_Descend')
+
+            } else if (this.isGrounded && this.velocityY >0 && this.currentAnimation == 'Jump_M_Descend'){
+                this.startTimer('timeout', 400)
+                this.setAnimation('Jump_M_Landing')
+
+            } else if (this.isGrounded && this.velocityX==this.moveSpeed || this.velocityX==  -this.moveSpeed)  {
+                this.setAnimation('Run_M_Active')
+                this.Active_Timer=0
+
+            } else if (this.isGrounded && this.Active_Timer < 1 ){
+                this.setAnimation('Run_M_Stop')
+            } else {
+                console.log('idle')
+                if (this.timeout <= 0 && this.isGrounded) {
+                    this.setAnimation('idle_M')
+                }
+            }
+
+        this.updateTimer('timeout', deltaTime)
+        
+        
+        
+
+
 
         }
 
-
-        if(this.currentSizeState=='max'){
-            if(!this.isGrounded && this.velocityY < 0 ){
+        if (this.currentSizeState=='max'){
+            // console.log(this.Active_Timer)
+            // console.log(this.velocityY)
+            if (!this.isGrounded && this.velocityY < 0 ){
             this.setAnimation('Jump_L_Ascend')
-            this.Active_Timer=0.5}
+            
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='false'){
+                this.setAnimation('Jump_L_Apex')
+                this.Active_Timer=0
+                this.Active_Animation='true'
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='true' && this.Active_Timer > 1) {
+                this.setAnimation('Jump_L_Descend')
+
+            } else if (this.isGrounded && this.velocityY >0 && this.currentAnimation == 'Jump_L_Descend'){
+                this.startTimer('timeout', 400)
+                this.setAnimation('Jump_L_Landing')
+
+            } else if (this.isGrounded && this.velocityX==this.moveSpeed || this.velocityX==  -this.moveSpeed)  {
+                this.setAnimation('Run_L_Active')
+                this.Active_Timer=0
+
+            } else if (this.isGrounded && this.Active_Timer < 1 ){
+                this.setAnimation('Run_L_Stop')
+            } else {
+                console.log('idle')
+                if (this.timeout <= 0 && this.isGrounded) {
+                    this.setAnimation('idle_L')
+                }
+            }
+
+        this.updateTimer('timeout', deltaTime)
+        
+        
+        
+
+
 
         }
+
 
 
         
@@ -330,19 +413,22 @@ export default class Player extends GameObject {
     
         // Size Changer 
         if (this.currentSizeState=='middle'){
-
+            this.width=50
+            this.height=50
             this.jumpPower= this.constantJumpPower * 0.55
             this.moveSpeed= this.constantMoveSpeed * 0.45
             this.maxJumps= 2
         }  
         else if (this.currentSizeState=='mini'){
-
+            this.width=25
+            this.height= 25
             this.jumpPower= this.constantJumpPower * 0.50
             this.moveSpeed= this.constantMoveSpeed * 0.40
             this.maxJumps= 1
         }
         else if (this.currentSizeState=='max'){
-
+            this.width=70
+            this.height=70
             this.jumpPower= this.constantJumpPower * 0.60
             this.moveSpeed= this.constantMoveSpeed * 0.50
             this.maxJumps= 2
@@ -357,9 +443,11 @@ export default class Player extends GameObject {
 
     SizeChange(Size){
         
-        if (Size =='Increace'){
+        if (Size =='Increace')
+            {
             console.log(this.currentSizeState)
             if (this.currentSizeState== 'middle'){
+ 
                 this.currentSizeState='max'
                 this.x-=10}
 
