@@ -1,6 +1,6 @@
 import Level from './Level.js'
 import Platform from '../Platform.js'
-import Enemy from '../Enemy.js'
+import Enemy from '../Squirrel.js'
 import BackgroundObject from '../BackgroundObject.js'
 import Background from '../Background.js'
 import tree from '../assets/bakgrund/1 träd andra sidan bäcken.png'
@@ -87,16 +87,16 @@ export default class Level1 extends Level {
                 height: 200, // Fyll hela höjden
                 width: 500, // storlek på bredden
                 yPosition: 400,  // Höjd
-                xPosition: 200, // längd
+                xPosition: 200 // längd
             }),
             new Background(this.game, trees, {
                 tiled: false,
                 scrollSpeed: 0.6, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
-                height: 100, // Fyll hela höjden
-                width: 440,
-                yPosition: -400,
-                xPosition: -50
+                height: 130, // Fyll hela höjden
+                width: 330,
+                yPosition: -570,
+                xPosition: -1310
                 
             }),
             
@@ -108,7 +108,7 @@ export default class Level1 extends Level {
                 height: 100, // Fyll hela höjden
                 width: 95,
                 yPosition: -490,
-                xPosition: -650
+                xPosition: -630
             }),
             new Background(this.game, tree, {
                 tiled: false,
@@ -141,10 +141,10 @@ export default class Level1 extends Level {
                 tiled: false,
                 scrollSpeed: 0.8, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
-                height: 100, // Fyll hela höjden
+                height: 90, // Fyll hela höjden
                 width: 95,
-                yPosition: -690,
-                xPosition: -1820
+                yPosition: -720,
+                xPosition: -120
             }),
             new Background(this.game, tree, {
                 tiled: false,

@@ -121,6 +121,7 @@ export default class PlatformerGame extends GameBase {
         }
         
         // Ladda nästa level
+        this.slimeBlobs = []
         this.loadLevel(this.currentLevelIndex)
         this.gameState = 'PLAYING'
     }
