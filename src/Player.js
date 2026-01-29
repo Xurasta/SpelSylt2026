@@ -260,36 +260,8 @@ export default class Player extends GameObject {
         }
 
         // Uppdatera animation state baserat på movement
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='mini') {
-            this.setAnimation('jump')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='mini' ) {
-            this.setAnimation('fall')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='mini') {
-            this.setAnimation('run')
-        } else if( this.currentSizeState=='mini' ) {
-            this.setAnimation('idle')
-        }
-
-
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='middle') {
-            this.setAnimation('jump')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='middle' ) {
-            this.setAnimation('fall')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='middle') {
-            this.setAnimation('run')
-        } else if( this.currentSizeState=='middle' ) {
-            this.setAnimation('idle')
-        }
-
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='max') {
-            this.setAnimation('jump')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='max' ) {
-            this.setAnimation('fall')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='max') {
-            this.setAnimation('run')
-        } else if( this.currentSizeState=='max' ) {
-            this.setAnimation('idle')
-        }
+       
+        
 
     
         // Size Changer 
