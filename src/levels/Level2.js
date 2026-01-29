@@ -131,4 +131,8 @@ export default class Level2 extends Level {
             new Enemy(this.game, 2100, height - 360, 40, 40, 130),
         ]
     }
+    update(deltaTime) {
+        this.updateTimer('timer', deltaTime);
+        console.log(this.timer);
+    }
 }
