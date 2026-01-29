@@ -87,7 +87,7 @@ export default class Level1 extends Level {
                 height: 200, // Fyll hela höjden
                 width: 500, // storlek på bredden
                 yPosition: 400,  // Höjd
-                xPosition: 200, // längd
+                xPosition: 200 // längd
             }),
             new Background(this.game, trees, {
                 tiled: false,
@@ -106,7 +106,7 @@ export default class Level1 extends Level {
                 height: 100, // Fyll hela höjden
                 width: 95,
                 yPosition: -490,
-                xPosition: -650
+                xPosition: -630
             }),
             new Background(this.game, tree, {
                 tiled: false,
