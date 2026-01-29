@@ -1,6 +1,6 @@
 import Level from './Level.js'
 import Platform from '../Platform.js'
-import Enemy from '../Enemy.js'
+import Enemy from '../Squirrel.js'
 import BackgroundObject from '../BackgroundObject.js'
 import Background from '../Background.js'
 import tree from '../assets/bakgrund/1 träd andra sidan bäcken.png'
