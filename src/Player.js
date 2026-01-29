@@ -2,19 +2,6 @@ import GameObject from './GameObject.js'
 
 import SlimeBlob from './SlimeBlob.js'
 
-import MiniIdleSprite from './assets/player/Slime S Idle V1.png'
-import MiniRunSprite from './assets/player/Slime S Running V2.png'
-import MiniJumpSprite from './assets/player/Slime S Jumping V1.png'
-
-import MiddleIdleSprite from './assets/player/Slime S Idle V1.png'
-import MiddleRunSprite from './assets/player/Slime S Running V2.png'
-import MiddleJumpSprite from './assets/player/Slime S Jumping V1.png'
-
-import MaxIdleSprite from './assets/player/Slime S Idle V1.png'
-import MaxRunSprite from './assets/player/Slime S Running V2.png'
-import MaxJumpSprite from './assets/player/Slime S Jumping V1.png'
-
-import fallSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Fall (32x32).png'
 import jumpSound from './assets/sounds/jump.mp3'
 
 import chunk from './assets/player/Slime chunk.png'
