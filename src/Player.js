@@ -3,32 +3,32 @@ import GameObject from './GameObject.js'
 import SlimeBlob from './SlimeBlob.js'
 
 // Idle Mini
-import MiniIdle from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Idle.png'
+import MiniIdle from './assets/player/Slime_S_Idle.png'
 // Run Mini
 import MiniRunActive from './assets/player/Slime_S_Running_Active.png'
 import MiniRunStop from './assets/player/Slime_S_Running_Stop.png'
 
 // jumping Mini
-import MiniJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Jumping_Ascend.png'
+import MiniJumpAscend from './assets/player/Slime_S_Jumping_Ascend.png'
 import MiniJumpApex from './assets/player/Slime_S_Jumping_Apex.png'
 import MiniJumpDescend from './assets/player/Slime_S_Jumping_Descend.png'
 import MiniJumpLanding from './assets/player/Slime_S_Jumping_Landing.png'
 
 
 // "Growth" 
-import MiniToMiddle from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Grow.png'
-import MiddleToMax from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Grow.png'
+import MiniToMiddle from './assets/player/Slime_S_Grow.png'
+import MiddleToMax from './assets/player/Slime_M_Grow.png'
 
 
 // Idle Middle
 import MiddleIdle from './assets/player/Slime_M_Idle.png'
 
 // Run Middle
-import MiddleRunActive from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Run_Active.png'
-import MiddleRunStop from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Run_Stop.png'
+import MiddleRunActive from './assets/player/Slime_M_Run_Active.png'
+import MiddleRunStop from './assets/player/Slime_M_Run_Stop.png'
 
 // Jump Middle
-import MiddleJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Jumping_Ascend.png'
+import MiddleJumpAscend from './assets/player/Slime_M_Jumping_Ascend.png'
 import MiddleJumpApex from './assets/player/Slime_M_Jumping_Apex.png'
 import MiddleJumpDescend from './assets/player/Slime_M_Jumping_Descent.png'
 import MiddleJumpLanding from './assets/player/Slime_M_Jumping_Landing.png'
@@ -40,11 +40,11 @@ import MiddleDash from  './assets/player/Slime_M_Dash.png'
 import MaxIdle from './assets/player/Slime_L_Idle.png'
 
 // Run Max
-import MaxRunActive from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Run_Active.png'
-import MaxRunStop from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Run_Stop.png'
+import MaxRunActive from './assets/player/Slime_L_Run_Active.png'
+import MaxRunStop from './assets/player/Slime_L_Run_Stop.png'
 
 // Jump Max
-import MaxJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Jumping_Ascend.png'
+import MaxJumpAscend from './assets/player/Slime_L_Jumping_Ascend.png'
 import MaxJumpApex from './assets/player/Slime_L_Jumping_Apex.png'
 import MaxJumpDescend from './assets/player/Slime_L_Jumping_Ascend.png'
 import MaxJumpLanding from './assets/player/Slime_L_Jumping_Landing.png'
