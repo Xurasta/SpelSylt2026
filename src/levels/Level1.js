@@ -18,6 +18,13 @@ import boulder from '../assets/sprites/Boulder.png'
 import mountain from '../assets/bakgrund/Gläs.png'
 
 import bakgrundlvl from '../assets/bakgrund/Skog-himmel.png'
+import bush from '../assets/sprites/lvl1/Bush.png'
+import backGrass from '../assets/sprites/lvl1/BG Grass.png'
+import flowers from '../assets/sprites/lvl1/Flowers.png'
+import dashSign from '../assets/sprites/lvl1/Sign (dashing).png'
+import growSign from '../assets/sprites/lvl1/Sign (Growing).png'
+import jumpingSign from '../assets/sprites/lvl1/Sign (jumping).png'
+import thornSign from '../assets/sprites/lvl1/Sign (Thorns).png'
 import Camera from '../Camera.js'
 
 // Second test
@@ -41,11 +48,11 @@ export default class Level1 extends Level {
         this.backgrounds = [
             // Far background - blå himmel
             new Background(this.game, bakgrundlvl, {
-                tiled: true,
+                tiled: false,
                 tileWidth: 64,
                 tileHeight: 64,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
-                tiledY: false, // Tila bara horisontellt
+                tiledY: true, // Tila bara horisontellt
                 tileHeight: this.game.worldHeight, // Fyll hela höjden
                 tileWidth: this.game.worldWidth // Fyll hela bredden
             }),
@@ -183,7 +190,6 @@ export default class Level1 extends Level {
             tile: 'both',
             backdrop: 'false'
         }
-
         
         const woodenPlatformSupport = {
             image: woodPlatform,
@@ -256,6 +262,42 @@ export default class Level1 extends Level {
             tile: 'both',
             backdrop: 'false'
         }
+
+        const flowersSet = {
+            image: flowers,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
+        const dashSignSet = {
+            image: dashSign,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
+        const jumpingSignSet = {
+            image: jumpingSign,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
         
         this.backgroundObjects = [
 
@@ -276,15 +318,27 @@ export default class Level1 extends Level {
 
             new Platform(this.game, 3360, worldHeight - 330, 48, 48, { sprite: arrowR }),
 
+            // Boulders
             new Platform(this.game, 1860, worldHeight - 60, 48, 48, { sprite: boulderSet}),
             new Platform(this.game, 1800, worldHeight - 280, 48, 48, { sprite: boulderSet}),
             new Platform(this.game, 1790, worldHeight - 285, 48, 48, { sprite: boulderSet}),
             new Platform(this.game, 200, worldHeight - 50, 48, 48, { sprite: boulderSet}),
             new Platform(this.game, 700, worldHeight - 60, 48, 48, { sprite: boulderSet}),
 
+            // Boulders
             new Platform(this.game, 2900, worldHeight - 60, 48, 48, { sprite: boulderSet}),
             new Platform(this.game, 2700, worldHeight - 50, 48, 48, { sprite: boulderSet}),
-            new Platform(this.game, 3065, worldHeight - 70, 48, 48, { sprite: boulderSet})
+            new Platform(this.game, 3065, worldHeight - 70, 48, 48, { sprite: boulderSet}),
+
+            // Flowers
+            new Platform(this.game, 0, worldHeight - 80, 48, 48, { sprite: flowersSet }),
+            new Platform(this.game, 30, worldHeight - 80, 48, 48, { sprite: flowersSet }),
+            new Platform(this.game, 80, worldHeight - 80, 48, 48, { sprite: flowersSet }),
+            new Platform(this.game, 120, worldHeight - 80, 48, 48, { sprite: flowersSet }),
+
+            // Signs
+            new Platform(this.game, 800, worldHeight - 80, 48, 48, { sprite:  dashSignSet }),
+            new Platform(this.game, 1800, worldHeight - 300, 48, 48, { sprite:  jumpingSignSet }),
         ]
     }
 
