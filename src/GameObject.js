@@ -91,8 +91,8 @@ export default class GameObject {
 
         console.log(frameWidth, (img.width / frames), frameHeight, img.height)
     }
-
-      /**
+    
+     /**
      * Hjälpmetod för att hantera timers (cooldowns, durations, etc)
      * Används för: shootCooldown, dashTimer, reloadTimer, invulnerableTimer, etc
      * @param {string} timerName - Namnet på timer-variabeln (t.ex. 'shootCooldown')
@@ -147,7 +147,9 @@ export default class GameObject {
     drawSprite(ctx, camera = null, flipHorizontal = false) {
         if (!this.spriteLoaded || !this.animations || !this.currentAnimation) return false
 
-        const anim = this.animations[this.currentAnimation]
+        const anim = this.animations[this.currentAnimation] // 
+        console.log(this.currentAnimation, anim, this.animations)
+
         const frameWidth = anim.frameWidth
         const frameHeight = anim.frameHeight
 
