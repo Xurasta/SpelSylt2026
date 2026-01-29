@@ -7,7 +7,6 @@ import tree from '../assets/bakgrund/1 träd andra sidan bäcken.png'
 import clouds from '../assets/bakgrund/Moln skog.png'
 import trees from '../assets/bakgrund/Träd.png'
 
-import bush from '../assets/sprites/bush.png'
 import grass from '../assets/sprites/Grass.png'
 import thorns from '../assets/sprites/Thorns.png'
 import woodPlatform from '../assets/sprites/wood platform.png'
