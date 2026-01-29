@@ -99,7 +99,7 @@ export default class Player extends GameObject {
         this.loadSprite('idle_S',MiniIdle, 10, 150)  
         this.loadSprite('Run_S_Active',MiniRunActive,3,150)
         this.loadSprite('Run_S_Stop',MiniRunStop,4,150)
-        this.loadSprite('Jump_S_Ascend',MiniJumpAscend)
+        this.loadSprite('Jump_S_Ascend',MiniJumpAscend,1,150)
         this.loadSprite('Jump_S_Landing',MiniJumpLanding,3,150)
         this.loadSprite('Jump_S_Apex',MiniJumpApex,1,150)
         this.loadSprite('Jump_S_Descend',MiniJumpDescend,1,150)
@@ -259,22 +259,25 @@ export default class Player extends GameObject {
             }
         }
 
+
+        //
+            if(this.Active_Timer < 1){
+                this.Active_Timer+=deltaTime/500
+                console.log(this.Active_Timer)
+            }else if (this.Active_Timer>1){
+                this.Active_Timer=1
+            }
+
         // Uppdatera animation state baserat på movement
                 
         if (this.currentSizeState=='mini'){
             console.log(this.velocityY)
-
             if(!this.isGrounded && this.velocityY < 0 ){
             this.setAnimation('Jump_S_Ascend')
             this.Active_Timer=-1
-        }else if (!this.isGrounded && this.velocityY < 1 && this.Active_Timer!=1 ){
-            this.setAnimation('Jump_S_Apex')
-        }else if ( !this.isGrounded && this.velocityY < 1){
-            this.setAnimation('Jump_S_Descend')
-            this.Active_Timer=0
+            
 
-        }else if (this.isGrounded && this.velocityY >0 && this.Active_Timer!=1){
-            this.setAnimation('Jump_S_Landing')
+
         }
 
         
