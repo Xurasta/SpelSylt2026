@@ -2,19 +2,53 @@ import GameObject from './GameObject.js'
 
 import SlimeBlob from './SlimeBlob.js'
 
-import MiniIdleSprite from './assets/player/Slime S Idle V1.png'
-import MiniRunSprite from './assets/player/Slime S Running V2.png'
-import MiniJumpSprite from './assets/player/Slime S Jumping V1.png'
+// Idle Mini
+import MiniIdle from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Idle.png'
+// Run Mini
+import MiniRunActive from './assets/player/Slime_S_Running_Active.png'
+import MiniRunStop from './assets/player/Slime_S_Running_Stop.png'
 
-import MiddleIdleSprite from './assets/player/Slime S Idle V1.png'
-import MiddleRunSprite from './assets/player/Slime S Running V2.png'
-import MiddleJumpSprite from './assets/player/Slime S Jumping V1.png'
+// jumping Mini
+import MiniJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Jumping_Ascend.png'
+import MiniJumpApex from './assets/player/Slime_S_Jumping_Apex.png'
+import MiniJumpDescend from './assets/player/Slime_S_Jumping_Descend.png'
+import MiniJumpLanding from './assets/player/Slime_S_Jumping_Landing.png'
 
-import MaxIdleSprite from './assets/player/Slime S Idle V1.png'
-import MaxRunSprite from './assets/player/Slime S Running V2.png'
-import MaxJumpSprite from './assets/player/Slime S Jumping V1.png'
 
-import fallSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Fall (32x32).png'
+// "Growth" 
+import MiniToMiddle from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Grow.png'
+import MiddleToMax from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Grow.png'
+
+
+// Idle Middle
+import MiddleIdle from './assets/player/Slime_M_Idle.png'
+
+// Run Middle
+import MiddleRunActive from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Run_Active.png'
+import MiddleRunStop from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Run_Stop.png'
+
+// Jump Middle
+import MiddleJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Jumping_Ascend.png'
+import MiddleJumpApex from './assets/player/Slime_M_Jumping_Apex.png'
+import MiddleJumpDescend from './assets/player/Slime_M_Jumping_Descent.png'
+import MiddleJumpLanding from './assets/player/Slime_M_Jumping_Landing.png'
+
+// Dash Middle
+import MiddleDash from  './assets/player/Slime_M_Dash.png'
+
+// Idle Max
+import MaxIdle from './assets/player/Slime_L_Idle.png'
+
+// Run Max
+import MaxRunActive from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Run_Active.png'
+import MaxRunStop from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Run_Stop.png'
+
+// Jump Max
+import MaxJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Jumping_Ascend.png'
+import MaxJumpApex from './assets/player/Slime_L_Jumping_Apex.png'
+import MaxJumpDescend from './assets/player/Slime_L_Jumping_Ascend.png'
+import MaxJumpLanding from './assets/player/Slime_L_Jumping_Landing.png'
+
 import jumpSound from './assets/sounds/jump.mp3'
 
 import chunk from './assets/player/Slime chunk.png'
@@ -62,25 +96,46 @@ export default class Player extends GameObject {
         this.jumpSound.volume = 0.3; // Sänk volymen lite
         
         // Sprite animation system - ladda sprites med olika hastigheter
-        this.loadSprite('idle', MiniIdleSprite, 10, 150)  // Långsammare idle
-        this.loadSprite('run', MiniRunSprite, 8, 80)     // Snabbare spring
-        this.loadSprite('jump', MiniJumpSprite, 8,100)
-        this.loadSprite('fall', MiniIdleSprite, 10,100)
+        this.loadSprite('idle_S',MiniIdle, 10, 150)  
+        this.loadSprite('Run_S_Active',MiniRunActive,3,150)
+        this.loadSprite('Run_S_Stop',MiniRunStop,4,150)
+        this.loadSprite('Jump_S_Ascend',MiniJumpAscend,1,150)
+        this.loadSprite('Jump_S_Landing',MiniJumpLanding,3,150)
+        this.loadSprite('Jump_S_Apex',MiniJumpApex,1,150)
+        this.loadSprite('Jump_S_Descend',MiniJumpDescend,1,150)
+        this.loadSprite('Growth_S',MiniToMiddle,5,150)
 
 
-        //this.loadSprite('idle', MiddleIdleSprite, 10, 150)  // Långsammare idle
-        //this.loadSprite('run', MiddleRunSprite, 8, 80)     // Snabbare spring
-        //this.loadSprite('jump', MiddleJumpSprite, 8,100)
-        //this.loadSprite('fall', MiddleIdleSprite, 10,100)
+
+        //Middle
+        this.loadSprite('idle_M',MiddleIdle, 8, 150)
+        this.loadSprite('Run_M_Active',MiddleRunActive,4,150)
+        this.loadSprite('Run_M_Stop',MiddleRunStop,4,150)
+        this.loadSprite('Jump_M_Ascend',MiddleJumpAscend,1,150)
+        this.loadSprite('Jump_M_Landing',MiddleJumpLanding,5,150)
+        this.loadSprite('Jump_M_Apex',MiddleJumpApex,1,150)
+        this.loadSprite('Jump_M_Descend',MiddleJumpDescend,1,150)
+        this.loadSprite('Dash_M',MiddleDash,5,150 )
+        this.loadSprite('Growh_M',MiddleToMax,10,150 )
 
 
-       // this.loadSprite('idle', MaxIdleSprite, 10, 150)  // Långsammare idle
-       // this.loadSprite('run', MaxRunSprite, 8, 80)     // Snabbare spring
-        //this.loadSprite('jump', MaxJumpSprite, 8,100)
-        //this.loadSprite('fall', MaxIdleSprite, 10,100)
-        
-        this.currentAnimation = 'idle'
-        this.currentSizeState="middle"
+        //Max
+        this.loadSprite('idle_L',MaxIdle, 10, 150)
+        this.loadSprite('Run_L_Active',MaxRunActive,9,150)
+        this.loadSprite('Run_L_Stop',MaxRunStop,6,150)
+        this.loadSprite('Jump_L_Ascend',MaxJumpAscend,1,150)
+        this.loadSprite('Jump_L_Landing',MaxJumpLanding,7,150)
+        this.loadSprite('Jump_L_Apex',MaxJumpApex,1,150)
+        this.loadSprite('Jump_L_Descend',MaxJumpDescend,1,150)  
+    
+
+
+
+        this.currentAnimation = 'idle_S'
+        this.currentSizeState="mini"
+        this.Active_Animation='false'
+        this.Active_Timer=1
+
     }
 
     update(deltaTime) {
@@ -204,58 +259,177 @@ export default class Player extends GameObject {
             }
         }
 
+
+        //
+            if(this.Active_Timer < 1){
+                this.Active_Timer+=deltaTime/350
+                console.log(this.Active_Timer)
+            }
         // Uppdatera animation state baserat på movement
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='mini') {
-            this.setAnimation('jump')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='mini' ) {
-            this.setAnimation('fall')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='mini') {
-            this.setAnimation('run')
-        } else if( this.currentSizeState=='mini' ) {
-            this.setAnimation('idle')
+                
+        if (this.currentSizeState=='mini'){
+            // console.log(this.Active_Timer)
+            // console.log(this.velocityY)
+            if (!this.isGrounded && this.velocityY < 0 ){
+            this.setAnimation('Jump_S_Ascend')
+            
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='false'){
+                this.setAnimation('Jump_S_Apex')
+                this.Active_Timer=0
+                this.Active_Animation='true'
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='true' && this.Active_Timer > 1) {
+                this.setAnimation('Jump_S_Descend')
+
+            } else if (this.isGrounded && this.velocityY >0 && this.currentAnimation == 'Jump_S_Descend'){
+                this.startTimer('timeout', 400)
+                this.setAnimation('Jump_S_Landing')
+
+            } else if (this.isGrounded && this.velocityX==this.moveSpeed || this.velocityX==  -this.moveSpeed)  {
+                this.setAnimation('Run_S_Active')
+                this.Active_Timer=0
+
+            } else if (this.isGrounded && this.Active_Timer < 1 ){
+                this.setAnimation('Run_S_Stop')
+            } else {
+                console.log('idle')
+                if (this.timeout <= 0 && this.isGrounded) {
+                    this.setAnimation('idle_S')
+                }
+            }
+
+        this.updateTimer('timeout', deltaTime)
+        
+        
+        
+
+
+
         }
 
 
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='middle') {
-            this.setAnimation('jump')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='middle' ) {
-            this.setAnimation('fall')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='middle') {
-            this.setAnimation('run')
-        } else if( this.currentSizeState=='middle' ) {
-            this.setAnimation('idle')
+        if (this.currentSizeState=='middle'){
+            // console.log(this.Active_Timer)
+            // console.log(this.velocityY)
+            if (!this.isGrounded && this.velocityY < 0 ){
+            this.setAnimation('Jump_M_Ascend')
+            
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='false'){
+                this.setAnimation('Jump_M_Apex')
+                this.Active_Timer=0
+                this.Active_Animation='true'
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='true' && this.Active_Timer > 1) {
+                this.setAnimation('Jump_M_Descend')
+
+            } else if (this.isGrounded && this.velocityY >0 && this.currentAnimation == 'Jump_M_Descend'){
+                this.startTimer('timeout', 400)
+                this.setAnimation('Jump_M_Landing')
+
+            } else if (this.isGrounded && this.velocityX==this.moveSpeed || this.velocityX==  -this.moveSpeed)  {
+                this.setAnimation('Run_M_Active')
+                this.Active_Timer=0
+
+            } else if (this.isGrounded && this.Active_Timer < 1 ){
+                this.setAnimation('Run_M_Stop')
+            } else {
+                console.log('idle')
+                if (this.timeout <= 0 && this.isGrounded) {
+                    this.setAnimation('idle_M')
+                }
+            }
+
+        this.updateTimer('timeout', deltaTime)
+        
+        
+        
+
+
+
         }
 
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='max') {
-            this.setAnimation('jump')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='max' ) {
-            this.setAnimation('fall')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='max') {
-            this.setAnimation('run')
-        } else if( this.currentSizeState=='max' ) {
-            this.setAnimation('idle')
+        if (this.currentSizeState=='max'){
+            // console.log(this.Active_Timer)
+            // console.log(this.velocityY)
+            if (!this.isGrounded && this.velocityY < 0 ){
+            this.setAnimation('Jump_L_Ascend')
+            
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='false'){
+                this.setAnimation('Jump_L_Apex')
+                this.Active_Timer=0
+                this.Active_Animation='true'
+
+            } else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='true' && this.Active_Timer > 1) {
+                this.setAnimation('Jump_L_Descend')
+
+            } else if (this.isGrounded && this.velocityY >0 && this.currentAnimation == 'Jump_L_Descend'){
+                this.startTimer('timeout', 400)
+                this.setAnimation('Jump_L_Landing')
+
+            } else if (this.isGrounded && this.velocityX==this.moveSpeed || this.velocityX==  -this.moveSpeed)  {
+                this.setAnimation('Run_L_Active')
+                this.Active_Timer=0
+
+            } else if (this.isGrounded && this.Active_Timer < 1 ){
+                this.setAnimation('Run_L_Stop')
+            } else {
+                console.log('idle')
+                if (this.timeout <= 0 && this.isGrounded) {
+                    this.setAnimation('idle_L')
+                }
+            }
+
+        this.updateTimer('timeout', deltaTime)
+        
+        
+        
+
+
+
         }
+
+
+
+        
+        
+        
+    
+
+
+
+
+      
+
+
+
+
+
+       
+        
 
     
         // Size Changer 
         if (this.currentSizeState=='middle'){
-            this.width= 80
-            this.height= 80
-            this.jumpPower= this.constantJumpPower * 0.45
+            this.width=50
+            this.height=50
+            this.jumpPower= this.constantJumpPower * 0.55
             this.moveSpeed= this.constantMoveSpeed * 0.45
             this.maxJumps= 2
         }  
         else if (this.currentSizeState=='mini'){
-            this.width= 64
-            this.height= 64
-            this.jumpPower= this.constantJumpPower * 0.40
+            this.width=25
+            this.height= 25
+            this.jumpPower= this.constantJumpPower * 0.50
             this.moveSpeed= this.constantMoveSpeed * 0.40
             this.maxJumps= 1
         }
         else if (this.currentSizeState=='max'){
-            this.width= 128
-            this.height= 128
-            this.jumpPower= this.constantJumpPower * 0.50
+            this.width=70
+            this.height=70
+            this.jumpPower= this.constantJumpPower * 0.60
             this.moveSpeed= this.constantMoveSpeed * 0.50
             this.maxJumps= 2
 
@@ -269,9 +443,11 @@ export default class Player extends GameObject {
 
     SizeChange(Size){
         
-        if (Size =='Increace'){
+        if (Size =='Increace')
+            {
             console.log(this.currentSizeState)
             if (this.currentSizeState== 'middle'){
+ 
                 this.currentSizeState='max'
                 this.x-=10}
 
