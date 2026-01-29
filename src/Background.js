@@ -13,6 +13,9 @@ export default class Background {
                 this.tileHeight = this.image.height
             }
         }
+
+        this.offsetX += this.xPosition !== null ? this.xPosition : 0
+        this.offsetY += this.yPosition !== null ? this.yPosition : 0
         
         // Options med defaults
         this.tiled = options.tiled !== undefined ? options.tiled : true
@@ -21,7 +24,10 @@ export default class Background {
         this.tileY = options.tileY !== undefined ? options.tileY : true // Tila på Y-axeln?
         this.scrollSpeed = options.scrollSpeed !== undefined ? options.scrollSpeed : 1.0
         this.yPosition = options.yPosition !== undefined ? options.yPosition : 0 // Vertikal position (0 = top)
+        this.xPosition = options.xPosition !== undefined ? options.xPosition : 0 // Horisontell position (0 = left)
         this.height = options.height || null // Höjd att rita (null = full height)
+        this.width = options.width || null // Bredd att rita (null = full width)
+        
         
         // För parallax - spara offset
         this.offsetX = 0
@@ -42,6 +48,8 @@ export default class Background {
         if (this.tiled) {
             this.drawTiled(ctx, camera)
         } else {
+            this.offsetY += this.yPosition
+            this.offsetX += this.xPosition
             this.drawStretched(ctx, camera)
         }
     }
@@ -81,12 +89,14 @@ export default class Background {
     
     drawStretched(ctx, camera) {
         // Rita hela bilden stretched över hela världen
+        const width = this.width || this.game.worldWidth
+        const height = this.height || this.game.worldHeight
         ctx.drawImage(
             this.image,
             -this.offsetX,
             -this.offsetY,
-            this.game.worldWidth,
-            this.game.worldHeight
+            width,
+            height
         )
     }
 }

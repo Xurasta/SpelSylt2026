@@ -277,6 +277,8 @@ export default class PlatformerGame extends GameBase {
                 otherEnemy.handleEnemyCollision(enemy)
             })
         })
+        // poeng för att klara bana snabbare
+        this.score += deltaTime;
 
         // Kontrollera kollision med blobs
         this.slimeBlobs.forEach(slimeBlob => {
@@ -348,6 +350,7 @@ export default class PlatformerGame extends GameBase {
         if (this.player.health <= 0 && this.gameState === 'PLAYING') {
             this.gameState = 'GAME_OVER'
         }
+        this.currentLevel.updateTimer('timer', deltaTime);
     }
 
     draw(ctx) {

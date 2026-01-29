@@ -3,12 +3,9 @@ import Platform from '../Platform.js'
 import Enemy from '../Enemy.js'
 import BackgroundObject from '../BackgroundObject.js'
 import Background from '../Background.js'
-
-import blueBg from '../assets/Pixel Adventure 1/Background/Blue.png'
-import bigClouds from '../assets/clouds/Big Clouds.png'
-import cloud1 from '../assets/clouds/Small Cloud 1.png'
-import cloud2 from '../assets/clouds/Small Cloud 2.png'
-import cloud3 from '../assets/clouds/Small Cloud 3.png'
+import tree from '../assets/bakgrund/1 träd andra sidan bäcken.png'
+import clouds from '../assets/bakgrund/Moln skog.png'
+import trees from '../assets/bakgrund/Träd.png'
 
 import grass from '../assets/sprites/Grass.png'
 import thorns from '../assets/sprites/Thorns.png'
@@ -17,7 +14,9 @@ import arrowLeft from '../assets/sprites/Arrow Left.png'
 import arrowRight from '../assets/sprites/Arrow Right.png'
 import arrowUp from '../assets/sprites/Arrow Up.png'
 import boulder from '../assets/sprites/Boulder.png'
+import mountain from '../assets/bakgrund/Gläs.png'
 
+import bakgrundlvl from '../assets/bakgrund/Skog-himmel.png'
 import bush from '../assets/sprites/lvl1/Bush.png'
 import backGrass from '../assets/sprites/lvl1/BG Grass.png'
 import flowers from '../assets/sprites/lvl1/Flowers.png'
@@ -25,8 +24,6 @@ import dashSign from '../assets/sprites/lvl1/Sign (dashing).png'
 import growSign from '../assets/sprites/lvl1/Sign (Growing).png'
 import jumpingSign from '../assets/sprites/lvl1/Sign (jumping).png'
 import thornSign from '../assets/sprites/lvl1/Sign (Thorns).png'
-
-import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
 import Camera from '../Camera.js'
 
 // Second test
@@ -39,8 +36,8 @@ export default class Level1 extends Level {
         super(game)
         
         // Player spawn position för denna level
-        this.playerSpawnX = 0
-        this.playerSpawnY = 800
+        this.playerSpawnX = 50
+        this.playerSpawnY = 50
         
         // Initiera level
         this.init()
@@ -51,22 +48,120 @@ export default class Level1 extends Level {
             // Far background - blå himmel
             new Background(this.game, bakgrundlvl, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
                 tiledY: true, // Tila bara horisontellt
                 tileHeight: this.game.worldHeight, // Fyll hela höjden
                 tileWidth: this.game.worldWidth // Fyll hela bredden
             }),
+            new Background(this.game, mountain, {
+                tiled: false,
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 500, // Fyll hela höjden
+                width: 2000,
+                yPosition: -300,
+                xPosition: 200
+            }),
+            new Background(this.game, clouds, {
+                tiled: false,
+                scrollSpeed: 0.6, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 200, // Fyll hela höjden
+                width: 3000,
+                yPosition: -200 ,
+                xPosition: 0
+            }),
+            new Background(this.game, trees, {
+                tiled: false,
+                scrollSpeed: 0.35, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 550,
+                yPosition: -395,
+                xPosition: 0
+            }),
+            new Background(this.game, trees, {
+                tiled: false, // upprepning
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 200, // Fyll hela höjden
+                width: 500, // storlek på bredden
+                yPosition: 400,  // Höjd
+                xPosition: 200, // längd
+            }),
+            new Background(this.game, trees, {
+                tiled: false,
+                scrollSpeed: 0.6, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 440,
+                yPosition: -400,
+                xPosition: -50
+                
+            }),
+            
 
-            // Mid background - stora moln
-           
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -650
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -410
+             }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -860
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -750
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.8, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -690,
+                xPosition: -1820
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -4900,
+                xPosition: -950
+            }),
         ]
     }
 
     createBackgroundObjects() {
         const height = this.game.height
         const worldHeight = this.game.worldHeight
+        const worldWidth = this.game.worldWidth
 
         const woodenPlatformRail = {
             image: woodPlatform,
@@ -190,27 +285,6 @@ export default class Level1 extends Level {
         
         this.backgroundObjects = [
 
-            // Små moln som rör sig oberoende
-            new BackgroundObject(this.game, 200, worldHeight - 400, cloud1, {
-                speed: 0.02,
-                scrollSpeed: 0.4,
-            }),
-            new BackgroundObject(this.game, 600, worldHeight - 400, cloud2, {
-                speed: 0.015,
-                scrollSpeed: 0.4,
-            }),
-            new BackgroundObject(this.game, 1200, worldHeight - 400, cloud3, {
-                speed: 0.018,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 1800, worldHeight - 320, cloud1, {
-                speed: 0.022,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 2200, worldHeight - 260, cloud2, {
-                speed: 0.016,
-                scrollSpeed: 0.4
-            }),
 
             new Platform(this.game, 3100, worldHeight - 100, 48, 300, { sprite: woodenPlatformSupport }),
             new Platform(this.game, 3100, worldHeight - 290, 48, 12, { sprite: woodenPlatformRail }),
