@@ -163,10 +163,10 @@ export default class GameObject {
             ctx.scale(-1, 1)
             ctx.drawImage(
                 anim.image,
-                this.frameIndex * frameWidth + (frameWidth / 4),
-                frameHeight / 2,
-                frameWidth / 2 ,
-                frameHeight / 2 ,
+                this.frameIndex * frameWidth,
+                0,
+                frameWidth,
+                frameHeight,
                 0,
                 0,
                 this.width,
@@ -175,10 +175,10 @@ export default class GameObject {
         } else {
             ctx.drawImage(
                 anim.image,
-                this.frameIndex * frameWidth + (frameWidth / 4),
-                frameHeight / 2,
-                frameWidth / 2 ,
-                frameHeight / 2 ,
+                this.frameIndex * frameWidth,
+                0,
+                frameWidth,
+                frameHeight,
                 screenX,
                 screenY,
                 this.width,

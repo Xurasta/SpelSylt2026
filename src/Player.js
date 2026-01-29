@@ -1,5 +1,6 @@
 import GameObject from './GameObject.js'
 
+import SlimeBlob from './SlimeBlob.js'
 
 // Idle Mini
 import MiniIdle from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Idle.png'
@@ -53,6 +54,8 @@ import MaxJumpLanding from './assets/player/Slime_L_Jumping_Landing.png'
 import fallSprite from './assets/Pixel Adventure 1/Main Characters/Ninja Frog/Fall (32x32).png'
 import jumpSound from './assets/sounds/jump.mp3'
 
+import chunk from './assets/player/Slime chunk.png'
+
 export default class Player extends GameObject {
     constructor(game, x, y, width, height, color) {
         super(game, x, y, width, height)
@@ -61,6 +64,7 @@ export default class Player extends GameObject {
         // Nuvarande hastighet (pixels per millisekund)
         this.velocityX = 0
         this.velocityY = 0
+        this.timeout = 0
 
         // Rörelsehastighet (hur snabbt spelaren accelererar/rör sig)
         this.moveSpeed = 0.3
@@ -80,9 +84,8 @@ export default class Player extends GameObject {
         this.jumpPower = -0.6 // negativ hastighet för att hoppa uppåt
         this.isGrounded = false // om spelaren står på marken
         this.DecreaceOnesChecker=0
-        
-        
-        
+        this.constantJumpPower = -1
+
         // Health system
         this.maxHealth = 3
         this.health = this.maxHealth
@@ -93,10 +96,6 @@ export default class Player extends GameObject {
          // ljud effekter
         this.jumpSound = new Audio(jumpSound);
         this.jumpSound.volume = 0.3; // Sänk volymen lite
-
-        
-
-
         
         // Sprite animation system - ladda sprites med olika hastigheter
 
@@ -144,12 +143,26 @@ export default class Player extends GameObject {
     }
 
     update(deltaTime) {
+        const blob = {
+            image: chunk,
+            sourceWidth: 16,
+            sourceHeight: 16,
+            startClipX: 0,
+            clippedWidthX: 16,
+            startClipY: 0,
+            clippedWidthY: 16,
+            tile: 'both',
+            backdrop: 'false'
+        }
         // Startar dash timer
         if (!this.isDashing && this.game.inputHandler.keys.has('Shift') && this.currentSizeState!='mini') {
             this.SizeChange('Decreace')
             this.game.inputHandler.keys.delete('Shift')
             this.startTimer('dashTimer', 100)
             this.isDashing = true
+            this.game.slimeBlobs.push(
+                new SlimeBlob (this.game, this.x, this.y, 16, 16, { sprite: blob })
+            )
         }
 
         // Dash - updaterar tiden och sätter velocity i x-led till dashSpeed
@@ -184,6 +197,7 @@ export default class Player extends GameObject {
                 
             }
         }
+
         // Hoppa
         if ( this.game.inputHandler.keys.has(' ') && (this.jumpCount <1 || this.jumpCount < this.maxJumps) ){
             this.game.inputHandler.keys.delete(' ')            
@@ -195,35 +209,28 @@ export default class Player extends GameObject {
             this.game.inputHandler.keys.delete(' ')
             this.jumpCount +++ 1
 
-        }else if (this.jumpCount==this.maxJumps && this.DecreaceOnesChecker<1  ){
+        } else if (this.jumpCount == this.maxJumps && this.DecreaceOnesChecker < 1 && this.currentSizeState !== 'mini'){
             this.SizeChange('Decreace')
-            this.DecreaceOnesChecker=1
+            this.DecreaceOnesChecker = 1
+            this.game.slimeBlobs.push(
+                new SlimeBlob (this.game, this.x, this.y, 16, 16, { sprite: blob })
+            )
         }
-
         if (this.isGrounded == true) {
             this.jumpCount = 0
-            this.DecreaceOnesChecker=0
+            this.DecreaceOnesChecker = 0
 
-        }else{
-
+        } else{
+            // Nothing?
         }
 
-
-
-
-
-
-
-
-
-
+        // Öka storlek button
         if (this.game.inputHandler.keys.has('q')  ) {
             this.game.inputHandler.keys.delete('q')
             this.SizeChange('Increace')          
         }
 
-
-
+        // Minska storlek button
         if (this.game.inputHandler.keys.has('e') ) {
             this.game.inputHandler.keys.delete('e')
             this.SizeChange('Decreace') 
@@ -258,11 +265,7 @@ export default class Player extends GameObject {
                 this.invulnerable = false
             }
         }
-        
-        // Uppdatera shoot cooldown
 
-        
-        // Skjut med X-tangenten
         // Uppdatera animation state baserat på movement
         
 //
@@ -334,35 +337,30 @@ export default class Player extends GameObject {
 
         
     
-
         // Size Changer 
 
         if (this.currentSizeState=='middle'){
-            this.width=40
-            this.height=40
-            this.jumpPower= -0.6
-            this.moveSpeed=0.3
-            this.maxJumps=2
+            this.width= 80
+            this.height= 80
+            this.jumpPower= this.constantJumpPower * 0.45
+            this.moveSpeed= this.constantMoveSpeed * 0.45
+            this.maxJumps= 2
         }  
         else if (this.currentSizeState=='mini'){
-            this.width=20
-            this.height=20
-            this.jumpPower= -0.5
-            this.moveSpeed=0.3
-            this.maxJumps=1
+            this.width= 64
+            this.height= 64
+            this.jumpPower= this.constantJumpPower * 0.40
+            this.moveSpeed= this.constantMoveSpeed * 0.40
+            this.maxJumps= 1
         }
         else if (this.currentSizeState=='max'){
-            this.width=60
-            this.height=60
-            this.jumpPower= -0.7
-            this.moveSpeed= 0.45
-            this.maxJumps=2
+            this.width= 128
+            this.height= 128
+            this.jumpPower= this.constantJumpPower * 0.50
+            this.moveSpeed= this.constantMoveSpeed * 0.50
+            this.maxJumps= 2
 
-        }
-
-        
-            
-
+        }  
         
         // Uppdatera animation frame
         this.updateAnimation(deltaTime)
@@ -397,16 +395,7 @@ export default class Player extends GameObject {
             }
 
             
-        }
-
-
-      
-
-
-            
-
-                
-                
+        }          
     
     } 
     
@@ -448,7 +437,9 @@ export default class Player extends GameObject {
         const screenY = camera ? this.y - camera.y : this.y
         
         // Försök rita sprite, annars fallback till rektangel
+        ctx.globalAlpha = 0.8
         const spriteDrawn = this.drawSprite(ctx, camera, this.lastDirectionX === -1)
+        ctx.globalAlpha = 1
         
         if (!spriteDrawn) {
             // Fallback: Rita spelaren som en rektangel

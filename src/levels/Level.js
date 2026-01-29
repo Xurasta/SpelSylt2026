@@ -14,7 +14,7 @@ export default class Level {
         
         // Level data - ska fyllas i av subklasser
         this.platforms = []
-        this.coins = []
+        this.slimeBlobs = []
         this.enemies = []
         
         // Background data
@@ -83,7 +83,7 @@ export default class Level {
     getData() {
         return {
             platforms: this.platforms,
-            coins: this.coins,
+            slimeBlobs: this.slimeBlobs,
             enemies: this.enemies,
             backgrounds: this.backgrounds,
             backgroundObjects: this.backgroundObjects,

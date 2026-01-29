@@ -99,10 +99,10 @@ export default class SaveGameManager {
         
         return {
             timestamp: new Date(save.timestamp).toLocaleString('sv-SE'),
-            level: save.currentLevelIndex + 1, // +1 för att levels är 0-indexerade
+            level: save.currentLevelIndex + 2, // +1 för att levels är 0-indexerade // 
             score: save.score,
             health: save.health,
-            coinsCollected: save.coinsCollected
+            slimeBlobsCollected: save.slimeBlobsCollected
         }
     }
 

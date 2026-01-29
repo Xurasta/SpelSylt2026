@@ -1,16 +1,14 @@
 import Level from './Level.js'
 import Platform from '../Platform.js'
-import Coin from '../Coin.js'
 import Enemy from '../Enemy.js'
 import Background from '../Background.js'
 import BackgroundObject from '../BackgroundObject.js'
 import pinkBg from '../assets/Pixel Adventure 1/Background/Pink.png'
-import bigClouds from '../assets/clouds/Big Clouds.png'
-import cloud1 from '../assets/clouds/Small Cloud 1.png'
-import cloud2 from '../assets/clouds/Small Cloud 2.png'
-import grass from '../assets/sprites/Grass.png'
-import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
 
+import grass from '../assets/sprites/Grass.png'
+import roadpiece from '../assets/sprites/lvl2/Road.png'
+import concrete from '../assets/sprites/lvl2/Concrete.png'
+import car from '../assets/sprites/lvl2/Car.png'
 
 /**
  * Level 2 - Andra nivån med svårare utmaningar
@@ -32,6 +30,22 @@ export default class Level2 extends Level {
     }
 
     createBackgrounds() {
+        const height = this.game.height
+        const worldWidth = this.game.worldWidth
+        const worldHeight = this.game.worldHeight
+
+        const rails = {
+            image: roadpiece,
+            sourceWidth: 48,
+            sourceHeight: 11,
+            startClipX: 4,
+            clippedWidthX: 40,
+            startClipY: 6,
+            clippedWidthY: 6,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
         this.backgrounds = [
             // Far background - rosa himmel (skymning känsla, svårare level)
             new Background(this.game, pinkBg, {
@@ -40,16 +54,9 @@ export default class Level2 extends Level {
                 tileHeight: 64,
                 scrollSpeed: 0.3
             }),
-            // Mid background - stora moln
-            new Background(this.game, bigClouds, {
-                tiled: true,
-                tileWidth: 448,
-                tileHeight: 101,
-                tileY: false,
-                scrollSpeed: 0.6,
-                yPosition: this.game.height - 141,
-                height: 101
-            })
+
+            new Platform(this.game, 0,  worldHeight - 58, worldWidth - 2940, 14, { sprite: rails })
+
         ]
     }
 
@@ -57,52 +64,56 @@ export default class Level2 extends Level {
         const height = this.game.height
 
         this.backgroundObjects = [
-            // Fler och snabbare moln för svårare level
-            new BackgroundObject(this.game, 150, height - 320, cloud1, {
-                speed: 0.025,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 500, height - 280, cloud2, {
-                speed: 0.02,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 900, height - 300, cloud1, {
-                speed: 0.028,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 1300, height - 260, cloud2, {
-                speed: 0.022,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 1700, height - 340, cloud1, {
-                speed: 0.026,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 2100, height - 290, cloud2, {
-                speed: 0.024,
-                scrollSpeed: 0.4
-            })
+
         ]
     }
 
     createPlatforms() {
         const height = this.game.height
         const worldWidth = this.game.worldWidth
+        const worldHeight = this.game.worldHeight
+
+        const roadBottom = {
+            image: roadpiece,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 2,
+            clippedWidthX: 30,
+            startClipY: 11,
+            clippedWidthY: 37,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
+        const ground = {
+            image: concrete,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 1,
+            clippedWidthX: 46,
+            startClipY: 0,
+            clippedWidthY: 47,
+            tile: 'both',
+        }
+
+        const carSet = {
+            image: car,
+            sourceWidth: 96,
+            sourceHeight: 96,
+            startClipX: 2,
+            clippedWidthX: 44,
+            startClipY: 29,
+            clippedWidthY: 19,
+            tile: 'both',
+            backdrop: 'false'
+        }
 
         this.platforms = [
             // Marken (hela nivån)
-            new Platform(this.game, 0, height - 40, worldWidth, 40, grass),
             
-            // Svårare plattformar - högre hopp, längre gap
-            new Platform(this.game, 200, height - 180, 100, 20, grass),
-            new Platform(this.game, 450, height - 280, 80, 20, grass),
-            new Platform(this.game, 700, height - 200, 120, 20, grass),
-            new Platform(this.game, 950, height - 320, 100, 20, grass),
-            new Platform(this.game, 1200, height - 240, 90, 20, grass),
-            new Platform(this.game, 1450, height - 360, 110, 20, grass),
-            new Platform(this.game, 1700, height - 280, 100, 20, grass),
-            new Platform(this.game, 1950, height - 200, 120, 20, grass),
-            new Platform(this.game, 2200, height - 320, 100, 20, grass),
+            new Platform (this.game, 200,  worldHeight - 90, 96, 40, { sprite: carSet }),
+            new Platform (this.game, 0,  worldHeight - 50, worldWidth - 2940, 48, { sprite: roadBottom }),
+            new Platform (this.game, worldWidth - 2940,  worldHeight - 50, worldWidth, 48, { sprite: ground }),
         ]
     }
 
