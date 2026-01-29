@@ -40,8 +40,8 @@ import MiddleDash from  './assets/player/Slime_M_Dash.png'
 import MaxIdle from './assets/player/Slime_L_Idle.png'
 
 // Run Max
-import MaxRunActive from './assets/player/Slime_L_Running_Active.png'
-import MaxRunStop from './assets/player/Slime_L_Running_Stop.png'
+import MaxRunActive from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Run_Active.png'
+import MaxRunStop from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Run_Stop.png'
 
 // Jump Max
 import MaxJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Jumping_Ascend.png'
