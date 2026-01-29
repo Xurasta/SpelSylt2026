@@ -260,6 +260,43 @@ export default class Player extends GameObject {
         }
 
         // Uppdatera animation state baserat på movement
+                
+        if (this.currentSizeState=='mini'){
+            console.log(this.velocityY)
+
+            if(!this.isGrounded && this.velocityY < 0 ){
+            this.setAnimation('Jump_S_Ascend')
+            this.Active_Timer=-1
+        }else if (!this.isGrounded && this.velocityY < 1 && this.Active_Timer!=1 ){
+            this.setAnimation('Jump_S_Apex')
+        }else if ( !this.isGrounded && this.velocityY < 1){
+            this.setAnimation('Jump_S_Descend')
+            this.Active_Timer=0
+
+        }else if (this.isGrounded && this.velocityY >0 && this.Active_Timer!=1){
+            this.setAnimation('Jump_S_Landing')
+        }
+
+        
+        
+        
+        else{
+            this.setAnimation('idle_S')
+        }
+
+
+
+
+      
+
+
+        }
+
+
+        if(this.currentSizeState=='max'){
+
+        }
+
        
         
 
