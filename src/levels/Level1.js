@@ -1,6 +1,6 @@
 import Level from './Level.js'
 import Platform from '../Platform.js'
-import Coin from '../Coin.js'
+//import Coin from '../Coin.js'
 import Enemy from '../Enemy.js'
 import BackgroundObject from '../BackgroundObject.js'
 import Background from '../Background.js'
@@ -9,15 +9,15 @@ import clouds from '../assets/bakgrund/Moln skog.png'
 import trees from '../assets/bakgrund/Träd.png'
 
 import grass from '../assets/sprites/Grass.png'
-import thorns from '../assets/sprites/Thorns.png'
-import woodPlatform from '../assets/sprites/wood platform.png'
+//import thorns from '../assets/sprites/Thorns.png'
+//import woodPlatform from '../assets/sprites/wood platform.png'
 import arrowLeft from '../assets/sprites/Arrow Left.png'
 import arrowRight from '../assets/sprites/Arrow Right.png'
 import arrowUp from '../assets/sprites/Arrow Up.png'
-import boulder from '../assets/sprites/Boulder.png'
+//import boulder from '../assets/sprites/Boulder.png'
 import mountain from '../assets/bakgrund/Gläs.png'
 
-import bakgrundlvl from '../assets/bakgrund/Skog-himmel.png'
+//import bakgrundlvl from '../assets/bakgrund/Skog-himmel.png'
 import bush from '../assets/sprites/lvl1/Bush.png'
 import backGrass from '../assets/sprites/lvl1/BG Grass.png'
 import flowers from '../assets/sprites/lvl1/Flowers.png'
@@ -44,6 +44,9 @@ export default class Level1 extends Level {
         
         // Initiera level
         this.init()
+    }
+    createCoins() {
+        
     }
 
     createBackgrounds() {
@@ -181,7 +184,7 @@ export default class Level1 extends Level {
         const worldHeight = this.game.worldHeight
         const worldWidth = this.game.worldWidth
 
-        const woodenPlatformRail = {
+        /*const woodenPlatformRail = {
             image: woodPlatform,
             sourceWidth: 48,
             sourceHeight: 48,
@@ -216,7 +219,7 @@ export default class Level1 extends Level {
             tile: 'both',
             backdrop: 'false'
         }
-
+            
         const thornRepeat = {
             image: thorns,
             sourceWidth: 96,
@@ -228,6 +231,7 @@ export default class Level1 extends Level {
             tile: 'both',
             backdrop: 'false'
         }
+            */
 
         const arrowR = {
             image: arrowRight,
@@ -253,7 +257,7 @@ export default class Level1 extends Level {
             backdrop: 'false'
         }
 
-        const boulderSet = {
+        /*const boulderSet = {
             image: boulder,
             sourceWidth: 48,
             sourceHeight: 48,
@@ -263,7 +267,7 @@ export default class Level1 extends Level {
             clippedWidthY: 48,
             tile: 'both',
             backdrop: 'false'
-        }
+        }*/
 
         const flowersSet = {
             image: flowers,
@@ -304,13 +308,15 @@ export default class Level1 extends Level {
         this.backgroundObjects = [
 
 
+            /*
             new Platform(this.game, 3100, worldHeight - 100, 48, 300, { sprite: woodenPlatformSupport }),
             new Platform(this.game, 3100, worldHeight - 290, 48, 12, { sprite: woodenPlatformRail }),
 
             new Platform(this.game, 3100, worldHeight - 283, 350, 300, { sprite: woodenPlatformSupport }),
             new Platform(this.game, 3104, worldHeight - 290, 350, 12, { sprite: woodenPlatformRailRepeat }),
+            */
 
-            new Platform(this.game, 1200, worldHeight - 64, 480, 32, { sprite: thornRepeat}),
+            //new Platform(this.game, 1200, worldHeight - 64, 480, 32, { sprite: thornRepeat}),
 
             new Platform(this.game, 1280, worldHeight - 235, 48, 48, { sprite: arrowR }),
 
@@ -321,6 +327,7 @@ export default class Level1 extends Level {
             new Platform(this.game, 3360, worldHeight - 330, 48, 48, { sprite: arrowR }),
 
             // Boulders
+            /*
             new Platform(this.game, 1860, worldHeight - 60, 48, 48, { sprite: boulderSet}),
             new Platform(this.game, 1800, worldHeight - 280, 48, 48, { sprite: boulderSet}),
             new Platform(this.game, 1790, worldHeight - 285, 48, 48, { sprite: boulderSet}),
@@ -331,6 +338,7 @@ export default class Level1 extends Level {
             new Platform(this.game, 2900, worldHeight - 60, 48, 48, { sprite: boulderSet}),
             new Platform(this.game, 2700, worldHeight - 50, 48, 48, { sprite: boulderSet}),
             new Platform(this.game, 3065, worldHeight - 70, 48, 48, { sprite: boulderSet}),
+            */
 
             // Flowers
             new Platform(this.game, 0, worldHeight - 80, 48, 48, { sprite: flowersSet }),
@@ -347,6 +355,7 @@ export default class Level1 extends Level {
     createPlatforms() {
         const height = this.game.height
         const worldWidth = this.game.worldWidth
+        const worldHeight = this.game.worldHeight
 
         const ground = {
             image: grass,
@@ -362,17 +371,15 @@ export default class Level1 extends Level {
         this.platforms = [
             // Marken (hela nivån)
             new Platform (this.game, 0, height - 32, worldWidth, 32, { sprite: ground }),
+            //new Platform(this.game, 3101, worldHeight - 283, 350, 5, { sprite: woodenPlatformStandRepeat }),
 
-        ]
-    }
-
-            new Platform(this.game, 3101, worldHeight - 283, 350, 5, { sprite: woodenPlatformStandRepeat }),
-
+            /*
             new Platform(this.game, 3080, worldHeight - 120, 400, 300, { sprite: dirt }),
             new Platform(this.game, 3080, worldHeight - 120, 400, 32, { sprite: dirtTop }),
 
             new Platform(this.game, 2800, worldHeight - 120, 120, 300, { sprite: dirt }),
             new Platform(this.game, 2800, worldHeight - 120, 120, 32, { sprite: dirtTop })
+            */
         ]
     }
 

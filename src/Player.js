@@ -3,13 +3,13 @@ import GameObject from './GameObject.js'
 import SlimeBlob from './SlimeBlob.js'
 
 // Idle Mini
-import MiniIdle from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Idle.png'
+import MiniIdle from './assets/player/Slime_S_Idle.png'
 // Run Mini
 import MiniRunActive from './assets/player/Slime_S_Running_Active.png'
 import MiniRunStop from './assets/player/Slime_S_Running_Stop.png'
 
 // jumping Mini
-import MiniJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Jumping_Ascend.png'
+import MiniJumpAscend from './assets/player/Slime_S_Jumping_Ascend.png'
 import MiniJumpApex from './assets/player/Slime_S_Jumping_Apex.png'
 import MiniJumpDescend from './assets/player/Slime_S_Jumping_Descend.png'
 import MiniJumpLanding from './assets/player/Slime_S_Jumping_Landing.png'
@@ -28,7 +28,7 @@ import MiddleIdle from './assets/player/Slime_M_Idle.png'
 //import MiddleRunStop from './assets/player/Slime_M_Running_Stop.png'
 
 // Jump Middle
-import MiddleJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Jumping_Ascend.png'
+import MiddleJumpAscend from './assets/player/Slime_M_Jumping_Ascend.png'
 import MiddleJumpApex from './assets/player/Slime_M_Jumping_Apex.png'
 import MiddleJumpDescend from './assets/player/Slime_M_Jumping_Descent.png'
 import MiddleJumpLanding from './assets/player/Slime_M_Jumping_Landing.png'
@@ -44,7 +44,7 @@ import MaxRunActive from './assets/player/Slime_L_Running_Active.png'
 import MaxRunStop from './assets/player/Slime_L_Running_Stop.png'
 
 // Jump Max
-import MaxJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Jumping_Ascend.png'
+import MaxJumpAscend from './assets/player/Slime_L_Jumping_Ascend.png'
 import MaxJumpApex from './assets/player/Slime_L_Jumping_Apex.png'
 import MaxJumpDescend from './assets/player/Slime_L_Jumping_Ascend.png'
 import MaxJumpLanding from './assets/player/Slime_L_Jumping_Landing.png'

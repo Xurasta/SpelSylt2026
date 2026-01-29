@@ -122,6 +122,7 @@ export default class Level2 extends Level {
 
         this.coins = [
             // Mynt placerade strategiskt på svåra platser
+            /*
             new Coin(this.game, 250, height - 220),
             new Coin(this.game, 500, height - 320),
             new Coin(this.game, 750, height - 240),
@@ -134,6 +135,7 @@ export default class Level2 extends Level {
             new Coin(this.game, 2000, height - 240),
             new Coin(this.game, 2250, height - 360),
             new Coin(this.game, 2290, height - 360),
+            */
         ]
     }
 
