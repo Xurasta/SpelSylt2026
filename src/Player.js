@@ -96,6 +96,45 @@ export default class Player extends GameObject {
         this.jumpSound.volume = 0.3; // Sänk volymen lite
         
         // Sprite animation system - ladda sprites med olika hastigheter
+        this.loadSprite('idle_S',MiniIdle, 10, 150)  
+        this.loadSprite('Run_S_Active',MiniRunActive,3,150)
+        this.loadSprite('Run_S_Stop',MiniRunStop,4,150)
+        this.loadSprite('Jump_S_Ascend',MiniJumpAscend)
+        this.loadSprite('Jump_S_Landing',MiniJumpLanding,3,150)
+        this.loadSprite('Jump_S_Apex',MiniJumpApex,1,150)
+        this.loadSprite('Jump_S_Descend',MiniJumpDescend,1,150)
+        this.loadSprite('Growth_S',MiniToMiddle,5,150)
+
+
+
+        //Middle
+        this.loadSprite('idle_M',MiddleIdle, 8, 150)
+       // this.loadSprite('Run_M_Active',MiddleRunActive,3,150)
+       // this.loadSprite('Run_M_Stop',MiddleRunStop,4,150)
+        this.loadSprite('Jump_M_Ascend',MiddleJumpAscend,1,150)
+        this.loadSprite('Jump_M_Landing',MiddleJumpLanding,5,150)
+        this.loadSprite('Jump_M_Apex',MiddleJumpApex,1,150)
+        this.loadSprite('Jump_M_Descend',MiddleJumpDescend,1,150)
+        this.loadSprite('Dash_M',MiddleDash,5,150 )
+        this.loadSprite('Growh_M',MiddleToMax,10,150 )
+
+
+        //Max
+        this.loadSprite('idle_L',MaxIdle, 10, 150)
+        this.loadSprite('Run_L_Active',MaxRunActive,9,150)
+        this.loadSprite('Run_L_Stop',MaxRunStop,6,150)
+        this.loadSprite('Jump_L_Ascend',MaxJumpAscend)
+        this.loadSprite('Jump_L_Landing',MaxJumpLanding,7,150)
+        this.loadSprite('Jump_L_Apex',MaxJumpApex,1,150)
+        this.loadSprite('Jump_L_Descend',MaxJumpDescend,1,150)  
+    
+
+
+
+        this.currentAnimation = 'idle_S'
+        this.currentSizeState="mini"
+        this.Active_Animation='True'
+        this.Active_Timer=1
 
     }
 
