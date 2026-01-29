@@ -1,14 +1,19 @@
 import GameObject from './GameObject.js'
-import NpcSpricte from './assets/player/Squirrel.png'
+import NPCRunning from './assets/animals/Squirrel running.png'
+import NPCEaten from './assets/animals/Squirrel getting eaten.png'
+
 export default class Enemy extends GameObject {
     constructor(game, x, y, width, height, patrolDistance = null) {
         super(game, x, y, width, height)
         this.color = 'red' // Röd
-        
+
         // Fysik
         this.velocityX = 0
         this.velocityY = 0
         this.isGrounded = false 
+
+        this.width = 32
+        this.height = 32
         
         // Patrol AI
         this.startX = x
@@ -16,19 +21,22 @@ export default class Enemy extends GameObject {
         this.endX = patrolDistance !== null ? x + patrolDistance : null
         this.speed = 0.1
         this.direction = 1 // 1 = höger, -1 = vänster
+        this.lastDirectionX = 1
+        
 
-
-          this.loadSprite('idle', NpcSpricte, 1)
-
+        this.loadSprite('running', NPCRunning, 8, 50)
+        this.loadSprite('eaten', NPCEaten, 6, 60)
     }
-
-
 
 
     update(deltaTime) {
         // Applicera gravitation
+        if (this.currentAnimation == 'eaten') {
+            console.log('eaten')
+        } else {
+            this.setAnimation('running')
+        }
 
-        this.setAnimation('idle')
         this.velocityY += this.game.gravity * deltaTime
         
         // Applicera luftmotstånd
@@ -45,9 +53,11 @@ export default class Enemy extends GameObject {
             if (this.patrolDistance !== null) {
                 if (this.x >= this.endX) {
                     this.direction = -1
+                    this.lastDirectionX = -1
                     this.x = this.endX
                 } else if (this.x <= this.startX) {
                     this.direction = 1
+                    this.lastDirectionX = 1
                     this.x = this.startX
                 }
             }
@@ -59,6 +69,9 @@ export default class Enemy extends GameObject {
         // Uppdatera position
         this.x += this.velocityX * deltaTime
         this.y += this.velocityY * deltaTime
+
+                
+        this.updateAnimation(deltaTime)
     }
 
     handlePlatformCollision(platform) {
@@ -78,10 +91,12 @@ export default class Enemy extends GameObject {
                 // Fienden träffar vägg - vänd
                 this.x = platform.x - this.width
                 this.direction = -1
+                this.lastDirectionX = -1
             } else if (collision.direction === 'right' && this.velocityX < 0) {
                 // Fienden träffar vägg - vänd
                 this.x = platform.x + platform.width
                 this.direction = 1
+                this.lastDirectionX = 1
             }
         }
     }
@@ -98,9 +113,11 @@ export default class Enemy extends GameObject {
             if (this.x <= 0) {
                 this.x = 0
                 this.direction = 1
+                this.lastDirectionX = 1
             } else if (this.x + this.width >= gameWidth) {
                 this.x = gameWidth - this.width
                 this.direction = -1
+                this.lastDirectionX = -1
             }
         }
     }
@@ -110,9 +127,13 @@ export default class Enemy extends GameObject {
         const screenX = camera ? this.x - camera.x : this.x
         const screenY = camera ? this.y - camera.y : this.y
         
-        // Rita fienden som en röd rektangel
-        ctx.fillStyle = this.color
-        ctx.fillRect(screenX, screenY, this.width, this.height)
+        // Rita djuren
+        const spriteDrawn = this.drawSprite(ctx, camera, this.lastDirectionX !== -1)
+        
+        if (!spriteDrawn) {
+            ctx.fillStyle = this.color
+            ctx.fillRect(screenX, screenY, this.width, this.height)
+        }
     }
 
 

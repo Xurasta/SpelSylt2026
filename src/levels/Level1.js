@@ -3,17 +3,27 @@ import Platform from '../Platform.js'
 import Enemy from '../Enemy.js'
 import BackgroundObject from '../BackgroundObject.js'
 import Background from '../Background.js'
-import blueBg from '../assets/Pixel Adventure 1/Background/Blue.png'
-import bigClouds from '../assets/clouds/Big Clouds.png'
-import cloud1 from '../assets/clouds/Small Cloud 1.png'
-import cloud2 from '../assets/clouds/Small Cloud 2.png'
-import cloud3 from '../assets/clouds/Small Cloud 3.png'
+import tree from '../assets/bakgrund/1 träd andra sidan bäcken.png'
+import clouds from '../assets/bakgrund/Moln skog.png'
+import trees from '../assets/bakgrund/Träd.png'
+
 import grass from '../assets/sprites/Grass.png'
-import bush from '../assets/sprites/bush.png'
 import thorns from '../assets/sprites/Thorns.png'
 import woodPlatform from '../assets/sprites/wood platform.png'
+import arrowLeft from '../assets/sprites/Arrow Left.png'
+import arrowRight from '../assets/sprites/Arrow Right.png'
+import arrowUp from '../assets/sprites/Arrow Up.png'
+import boulder from '../assets/sprites/Boulder.png'
+import mountain from '../assets/bakgrund/Gläs.png'
 
-import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
+import bakgrundlvl from '../assets/bakgrund/Skog-himmel.png'
+import bush from '../assets/sprites/lvl1/Bush.png'
+import backGrass from '../assets/sprites/lvl1/BG Grass.png'
+import flowers from '../assets/sprites/lvl1/Flowers.png'
+import dashSign from '../assets/sprites/lvl1/Sign (dashing).png'
+import growSign from '../assets/sprites/lvl1/Sign (Growing).png'
+import jumpingSign from '../assets/sprites/lvl1/Sign (jumping).png'
+import thornSign from '../assets/sprites/lvl1/Sign (Thorns).png'
 import Camera from '../Camera.js'
 
 // Second test
@@ -37,23 +47,121 @@ export default class Level1 extends Level {
         this.backgrounds = [
             // Far background - blå himmel
             new Background(this.game, bakgrundlvl, {
-                tiled: true,
-                tileWidth: 64,
-                tileHeight: 64,
+                tiled: false,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
-                tiledY: false, // Tila bara horisontellt
+                tiledY: true, // Tila bara horisontellt
                 tileHeight: this.game.worldHeight, // Fyll hela höjden
                 tileWidth: this.game.worldWidth // Fyll hela bredden
             }),
+            new Background(this.game, mountain, {
+                tiled: false,
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 500, // Fyll hela höjden
+                width: 2000,
+                yPosition: -300,
+                xPosition: 200
+            }),
+            new Background(this.game, clouds, {
+                tiled: false,
+                scrollSpeed: 0.6, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 200, // Fyll hela höjden
+                width: 3000,
+                yPosition: -200 ,
+                xPosition: 0
+            }),
+            new Background(this.game, trees, {
+                tiled: false,
+                scrollSpeed: 0.35, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 550,
+                yPosition: -395,
+                xPosition: 0
+            }),
+            new Background(this.game, trees, {
+                tiled: false, // upprepning
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 200, // Fyll hela höjden
+                width: 500, // storlek på bredden
+                yPosition: 400,  // Höjd
+                xPosition: 200, // längd
+            }),
+            new Background(this.game, trees, {
+                tiled: false,
+                scrollSpeed: 0.6, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 440,
+                yPosition: -400,
+                xPosition: -50
+                
+            }),
+            
 
-            // Mid background - stora moln
-           
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -650
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -410
+             }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -860
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -490,
+                xPosition: -750
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.8, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -690,
+                xPosition: -1820
+            }),
+            new Background(this.game, tree, {
+                tiled: false,
+                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                tiledY: false, // Tila bara horisontellt
+                height: 100, // Fyll hela höjden
+                width: 95,
+                yPosition: -4900,
+                xPosition: -950
+            }),
         ]
     }
 
     createBackgroundObjects() {
         const height = this.game.height
         const worldHeight = this.game.worldHeight
+        const worldWidth = this.game.worldWidth
 
         const woodenPlatformRail = {
             image: woodPlatform,
@@ -66,7 +174,6 @@ export default class Level1 extends Level {
             tile: 'both',
             backdrop: 'false'
         }
-
         
         const woodenPlatformSupport = {
             image: woodPlatform,
@@ -91,38 +198,131 @@ export default class Level1 extends Level {
             tile: 'both',
             backdrop: 'false'
         }
+
+        const thornRepeat = {
+            image: thorns,
+            sourceWidth: 96,
+            sourceHeight: 96,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0,
+            clippedWidthY: 16,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
+        const arrowR = {
+            image: arrowRight,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
+        const arrowU = {
+            image: arrowUp,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
+        const boulderSet = {
+            image: boulder,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
+        const flowersSet = {
+            image: flowers,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
+        const dashSignSet = {
+            image: dashSign,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
+
+        const jumpingSignSet = {
+            image: jumpingSign,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
         
         this.backgroundObjects = [
-            // Små moln som rör sig oberoende
-            new BackgroundObject(this.game, 200, height - 300, cloud1, {
-                speed: 0.02,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 600, height - 250, cloud2, {
-                speed: 0.015,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 1200, height - 280, cloud3, {
-                speed: 0.018,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 1800, height - 320, cloud1, {
-                speed: 0.022,
-                scrollSpeed: 0.4
-            }),
-            new BackgroundObject(this.game, 2200, height - 260, cloud2, {
-                speed: 0.016,
-                scrollSpeed: 0.4
-            }),
 
-            new Platform(this.game, 2900, height + 400, 48, 72, { sprite: woodenPlatformSupport }),
-            new Platform(this.game, 2900, height + 390, 48, 12, { sprite: woodenPlatformRail }),
 
-            new Platform(this.game, 3100, height + 200, 48, 300, { sprite: woodenPlatformSupport }),
-            new Platform(this.game, 3100, height + 190, 48, 12, { sprite: woodenPlatformRail }),
+            new Platform(this.game, 3100, worldHeight - 100, 48, 300, { sprite: woodenPlatformSupport }),
+            new Platform(this.game, 3100, worldHeight - 290, 48, 12, { sprite: woodenPlatformRail }),
 
-            new Platform(this.game, 3100, height + 200, 350, 300, { sprite: woodenPlatformSupport }),
-            new Platform(this.game, 3104, height + 190, 350, 12, { sprite: woodenPlatformRailRepeat })
+            new Platform(this.game, 3100, worldHeight - 283, 350, 300, { sprite: woodenPlatformSupport }),
+            new Platform(this.game, 3104, worldHeight - 290, 350, 12, { sprite: woodenPlatformRailRepeat }),
+
+            new Platform(this.game, 1200, worldHeight - 64, 480, 32, { sprite: thornRepeat}),
+
+            new Platform(this.game, 1280, worldHeight - 235, 48, 48, { sprite: arrowR }),
+
+            new Platform(this.game, 2300, worldHeight - 80, 48, 48, { sprite: arrowU }),
+
+            new Platform(this.game, 3020, worldHeight - 80, 48, 48, { sprite: arrowU }),
+
+            new Platform(this.game, 3360, worldHeight - 330, 48, 48, { sprite: arrowR }),
+
+            // Boulders
+            new Platform(this.game, 1860, worldHeight - 60, 48, 48, { sprite: boulderSet}),
+            new Platform(this.game, 1800, worldHeight - 280, 48, 48, { sprite: boulderSet}),
+            new Platform(this.game, 1790, worldHeight - 285, 48, 48, { sprite: boulderSet}),
+            new Platform(this.game, 200, worldHeight - 50, 48, 48, { sprite: boulderSet}),
+            new Platform(this.game, 700, worldHeight - 60, 48, 48, { sprite: boulderSet}),
+
+            // Boulders
+            new Platform(this.game, 2900, worldHeight - 60, 48, 48, { sprite: boulderSet}),
+            new Platform(this.game, 2700, worldHeight - 50, 48, 48, { sprite: boulderSet}),
+            new Platform(this.game, 3065, worldHeight - 70, 48, 48, { sprite: boulderSet}),
+
+            // Flowers
+            new Platform(this.game, 0, worldHeight - 80, 48, 48, { sprite: flowersSet }),
+            new Platform(this.game, 30, worldHeight - 80, 48, 48, { sprite: flowersSet }),
+            new Platform(this.game, 80, worldHeight - 80, 48, 48, { sprite: flowersSet }),
+            new Platform(this.game, 120, worldHeight - 80, 48, 48, { sprite: flowersSet }),
+
+            // Signs
+            new Platform(this.game, 800, worldHeight - 80, 48, 48, { sprite:  dashSignSet }),
+            new Platform(this.game, 1800, worldHeight - 300, 48, 48, { sprite:  jumpingSignSet }),
         ]
     }
 
@@ -208,10 +408,13 @@ export default class Level1 extends Level {
             new Platform(this.game, 1680, worldHeight - 260, 192, 300, { sprite: dirt }),
             new Platform(this.game, 1680, worldHeight - 260, 192, 32, { sprite: dirtTop }),
 
-            new Platform(this.game, 2900, height + 398, 48, 5, { sprite: woodenPlatformStand }),
+            new Platform(this.game, 3101, worldHeight - 283, 350, 5, { sprite: woodenPlatformStandRepeat }),
 
-            new Platform(this.game, 3100, height + 198, 48, 5, { sprite: woodenPlatformStand }),
-            new Platform(this.game, 3101, height + 198, 350, 5, { sprite: woodenPlatformStandRepeat })
+            new Platform(this.game, 3080, worldHeight - 120, 400, 300, { sprite: dirt }),
+            new Platform(this.game, 3080, worldHeight - 120, 400, 32, { sprite: dirtTop }),
+
+            new Platform(this.game, 2800, worldHeight - 120, 120, 300, { sprite: dirt }),
+            new Platform(this.game, 2800, worldHeight - 120, 120, 32, { sprite: dirtTop })
         ]
     }
 
@@ -224,8 +427,6 @@ export default class Level1 extends Level {
             new Enemy(this.game, 450, worldHeight - 240, 40, 40),
             new Enemy(this.game, 360, worldHeight - 440, 40, 40, 50),
             // Nya fiender längre bort
-            new Enemy(this.game, 1000, worldHeight - 220, 40, 40, 100),
-            new Enemy(this.game, 1400, worldHeight - 200, 40, 40),
             new Enemy(this.game, 1800, worldHeight - 240, 40, 40, 150),
         ]
     }

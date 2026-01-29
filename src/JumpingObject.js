@@ -1,7 +1,7 @@
 import GameObject from './GameObject.js'
 import Sprite from './Sprite.js'
 
-export default class Platform extends GameObject {
+export default class JumpingObjects extends GameObject {
     constructor(game, x, y, width, height, options = {}) {
         super(game, x, y, width, height)
         
@@ -14,7 +14,7 @@ export default class Platform extends GameObject {
         }
     }
     
-    update(deltaTime) {
+    update(deltaTime, ) {
         // Plattformar är statiska, gör inget
     }
     
