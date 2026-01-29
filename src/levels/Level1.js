@@ -48,8 +48,6 @@ export default class Level1 extends Level {
             // Far background - blå himmel
             new Background(this.game, bakgrundlvl, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
                 tiledY: true, // Tila bara horisontellt
                 tileHeight: this.game.worldHeight, // Fyll hela höjden
@@ -57,8 +55,6 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, mountain, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 500, // Fyll hela höjden
@@ -68,8 +64,6 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, clouds, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
                 scrollSpeed: 0.6, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 200, // Fyll hela höjden
@@ -79,8 +73,6 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, trees, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
                 scrollSpeed: 0.35, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 100, // Fyll hela höjden
@@ -88,22 +80,18 @@ export default class Level1 extends Level {
                 yPosition: -400,
                 xPosition: 0
             }),
-            new Background(this.gam, trees, {
-                tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
-                scrollSpeed: 0.35, // Långsam parallax (långt bort)
+            new Background(this.game, trees, {
+                tiled: false, // upprepning
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
-                height: 100, // Fyll hela höjden
-                width: 500,
-                yPosition: -420,
-                xPosition: -500
+                height: 200, // Fyll hela höjden
+                width: 500, // storlek på bredden
+                yPosition: -420,  // Höjd
+                xPosition: -200 // längd
             }),
             new Background(this.game, trees, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
-                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                scrollSpeed: 0.6, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 100, // Fyll hela höjden
                 width: 500,
@@ -112,9 +100,7 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, tree, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
-                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 100, // Fyll hela höjden
                 width: 95,
@@ -123,9 +109,7 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, tree, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
-                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 100, // Fyll hela höjden
                 width: 95,
@@ -134,9 +118,7 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, tree, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
-                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                scrollSpeed: 0.4, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 100, // Fyll hela höjden
                 width: 95,
@@ -145,8 +127,6 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, tree, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 100, // Fyll hela höjden
@@ -156,8 +136,6 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, tree, {
                 tiled: false,
-                tileWidth: 64,
-                tileHeight: 64,
                 scrollSpeed: 0.3, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 100, // Fyll hela höjden
@@ -165,11 +143,6 @@ export default class Level1 extends Level {
                 yPosition: -400 ,
                 xPosition: -950
             }),
-
-
-
-            // Mid background - stora moln
-           
         ]
     }
 
