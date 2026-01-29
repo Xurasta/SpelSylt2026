@@ -1,5 +1,6 @@
 import Level from './Level.js'
 import Platform from '../Platform.js'
+import Coin from '../Coin.js'
 import Enemy from '../Enemy.js'
 import BackgroundObject from '../BackgroundObject.js'
 import Background from '../Background.js'
@@ -25,7 +26,6 @@ import jumpingSign from '../assets/sprites/lvl1/Sign (jumping).png'
 import thornSign from '../assets/sprites/lvl1/Sign (Thorns).png'
 
 import bakgrundlvl from '../assets/bakgrund/bakgrund.png'
-import Camera from '../Camera.js'
 
 // Second test
 /**
@@ -242,84 +242,24 @@ export default class Level1 extends Level {
     createPlatforms() {
         const height = this.game.height
         const worldWidth = this.game.worldWidth
-        const worldHeight = this.game.worldHeight
 
         const ground = {
             image: grass,
             sourceWidth: 32,
             sourceHeight: 32,
-            startClipX: 12,
-            clippedWidthX: 16,
-            startClipY: 0,
+            startclipX: 12,
+            clippedWidthX: 12,
+            startClipY: 32,
             clippedWidthY: 32,
             tile: 'both'
         }
 
-        const dirt = {
-            image: grass,
-            sourceWidth: 32,
-            sourceHeight: 32,
-            startClipX: 12,
-            clippedWidthX: 16,
-            startClipY: 10,
-            clippedWidthY: 20,
-            tile: 'both'
-        }
-
-        const dirtTop = {
-            image: grass,
-            sourceWidth: 32,
-            sourceHeight: 32,
-            startClipX: 12,
-            clippedWidthX: 16,
-            startClipY: 0,
-            clippedWidthY: 28,
-            tile: 'both'
-        }
-
-        const woodenPlatformStand = {
-            image: woodPlatform,
-            sourceWidth: 48,
-            sourceHeight: 48,
-            startClipX: 0,
-            clippedWidthX: 48,
-            startClipY: 7,
-            clippedWidthY: 5,
-            tile: 'both',
-            backdrop: 'false'
-        }
-
-        const woodenPlatformStandRepeat = {
-            image: woodPlatform,
-            sourceWidth: 48,
-            sourceHeight: 48,
-            startClipX: 1,
-            clippedWidthX: 46,
-            startClipY: 7,
-            clippedWidthY: 5,
-            tile: 'both',
-            backdrop: 'false'
-        }
-
         this.platforms = [
             // Marken (hela nivån)
-            new Platform (this.game, 0,  worldHeight - 32, worldWidth, 32, { sprite: ground }),
+            new Platform (this.game, 0, height - 32, worldWidth, 32, { sprite: ground }),
 
-            // Berg
-            new Platform (this.game, 1071,  worldHeight - 100, 128, 180, { sprite: dirt }),
-            new Platform (this.game, 1071, worldHeight - 100, 128, 32, { sprite: dirtTop }),
-            
-            new Platform (this.game,  1200, worldHeight - 190, 128, 300, { sprite: dirt }),
-            new Platform (this.game,  1200, worldHeight - 190, 128, 32, { sprite: dirtTop }),
-    
-            new Platform(this.game, 1680, worldHeight - 260, 128, 300, { sprite: dirt }),
-            new Platform(this.game, 1680, worldHeight - 260, 128, 32, { sprite: dirtTop }),
-
-            new Platform(this.game, 2380, worldHeight - 200, 192, 300, { sprite: dirt }),
-            new Platform(this.game, 2380, worldHeight - 200, 192, 32, { sprite: dirtTop }),
-
-            new Platform(this.game, 1680, worldHeight - 260, 192, 300, { sprite: dirt }),
-            new Platform(this.game, 1680, worldHeight - 260, 192, 32, { sprite: dirtTop }),
+        ]
+    }
 
             new Platform(this.game, 3101, worldHeight - 283, 350, 5, { sprite: woodenPlatformStandRepeat }),
 
@@ -333,14 +273,17 @@ export default class Level1 extends Level {
 
     createEnemies() {
         const height = this.game.height
-        const worldHeight = this.game.worldHeight
 
         this.enemies = [
-            new Enemy(this.game, 200, worldHeight - 220, 40, 40, 80),
-            new Enemy(this.game, 450, worldHeight - 240, 40, 40),
-            new Enemy(this.game, 360, worldHeight - 440, 40, 40, 50),
+            new Enemy(this.game, 200, height - 220, 40, 40, 80),
+            new Enemy(this.game, 450, height - 240, 40, 40),
+            new Enemy(this.game, 360, height - 440, 40, 40, 50),
             // Nya fiender längre bort
             new Enemy(this.game, 1800, worldHeight - 240, 40, 40, 150),
         ]
+    }
+    update(deltaTime) {
+        this.updateTimer('timer', deltaTime);
+        console.log(this.timer);
     }
 }
