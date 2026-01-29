@@ -77,7 +77,5 @@ export default class BackgroundObject extends GameObject {
             this.width * this.scale,
             this.height * this.scale
         )
-
-        ctx.strokeRect(screenX, screenY, this.width * this.scale, this.height * this.scale)
     }
 }
