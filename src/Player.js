@@ -2,13 +2,13 @@ import GameObject from './GameObject.js'
 
 
 // Idle Mini
-import MiniIdle from './assets/player/Slime_S_Idle.png'
+import MiniIdle from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Idle.png'
 // Run Mini
 import MiniRunActive from './assets/player/Slime_S_Running_Active.png'
 import MiniRunStop from './assets/player/Slime_S_Running_Stop.png'
 
 // jumping Mini
-import MiniJumpAscend from './assets/player/Slime_S_Jumping_Ascend.png'
+import MiniJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Jumping_Ascend.png'
 import MiniJumpApex from './assets/player/Slime_S_Jumping_Apex.png'
 import MiniJumpDescend from './assets/player/Slime_S_Jumping_Descend.png'
 import MiniJumpLanding from './assets/player/Slime_S_Jumping_Landing.png'
@@ -27,7 +27,7 @@ import MiddleIdle from './assets/player/Slime_M_Idle.png'
 //import MiddleRunStop from './assets/player/Slime_M_Running_Stop.png'
 
 // Jump Middle
-import MiddleJumpAscend from './assets/player/Slime_M_Jumping_Ascend.png'
+import MiddleJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Jumping_Ascend.png'
 import MiddleJumpApex from './assets/player/Slime_M_Jumping_Apex.png'
 import MiddleJumpDescend from './assets/player/Slime_M_Jumping_Descent.png'
 import MiddleJumpLanding from './assets/player/Slime_M_Jumping_Landing.png'
@@ -43,7 +43,7 @@ import MaxRunActive from './assets/player/Slime_L_Running_Active.png'
 import MaxRunStop from './assets/player/Slime_L_Running_Stop.png'
 
 // Jump Max
-import MaxJumpAscend from './assets/player/Slime_L_Jumping_Ascend.png'
+import MaxJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Jumping_Ascend.png'
 import MaxJumpApex from './assets/player/Slime_L_Jumping_Apex.png'
 import MaxJumpDescend from './assets/player/Slime_L_Jumping_Ascend.png'
 import MaxJumpLanding from './assets/player/Slime_L_Jumping_Landing.png'
@@ -104,9 +104,9 @@ export default class Player extends GameObject {
         this.loadSprite('idle_S',MiniIdle, 10, 150)  
         this.loadSprite('Run_S_Active',MiniRunActive,3,150)
         this.loadSprite('Run_S_Stop',MiniRunStop,4,150)
-        this.loadSprite('Jump_S_Ascend',MiniJumpAscend,1,150)
+        this.loadSprite('Jump_S_Ascend',MiniJumpAscend)
         this.loadSprite('Jump_S_Landing',MiniJumpLanding,3,150)
-        this.loadSprite('Junmp_S_Apex',MiniJumpApex,1,150)
+        this.loadSprite('Jump_S_Apex',MiniJumpApex,1,150)
         this.loadSprite('Jump_S_Descend',MiniJumpDescend,1,150)
         this.loadSprite('Growth_S',MiniToMiddle,5,150)
 
@@ -118,7 +118,7 @@ export default class Player extends GameObject {
        // this.loadSprite('Run_M_Stop',MiddleRunStop,4,150)
         this.loadSprite('Jump_M_Ascend',MiddleJumpAscend,1,150)
         this.loadSprite('Jump_M_Landing',MiddleJumpLanding,5,150)
-        this.loadSprite('Junmp_M_Apex',MiddleJumpApex,1,150)
+        this.loadSprite('Jump_M_Apex',MiddleJumpApex,1,150)
         this.loadSprite('Jump_M_Descend',MiddleJumpDescend,1,150)
         this.loadSprite('Dash_M',MiddleDash,5,150 )
         this.loadSprite('Growh_M',MiddleToMax,10,150 )
@@ -128,16 +128,19 @@ export default class Player extends GameObject {
         this.loadSprite('idle_L',MaxIdle, 10, 150)
         this.loadSprite('Run_L_Active',MaxRunActive,9,150)
         this.loadSprite('Run_L_Stop',MaxRunStop,6,150)
-        this.loadSprite('Jump_L_Ascend',MaxJumpAscend,1,150)
+        this.loadSprite('Jump_L_Ascend',MaxJumpAscend)
         this.loadSprite('Jump_L_Landing',MaxJumpLanding,7,150)
-        this.loadSprite('Junmp_L_Apex',MaxJumpApex,1,150)
+        this.loadSprite('Jump_L_Apex',MaxJumpApex,1,150)
         this.loadSprite('Jump_L_Descend',MaxJumpDescend,1,150)  
     
 
 
 
-        this.currentAnimation = 'idle_M'
-        this.currentSizeState="middle"
+        this.currentAnimation = 'idle_S'
+        this.currentSizeState="mini"
+        this.Active_Animation='True'
+        this.Active_Timer=1
+
     }
 
     update(deltaTime) {
@@ -169,13 +172,16 @@ export default class Player extends GameObject {
                 this.velocityX = -this.moveSpeed
                 this.directionX = -1
                 this.lastDirectionX = -1 // Spara riktning
+                this.Active_Run='ON'
             } else if (this.game.inputHandler.keys.has('ArrowRight')) {
                 this.velocityX = this.moveSpeed
                 this.directionX = 1
                 this.lastDirectionX = 1 // Spara riktning
+                
             } else {
                 this.velocityX = 0
                 this.directionX = 0
+                
             }
         }
         // Hoppa
@@ -201,6 +207,12 @@ export default class Player extends GameObject {
         }else{
 
         }
+
+
+
+
+
+
 
 
 
@@ -253,41 +265,71 @@ export default class Player extends GameObject {
         // Skjut med X-tangenten
         // Uppdatera animation state baserat på movement
         
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='mini') {
-            this.setAnimation('idle_S')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='mini' ) {
-            this.setAnimation('idle_S')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='mini') {
-            this.setAnimation('idle_S')
-        } else if( this.currentSizeState=='mini' ) {
+//
+            if(this.Active_Timer < 1){
+                this.Active_Timer+=deltaTime/500
+                console.log(this.Active_Timer)
+            }else if (this.Active_Timer>1){
+                this.Active_Timer=1
+            }
+
+        //    }else if (this.isGrounded && this.velocityX==this.moveSpeed || this.velocityX==  -this.moveSpeed ){
+          //      this.setAnimation('Run_S_Active')
+            //    this.Active_Timer=0
+          //  }else if( this.isGrounded && this.Active_Timer!= 1){
+            //    this.setAnimation('Run_S_Stop')
+                
+        
+        if (this.currentSizeState=='mini'){
+            console.log(this.velocityY)
+
+            if(!this.isGrounded && this.velocityY < 0 ){
+            this.setAnimation('Jump_S_Ascend')
+            this.Active_Timer=-1
+        }else if (!this.isGrounded && this.velocityY < 1 && this.Active_Timer!=1 ){
+            this.setAnimation('Jump_S_Apex')
+        }else if ( !this.isGrounded && this.velocityY < 1){
+            this.setAnimation('Jump_S_Descend')
+            this.Active_Timer=0
+
+        }else if (this.isGrounded && this.velocityY >0 && this.Active_Timer!=1){
+            this.setAnimation('Jump_S_Landing')
+        }
+
+        
+        
+        
+        else{
             this.setAnimation('idle_S')
         }
 
 
 
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='middle') {
-            this.setAnimation('idle_M')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='middle' ) {
-            this.setAnimation('idle_M')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='middle') {
-            this.setAnimation('idle_M')
-        } else if( this.currentSizeState=='middle' ) {
-            this.setAnimation('idle_M')
+
+      
+
+
         }
 
 
-        if (!this.isGrounded && this.velocityY < 0 && this.currentSizeState=='max') {
-            this.setAnimation('idle_L')
-        } else if (!this.isGrounded && this.velocityY > 0 && this.currentSizeState=='max' ) {
-            this.setAnimation('idle_L')
-        } else if (this.velocityX !== 0 && this.currentSizeState=='max') {
-            this.setAnimation('idle_L')
-        } else if( this.currentSizeState=='max' ) {
-            this.setAnimation('idle_L')
+        if(this.currentSizeState=='max'){
+
         }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+ 
         
 
         
