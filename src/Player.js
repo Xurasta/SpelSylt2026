@@ -123,7 +123,7 @@ export default class Player extends GameObject {
         this.loadSprite('idle_L',MaxIdle, 10, 150)
         this.loadSprite('Run_L_Active',MaxRunActive,9,150)
         this.loadSprite('Run_L_Stop',MaxRunStop,6,150)
-        this.loadSprite('Jump_L_Ascend',MaxJumpAscend)
+        this.loadSprite('Jump_L_Ascend',MaxJumpAscend,1,150)
         this.loadSprite('Jump_L_Landing',MaxJumpLanding,7,150)
         this.loadSprite('Jump_L_Apex',MaxJumpApex,1,150)
         this.loadSprite('Jump_L_Descend',MaxJumpDescend,1,150)  
@@ -133,7 +133,7 @@ export default class Player extends GameObject {
 
         this.currentAnimation = 'idle_S'
         this.currentSizeState="mini"
-        this.Active_Animation='True'
+        this.Active_Animation='false'
         this.Active_Timer=1
 
     }
@@ -262,30 +262,58 @@ export default class Player extends GameObject {
 
         //
             if(this.Active_Timer < 1){
-                this.Active_Timer+=deltaTime/500
+                this.Active_Timer+=deltaTime/350
                 console.log(this.Active_Timer)
-            }else if (this.Active_Timer>1){
-                this.Active_Timer=1
             }
-
         // Uppdatera animation state baserat på movement
                 
         if (this.currentSizeState=='mini'){
+            console.log(this.Active_Timer)
             console.log(this.velocityY)
             if(!this.isGrounded && this.velocityY < 0 ){
             this.setAnimation('Jump_S_Ascend')
-            this.Active_Timer=-1
             
 
+        }else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='false'){
+            this.setAnimation('Jump_S_Apex')
+            this.Active_Timer=0
+            this.Active_Animation='true'
+
+        }else if (!this.isGrounded && this.velocityY > 0 && this.Active_Animation=='true' && this.Active_Timer>1) {
+            this.setAnimation('Jump_S_Descend')
+            
+
+        }else if (this.isGrounded && this.velocityY >0){
+            this.setAnimation('Jump_S_Landing')
+            this.Active_Animation='false'
+
+
+        }
+        }
+
+
+
+        if (this.currentSizeState=='middle'){
+
+            if(!this.isGrounded && this.velocityY < 0 ){
+            this.setAnimation('Jump_M_Ascend')
+            this.Active_Timer=0.5}
 
         }
 
-        
-        
-        
-        else{
-            this.setAnimation('idle_S')
+
+        if(this.currentSizeState=='max'){
+            if(!this.isGrounded && this.velocityY < 0 ){
+            this.setAnimation('Jump_L_Ascend')
+            this.Active_Timer=0.5}
+
         }
+
+
+        
+        
+        
+    
 
 
 
@@ -293,12 +321,8 @@ export default class Player extends GameObject {
       
 
 
-        }
 
 
-        if(this.currentSizeState=='max'){
-
-        }
 
        
         
@@ -306,23 +330,20 @@ export default class Player extends GameObject {
     
         // Size Changer 
         if (this.currentSizeState=='middle'){
-            this.width= 80
-            this.height= 80
-            this.jumpPower= this.constantJumpPower * 0.45
+
+            this.jumpPower= this.constantJumpPower * 0.55
             this.moveSpeed= this.constantMoveSpeed * 0.45
             this.maxJumps= 2
         }  
         else if (this.currentSizeState=='mini'){
-            this.width= 64
-            this.height= 64
-            this.jumpPower= this.constantJumpPower * 0.40
+
+            this.jumpPower= this.constantJumpPower * 0.50
             this.moveSpeed= this.constantMoveSpeed * 0.40
             this.maxJumps= 1
         }
         else if (this.currentSizeState=='max'){
-            this.width= 128
-            this.height= 128
-            this.jumpPower= this.constantJumpPower * 0.50
+
+            this.jumpPower= this.constantJumpPower * 0.60
             this.moveSpeed= this.constantMoveSpeed * 0.50
             this.maxJumps= 2
 
