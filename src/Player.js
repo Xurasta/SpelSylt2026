@@ -2,6 +2,53 @@ import GameObject from './GameObject.js'
 
 import SlimeBlob from './SlimeBlob.js'
 
+// Idle Mini
+import MiniIdle from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Idle.png'
+// Run Mini
+import MiniRunActive from './assets/player/Slime_S_Running_Active.png'
+import MiniRunStop from './assets/player/Slime_S_Running_Stop.png'
+
+// jumping Mini
+import MiniJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_S_Jumping_Ascend.png'
+import MiniJumpApex from './assets/player/Slime_S_Jumping_Apex.png'
+import MiniJumpDescend from './assets/player/Slime_S_Jumping_Descend.png'
+import MiniJumpLanding from './assets/player/Slime_S_Jumping_Landing.png'
+
+
+// "Growth" 
+import MiniToMiddle from './assets/player/Slime_S_Grow.png'
+import MiddleToMax from './assets/player/Slime_M_Grow.png'
+
+
+// Idle Middle
+import MiddleIdle from './assets/player/Slime_M_Idle.png'
+
+// Run Middle
+//import MiddleRunActive from './assets/player/Slime_M_Running_Active.png'
+//import MiddleRunStop from './assets/player/Slime_M_Running_Stop.png'
+
+// Jump Middle
+import MiddleJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_M_Jumping_Ascend.png'
+import MiddleJumpApex from './assets/player/Slime_M_Jumping_Apex.png'
+import MiddleJumpDescend from './assets/player/Slime_M_Jumping_Descent.png'
+import MiddleJumpLanding from './assets/player/Slime_M_Jumping_Landing.png'
+
+// Dash Middle
+import MiddleDash from  './assets/player/Slime_M_Dash.png'
+
+// Idle Max
+import MaxIdle from './assets/player/Slime_L_Idle.png'
+
+// Run Max
+import MaxRunActive from './assets/player/Slime_L_Running_Active.png'
+import MaxRunStop from './assets/player/Slime_L_Running_Stop.png'
+
+// Jump Max
+import MaxJumpAscend from '/home/billy/code/SpelSylt2026/src/assets/player/Slime_L_Jumping_Ascend.png'
+import MaxJumpApex from './assets/player/Slime_L_Jumping_Apex.png'
+import MaxJumpDescend from './assets/player/Slime_L_Jumping_Ascend.png'
+import MaxJumpLanding from './assets/player/Slime_L_Jumping_Landing.png'
+
 import jumpSound from './assets/sounds/jump.mp3'
 
 import chunk from './assets/player/Slime chunk.png'
@@ -49,25 +96,7 @@ export default class Player extends GameObject {
         this.jumpSound.volume = 0.3; // Sänk volymen lite
         
         // Sprite animation system - ladda sprites med olika hastigheter
-        this.loadSprite('idle', MiniIdleSprite, 10, 150)  // Långsammare idle
-        this.loadSprite('run', MiniRunSprite, 8, 80)     // Snabbare spring
-        this.loadSprite('jump', MiniJumpSprite, 8,100)
-        this.loadSprite('fall', MiniIdleSprite, 10,100)
 
-
-        //this.loadSprite('idle', MiddleIdleSprite, 10, 150)  // Långsammare idle
-        //this.loadSprite('run', MiddleRunSprite, 8, 80)     // Snabbare spring
-        //this.loadSprite('jump', MiddleJumpSprite, 8,100)
-        //this.loadSprite('fall', MiddleIdleSprite, 10,100)
-
-
-       // this.loadSprite('idle', MaxIdleSprite, 10, 150)  // Långsammare idle
-       // this.loadSprite('run', MaxRunSprite, 8, 80)     // Snabbare spring
-        //this.loadSprite('jump', MaxJumpSprite, 8,100)
-        //this.loadSprite('fall', MaxIdleSprite, 10,100)
-        
-        this.currentAnimation = 'idle'
-        this.currentSizeState="middle"
     }
 
     update(deltaTime) {
