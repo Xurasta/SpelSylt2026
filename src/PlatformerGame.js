@@ -1,5 +1,6 @@
 import GameBase from './GameBase.js'
 import Player from './Player.js'
+import Projectile from './Projectile.js'
 import Level1 from './levels/Level1.js'
 import Level2 from './levels/Level2.js'
 import MainMenu from './menus/MainMenu.js'
@@ -15,8 +16,8 @@ export default class PlatformerGame extends GameBase {
         super(width, height)
         
         // Plattformsspel behöver en större värld för sidoscrolling
-        this.worldWidth = width * 4
-        this.worldHeight = height * 2
+        this.worldWidth = width * 3
+        this.worldHeight = height
         this.camera.setWorldBounds(this.worldWidth, this.worldHeight)
 
         // Plattformsspel-specifik fysik
@@ -336,13 +337,8 @@ export default class PlatformerGame extends GameBase {
         this.camera.update(deltaTime)
         
         // Kolla win condition - alla mynt samlade
-        // if (this.coinsCollected === this.totalCoins && this.gameState === 'PLAYING') {
-        //     // Gå till nästa level
-        //     this.nextLevel()
-        // }
-        
-        if (this.player.x + this.player.width == this.worldWidth) {
-            
+        if (this.coinsCollected === this.totalCoins && this.gameState === 'PLAYING') {
+            // Gå till nästa level
             this.nextLevel()
         }
         

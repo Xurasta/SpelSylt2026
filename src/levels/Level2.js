@@ -22,7 +22,8 @@ export default class Level2 extends Level {
         
         // Player spawn position för denna level
         this.playerSpawnX = 50
-        this.playerSpawnY = 700
+        this.playerSpawnY = 50
+        this.timer = 0
         
         // Initiera level
         this.init()
@@ -113,6 +114,26 @@ export default class Level2 extends Level {
             new Platform (this.game, 200,  worldHeight - 90, 96, 40, { sprite: carSet }),
             new Platform (this.game, 0,  worldHeight - 50, worldWidth - 2940, 48, { sprite: roadBottom }),
             new Platform (this.game, worldWidth - 2940,  worldHeight - 50, worldWidth, 48, { sprite: ground }),
+        ]
+    }
+
+    createCoins() {
+        const height = this.game.height
+
+        this.coins = [
+            // Mynt placerade strategiskt på svåra platser
+            new Coin(this.game, 250, height - 220),
+            new Coin(this.game, 500, height - 320),
+            new Coin(this.game, 750, height - 240),
+            new Coin(this.game, 790, height - 240),
+            new Coin(this.game, 1000, height - 360),
+            new Coin(this.game, 1250, height - 280),
+            new Coin(this.game, 1500, height - 400),
+            new Coin(this.game, 1540, height - 400),
+            new Coin(this.game, 1750, height - 320),
+            new Coin(this.game, 2000, height - 240),
+            new Coin(this.game, 2250, height - 360),
+            new Coin(this.game, 2290, height - 360),
         ]
     }
 
