@@ -351,7 +351,6 @@ export default class PlatformerGame extends GameBase {
         
         if (this.player.x + this.player.width == this.worldWidth) {
             this.nextLevel()
-            this.currentLevel.startTimer('nextLevelTimer', 2000)
         }
         
         // Kolla lose condition - spelaren är död
