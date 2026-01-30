@@ -217,18 +217,6 @@ export default class Player extends GameObject {
             // Nothing?
         }
 
-        // Öka storlek button
-        if (this.game.inputHandler.keys.has('q')  ) {
-            this.game.inputHandler.keys.delete('q')
-            this.SizeChange('Increace')          
-        }
-
-        // Minska storlek button
-        if (this.game.inputHandler.keys.has('e') ) {
-            this.game.inputHandler.keys.delete('e')
-            this.SizeChange('Decreace') 
-        }
-
         // Applicera gravitation
         this.velocityY += this.game.gravity * deltaTime
         
@@ -258,9 +246,6 @@ export default class Player extends GameObject {
                 this.invulnerable = false
             }
         }
-
-
-        //
             if(this.Active_Timer < 1.5){
                 this.Active_Timer+=deltaTime/350
                 console.log(this.Active_Timer)
@@ -337,11 +322,6 @@ export default class Player extends GameObject {
 
         this.updateTimer('timeout', deltaTime)
         
-        
-        
-
-
-
         }
 
         if (this.currentSizeState=='max'){
@@ -377,34 +357,8 @@ export default class Player extends GameObject {
             }
 
         this.updateTimer('timeout', deltaTime)
-        
-        
-        
-
-
-
         }
 
-
-
-        
-        
-        
-    
-
-
-
-
-      
-
-
-
-
-
-       
-        
-
-    
         // Size Changer 
         if (this.currentSizeState=='middle'){
             this.width=50
