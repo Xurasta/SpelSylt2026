@@ -1,4 +1,5 @@
 import GameBase from './GameBase.js'
+import GameObject from './GameObject.js'
 import Player from './Player.js'
 import Level1 from './levels/Level1.js'
 import Level2 from './levels/Level2.js'
@@ -48,13 +49,15 @@ export default class PlatformerGame extends GameBase {
         this.init()
         
         // Skapa och visa huvudmenyn
+        this.timer = 2000
+
         this.currentMenu = new MainMenu(this)
-    }
+
+        }
     
     init() {
         // Återställ score (men inte game state - det hanteras av constructor/restart)
         this.score = 0
-        this.slimeBlobsCollected = 0
         
         // Återställ camera
         this.camera.x = 0
@@ -177,7 +180,6 @@ export default class PlatformerGame extends GameBase {
         
         // Återställ progress
         this.score = saveData.score
-        this.slimeBlobsCollected = saveData.slimeBlobsCollected
         
         // Starta spelet
         this.gameState = 'PLAYING'
@@ -188,6 +190,11 @@ export default class PlatformerGame extends GameBase {
     }
 
     update(deltaTime) {
+
+        if (this.timer > 0) {
+            this.timer -= deltaTime
+        }
+
         // Uppdatera menyn om den är aktiv
         if (this.gameState === 'MENU' && this.currentMenu) {
             this.currentMenu.update(deltaTime)
@@ -284,9 +291,8 @@ export default class PlatformerGame extends GameBase {
         // Kontrollera kollision med blobs
         this.slimeBlobs.forEach(slimeBlob => {
             if (this.player.intersects(slimeBlob) && !slimeBlob.markedForDeletion && this.inputHandler.keys.has('r')) {
-                // Plocka upp myntet
-                this.score += slimeBlob.value
-                this.slimeBlobsCollected++
+                // Plocka upp slimeblob
+                this.slimeBlobsCollected += 1
                 slimeBlob.collect() 
                 this.player.SizeChange('Increace')
             }
@@ -398,10 +404,18 @@ export default class PlatformerGame extends GameBase {
         
         // Rita UI sist (utan camera offset - alltid synligt)
         this.ui.draw(ctx)
+
         
         // Rita meny överst om den är aktiv
         if (this.currentMenu) {
             this.currentMenu.draw(ctx)
+        }
+
+        if (this.timer >= 0) {
+            console.log('Hi')
+            ctx.globalAlpha = 0 + this.timer/1000
+            ctx.fillRect(0, 0, 2000, 2000, 'black')
+            ctx.globalAlpha = 1
         }
     }
 }

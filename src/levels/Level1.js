@@ -55,11 +55,11 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, mountain, {
                 tiled: false,
-                scrollSpeed: 0.3, // Långsam parallax (långt bort)
+                scrollSpeed: 0.2, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
                 height: 500, // Fyll hela höjden
                 width: 2000,
-                yPosition: -300,
+                yPosition: -200,
                 xPosition: 200
             }),
             new Background(this.game, clouds, {
@@ -91,16 +91,14 @@ export default class Level1 extends Level {
             }),
             new Background(this.game, trees, {
                 tiled: false,
-                scrollSpeed: 0.6, // Långsam parallax (långt bort)
+                scrollSpeed: 0.2, // Långsam parallax (långt bort)
                 tiledY: false, // Tila bara horisontellt
-                height: 130, // Fyll hela höjden
-                width: 330,
-                yPosition: -570,
-                xPosition: -1310
+                height: 100, // Fyll hela höjden
+                width: 440,
+                yPosition: -200,
+                xPosition: -50
                 
             }),
-            
-
             new Background(this.game, tree, {
                 tiled: false,
                 scrollSpeed: 0.4, // Långsam parallax (långt bort)
@@ -136,24 +134,6 @@ export default class Level1 extends Level {
                 width: 95,
                 yPosition: -490,
                 xPosition: -750
-            }),
-            new Background(this.game, tree, {
-                tiled: false,
-                scrollSpeed: 0.8, // Långsam parallax (långt bort)
-                tiledY: false, // Tila bara horisontellt
-                height: 90, // Fyll hela höjden
-                width: 95,
-                yPosition: -720,
-                xPosition: -120
-            }),
-            new Background(this.game, tree, {
-                tiled: false,
-                scrollSpeed: 0.3, // Långsam parallax (långt bort)
-                tiledY: false, // Tila bara horisontellt
-                height: 100, // Fyll hela höjden
-                width: 95,
-                yPosition: -4900,
-                xPosition: -950
             }),
         ]
     }
@@ -294,7 +274,7 @@ export default class Level1 extends Level {
 
             new Platform(this.game, 1200, worldHeight - 64, 480, 32, { sprite: thornRepeat}),
 
-            new Platform(this.game, 1280, worldHeight - 235, 48, 48, { sprite: arrowR }),
+            new Platform(this.game, 1280, worldHeight - 220, 48, 48, { sprite: arrowR }),
 
             new Platform(this.game, 2300, worldHeight - 80, 48, 48, { sprite: arrowU }),
 
@@ -392,12 +372,12 @@ export default class Level1 extends Level {
             // Marken (hela nivån)
             new Platform (this.game, 0,  worldHeight - 32, worldWidth, 32, { sprite: ground }),
 
-            // Berg
+            // Hills
             new Platform (this.game, 1071,  worldHeight - 100, 128, 180, { sprite: dirt }),
             new Platform (this.game, 1071, worldHeight - 100, 128, 32, { sprite: dirtTop }),
             
-            new Platform (this.game,  1200, worldHeight - 190, 128, 300, { sprite: dirt }),
-            new Platform (this.game,  1200, worldHeight - 190, 128, 32, { sprite: dirtTop }),
+            new Platform (this.game,  1200, worldHeight - 180, 128, 300, { sprite: dirt }),
+            new Platform (this.game,  1200, worldHeight - 180, 128, 32, { sprite: dirtTop }),
     
             new Platform(this.game, 1680, worldHeight - 260, 128, 300, { sprite: dirt }),
             new Platform(this.game, 1680, worldHeight - 260, 128, 32, { sprite: dirtTop }),
@@ -424,10 +404,9 @@ export default class Level1 extends Level {
 
         this.enemies = [
             new Enemy(this.game, 200, worldHeight - 220, 40, 40, 80),
-            new Enemy(this.game, 450, worldHeight - 240, 40, 40),
-            new Enemy(this.game, 360, worldHeight - 440, 40, 40, 50),
             // Nya fiender längre bort
             new Enemy(this.game, 1800, worldHeight - 240, 40, 40, 150),
+            new Enemy(this.game, 3000, worldHeight - 240, 40, 40, 150),
         ]
     }
 }

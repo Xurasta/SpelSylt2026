@@ -43,7 +43,6 @@ export default class SlimeBlob extends GameObject {
     }
     
     collect() {
-        console.log('Collected blob')
         this.markedForDeletion = true
     }
 

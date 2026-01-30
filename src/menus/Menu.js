@@ -1,3 +1,6 @@
+import nameOfGame from '../assets/UI/Name of the game (title screen).png' 
+import TitleScreen from '../assets/UI/Title_Screen.jpg'
+
 export default class Menu {
     constructor(game) {
         this.game = game
@@ -84,47 +87,58 @@ export default class Menu {
         // Rita halvgenomskinlig bakgrund
         ctx.fillStyle = this.backgroundColor
         ctx.fillRect(0, 0, this.game.width, this.game.height)
-        
+
+        const titleImage = new Image()
+        titleImage.src = TitleScreen
         // Rita title
-        ctx.fillStyle = this.titleColor
-        ctx.font = 'bold 48px Arial'
-        ctx.textAlign = 'center'
-        ctx.textBaseline = 'middle'
-        ctx.fillText(this.title, this.game.width / 2, 80)
-        
+        ctx.drawImage(titleImage, 0, 0, this.game.width, this.game.height)
         // Rita options
-        const startY = 160
-        const lineHeight = 60
+        const startY = 280
+        const lineHeight = 50
         
         this.options.forEach((option, index) => {
             const y = startY + index * lineHeight
             const isSelected = index === this.selectedIndex
             
-            // Rita option text
-            ctx.font = '32px Arial'
-            ctx.fillStyle = isSelected ? this.selectedColor : this.optionColor
             
-            // Lägg till ">" för vald option
-            const prefix = isSelected ? '> ' : '  '
-            let displayText = prefix + option.text
-            
-            // Lägg till key hint om det finns
-            if (option.key) {
-                ctx.fillText(displayText, this.game.width / 2 - 80, y)
-                
-                // Rita key hint i grön
-                ctx.fillStyle = this.keyColor
+            if (option.image)  {
+                const menuImage = new Image()
+                menuImage.src = option.image
+                ctx.drawImage(menuImage, 30, y - 50, 200, 30)
+                const prefix = isSelected ? '< ' : '  '
+
+                ctx.fillStyle = 'black'
                 ctx.font = 'bold 24px Arial'
-                ctx.fillText(`[${option.key}]`, this.game.width / 2 + 150, y)
+                ctx.fillText(prefix, this.game.width / 3.5, y - 30)
+
+                if (option.key) {
+                    ctx.fillStyle = 'black'
+                    ctx.font = 'bold 24px Arial'
+                    ctx.fillText(`[${option.key}]`, this.game.width / 1.15, y - 30)
+                }
             } else {
-                ctx.fillText(displayText, this.game.width / 2, y)
+                
+                // Rita option text
+                ctx.font = '32px Arial'
+                ctx.fillStyle = isSelected ? this.selectedColor : this.optionColor
+
+                // Lägg till ">" för vald option
+                const prefix = isSelected ? '> ' : '  '
+                let displayText = prefix + option.text
+
+                // Lägg till key hint om det finns
+                if (option.key) {
+                    ctx.fillText(displayText, this.game.width / 6 - 50, y - 30)
+                    
+                    // Rita key hint i grön
+                    ctx.fillStyle = 'black'
+                    ctx.font = 'bold 24px Arial'
+                    ctx.fillText(`[${option.key}]`, this.game.width / 2 + 150, y)
+                } else {
+                    ctx.fillText(displayText, this.game.width / 2, y)
+                }
             }
         })
-        
-        // Rita instruktioner längst ner
-        ctx.fillStyle = '#888888'
-        ctx.font = '18px Arial'
-        ctx.fillText('Use Arrow Keys to navigate, Enter to select', this.game.width / 2, this.game.height - 50)
         
         ctx.restore()
     }
