@@ -3,7 +3,13 @@ import Platform from '../Platform.js'
 import Enemy from '../Mouse.js'
 import Background from '../Background.js'
 import BackgroundObject from '../BackgroundObject.js'
-import pinkBg from '../assets/Pixel Adventure 1/Background/Pink.png'
+import pinkBg from '../assets/level2/townSky.png'
+import town from '../assets/level2/Town buildings.png'
+import clowd from '../assets/level2/Town clouds.png'
+import platform from '../assets/level2/Concrete.png'
+import ground from '../assets/level2/Concrete.png'
+
+
 
 import grass from '../assets/sprites/Grass.png'
 import roadpiece from '../assets/sprites/lvl2/Road.png'
@@ -22,7 +28,7 @@ export default class Level2 extends Level {
         
         // Player spawn position för denna level
         this.playerSpawnX = 50
-        this.playerSpawnY = 700
+        this.playerSpawnY = 50
         
         // Initiera level
         this.init()
@@ -48,11 +54,28 @@ export default class Level2 extends Level {
         this.backgrounds = [
             // Far background - rosa himmel (skymning känsla, svårare level)
             new Background(this.game, pinkBg, {
-                tiled: true,
+                tiled: false,
                 tileWidth: 64,
                 tileHeight: 64,
                 scrollSpeed: 0.3
             }),
+            new Background(this.game, town, {
+                tiled: false,
+                tiledY: false, // Tila bara horisontellt
+                height: 1500, // Fyll hela höjden
+                width: this.game.worldWidth ,
+                yPosition: worldHeight - 611,
+                xPosition: 0
+            }),
+            new Background(this.game, clowd, {
+                tiled: false,
+                tiledY: false, // Tila bara horisontellt
+                height: 200, // Fyll hela höjden
+                width: this.game.worldWidth ,
+                yPosition: this.game.worldHeight - 1450,
+                xPosition: 0
+            }),
+        
 
             new Platform(this.game, 0,  worldHeight - 58, worldWidth - 2940, 14, { sprite: rails })
 
@@ -88,11 +111,33 @@ export default class Level2 extends Level {
             image: concrete,
             sourceWidth: 48,
             sourceHeight: 48,
-            startClipX: 1,
-            clippedWidthX: 46,
+            startClipX: 2,
+            clippedWidthX: 44,
             startClipY: 0,
-            clippedWidthY: 47,
+            clippedWidthY: 48,
             tile: 'both',
+        }
+
+        const concreteTiles = {
+            image: concrete,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 2,
+            clippedWidthX: 44,
+            startClipY: 2,
+            clippedWidthY: 44,
+            tile: 'both',
+        }
+
+        const concreteTop = {
+            image: concrete,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 2,
+            clippedWidthX: 44,
+            startClipY: 0,
+            clippedWidthY: 28,
+            tile: 'both'
         }
 
         const carSet = {
@@ -113,6 +158,45 @@ export default class Level2 extends Level {
             new Platform (this.game, 200,  worldHeight - 90, 96, 40, { sprite: carSet }),
             new Platform (this.game, 0,  worldHeight - 50, worldWidth - 2940, 48, { sprite: roadBottom }),
             new Platform (this.game, worldWidth - 2940,  worldHeight - 50, worldWidth, 48, { sprite: ground }),
+
+            new Platform (this.game, 750,  worldHeight - 150, 80, 20, { sprite: concreteTiles }),
+            new Platform (this.game, 750,  worldHeight - 150, 80, 10, { sprite: concreteTop }),
+
+            new Platform (this.game, 507,  worldHeight - 260, 100, 20, { sprite: concreteTiles }),
+            new Platform (this.game, 507,  worldHeight - 260, 100, 10, { sprite: concreteTop }),
+
+            new Platform (this.game, 950,  worldHeight - 260, 100, 20, { sprite: concreteTiles }),
+            new Platform (this.game, 950,  worldHeight - 260, 100, 10, { sprite: concreteTop }),
+
+            new Platform (this.game, 480,  worldHeight - 440 , 610, 20, { sprite: concreteTiles }),
+            new Platform (this.game, 480,  worldHeight - 440 , 610, 10, { sprite: concreteTop }),
+
+            new Platform (this.game, 900,  worldHeight - 550, 100, 20, { sprite: concreteTiles }),
+            new Platform (this.game, 900,  worldHeight - 550, 100, 10, { sprite: concreteTop }),
+            
+            new Platform (this.game, 1222,  worldHeight - 655, 245, 20, { sprite: concreteTiles }),
+            new Platform (this.game, 1222,  worldHeight - 655, 245, 10, { sprite: concreteTop }),
+
+            new Platform (this.game, 1720,  worldHeight - 500, 80, 450, { sprite: concreteTiles }),
+            new Platform (this.game, 1720,  worldHeight - 500, 80, 48, { sprite: concreteTop}),
+
+            new Platform (this.game, 2350,  worldHeight - 225, 80, 450, { sprite: concreteTiles }),
+            new Platform (this.game, 2350,  worldHeight - 225, 80, 48, { sprite: concreteTop }),
+
+            new Platform (this.game, 2450,  worldHeight - 275, 80, 450, { sprite: concreteTiles }),
+            new Platform (this.game, 2450,  worldHeight - 275, 80, 48, { sprite: concreteTop }),
+
+            new Platform (this.game, 2475,  worldHeight - 150, 80, 450, { sprite: concreteTiles }),
+            new Platform (this.game, 2475,  worldHeight - 150, 80, 48, { sprite: concreteTop }),
+
+            new Platform (this.game, 2400,  worldHeight - 400, 80, 450, { sprite: concreteTiles }),
+            new Platform (this.game, 2400,  worldHeight - 400, 80, 48, { sprite: concreteTop }),
+
+            new Platform (this.game, 3200,  worldHeight - 400, 80, 450, { sprite: concreteTiles }),
+            new Platform (this.game, 3200,  worldHeight - 400, 80, 48, { sprite: concreteTop}),
+            
+   
+
         ]
     }
 
@@ -123,7 +207,6 @@ export default class Level2 extends Level {
             // Fler och snabbare fiender
             new Enemy(this.game, 300, height - 220, 40, 40, 100),
             new Enemy(this.game, 600, height - 240, 40, 40, 120),
-            new Enemy(this.game, 850, height - 360, 40, 40, 80),
             new Enemy(this.game, 1100, height - 280, 40, 40, 150),
             new Enemy(this.game, 1350, height - 400, 40, 40, 90),
             new Enemy(this.game, 1600, height - 320, 40, 40, 120),
