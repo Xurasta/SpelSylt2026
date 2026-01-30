@@ -102,7 +102,6 @@ export default class SaveGameManager {
             level: save.currentLevelIndex + 2, // +1 för att levels är 0-indexerade // 
             score: save.score,
             health: save.health,
-            slimeBlobsCollected: save.slimeBlobsCollected
         }
     }
 
