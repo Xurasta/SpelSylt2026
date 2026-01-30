@@ -202,16 +202,16 @@ export default class Level2 extends Level {
 
     createEnemies() {
         const height = this.game.height
+        const worldWidth = this.game.worldWidth
+        const worldHeight = this.game.worldHeight
 
         this.enemies = [
             // Fler och snabbare fiender
-            new Enemy(this.game, 300, height - 220, 40, 40, 100),
-            new Enemy(this.game, 600, height - 240, 40, 40, 120),
-            new Enemy(this.game, 1100, height - 280, 40, 40, 150),
-            new Enemy(this.game, 1350, height - 400, 40, 40, 90),
-            new Enemy(this.game, 1600, height - 320, 40, 40, 120),
-            new Enemy(this.game, 1850, height - 240, 40, 40, 100),
-            new Enemy(this.game, 2100, height - 360, 40, 40, 130),
+            new Enemy(this.game, 300, worldHeight - 220, 40, 40, 100),
+            new Enemy(this.game, 600, worldHeight - 240, 40, 40, 120),
+            new Enemy(this.game, 1100, worldHeight - 600, 40, 40, 150),
+            new Enemy(this.game, 750, worldHeight - 150, 40, 40, 80),
+            new Enemy(this.game, 2100, worldHeight - 360, 40, 40, 130),
         ]
     }
     update(deltaTime) {

@@ -24,6 +24,8 @@ import dashSign from '../assets/sprites/lvl1/Sign (dashing).png'
 import growSign from '../assets/sprites/lvl1/Sign (Growing).png'
 import jumpingSign from '../assets/sprites/lvl1/Sign (jumping).png'
 import thornSign from '../assets/sprites/lvl1/Sign (Thorns).png'
+import eatingSign from '../assets/sprites/lvl1/Sign (eating).png'
+
 import Camera from '../Camera.js'
 
 // Second test
@@ -262,6 +264,18 @@ export default class Level1 extends Level {
             tile: 'both',
             backdrop: 'false'
         }
+
+        const eatingSignsSet = {
+            image: eatingSign,
+            sourceWidth: 48,
+            sourceHeight: 48,
+            startClipX: 0,
+            clippedWidthX: 48,
+            startClipY: 0, 
+            clippedWidthY: 48,
+            tile: 'both',
+            backdrop: 'false'
+        }
         
         this.backgroundObjects = [
 
@@ -301,8 +315,9 @@ export default class Level1 extends Level {
             new Platform(this.game, 120, worldHeight - 80, 48, 48, { sprite: flowersSet }),
 
             // Signs
-            new Platform(this.game, 800, worldHeight - 80, 48, 48, { sprite:  dashSignSet }),
+            new Platform(this.game, 900, worldHeight - 80, 48, 48, { sprite:  dashSignSet }),
             new Platform(this.game, 1800, worldHeight - 300, 48, 48, { sprite:  jumpingSignSet }),
+            new Platform(this.game, 300, worldHeight - 80, 48, 48, { sprite:  eatingSignsSet }),
         ]
     }
 

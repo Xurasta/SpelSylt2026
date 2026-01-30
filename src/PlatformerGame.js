@@ -50,6 +50,7 @@ export default class PlatformerGame extends GameBase {
         
         // Skapa och visa huvudmenyn
         this.timer = 2000
+        this.nextLevelTimer = 0
 
         this.currentMenu = new MainMenu(this)
 
@@ -349,8 +350,8 @@ export default class PlatformerGame extends GameBase {
         // }
         
         if (this.player.x + this.player.width == this.worldWidth) {
-            
             this.nextLevel()
+            this.currentLevel.startTimer('nextLevelTimer', 2000)
         }
         
         // Kolla lose condition - spelaren är död
@@ -402,8 +403,10 @@ export default class PlatformerGame extends GameBase {
         // Rita spelaren med camera offset
         this.player.draw(ctx, this.camera)
         
+
         // Rita UI sist (utan camera offset - alltid synligt)
         this.ui.draw(ctx)
+
 
         
         // Rita meny överst om den är aktiv
